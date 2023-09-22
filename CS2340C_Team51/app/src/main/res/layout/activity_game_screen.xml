@@ -35,6 +35,6 @@
         android:onClick="udpateTest"
         android:text="End Screen"
         tools:layout_editor_absoluteX="587dp"
-        tools:layout_editor_absoluteY="16dp" />
+        tools:layout_editor_absoluteY="6dp" />
     />
 </androidx.constraintlayout.widget.ConstraintLayout>

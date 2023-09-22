@@ -9,6 +9,7 @@ import com.example.cs2340c_team51.R;
 
 public class MainActivity extends AppCompatActivity {
     @Override
+    private Button exit;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
@@ -20,5 +21,15 @@ public class MainActivity extends AppCompatActivity {
         // one thing to note: i think each screen requires its own "activity"
         // https://developer.android.com/guide/components/activities/intro-activities
         // use this w/ example repo to figure out how to make an activity
+
+        exit=findVeiwById(R.id.Exit);
+        exit.setOnClickListener(new_View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, activity_end_screen.xml);
+                startActivity(intent);
+            }
+        }
     }
+    public void updateTe
 }

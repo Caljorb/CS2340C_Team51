@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/Game_Background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/game_background">
 
     <TextView
         android:id="@+id/difficulty"
@@ -11,10 +12,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_contstraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="146dp"
         android:layout_height="28dp"
-        android:text="Difficulty: "
+        android:text="Difficulty: Medium"
         android:textColor="#F0EAD6"
         tools:layout_editor_absoluteX="-2dp"
         tools:layout_editor_absoluteY="-3dp" />
@@ -24,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:onClick="udpateTest"
+        android:onClick="Go to end"
         android:text="End Screen"
         tools:layout_editor_absoluteX="587dp"
         tools:layout_editor_absoluteY="6dp" />

@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/nextButt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:translationZ="8dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
+
+    <ImageView
+        android:id="@+id/configBackground"
+        android:layout_width="1005dp"
+        android:layout_height="491dp"
+        android:contentDescription="@string/background"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/parallax_mountain_bg"
+        tools:ignore="VisualLintBounds" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameEntry"
+        android:layout_width="292dp"
+        android:layout_height="47dp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEntryBox"
+            android:layout_width="291dp"
+            android:layout_height="48dp"
+            android:hint="@string/please_insert_name"
+            android:translationZ="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/diffSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.855">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:text="@string/easy"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/medium"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="261dp" />
+
+        <RadioButton
+            android:id="@+id/hard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hard"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="309dp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/charSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.855">
+
+        <RadioButton
+            android:id="@+id/charSel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_1"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <RadioButton
+            android:id="@+id/charSel2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_2"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="261dp" />
+
+        <RadioButton
+            android:id="@+id/charSel3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_3"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="309dp" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/char1"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617"
+        app:srcCompat="@drawable/char1" />
+
+    <ImageView
+        android:id="@+id/char2"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:translationZ="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756"
+        app:srcCompat="@drawable/mushroomchar" />
+
+    <ImageView
+        android:id="@+id/char3"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:translationZ="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.895"
+        app:srcCompat="@drawable/f_09char" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

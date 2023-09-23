@@ -71,16 +71,21 @@ public class InitConfigActivity extends AppCompatActivity {
         }
 
         // todo: logic to move to game screen
-        if (diffSel && charSel && nameSel) {
+        /*if (diffSel && charSel && nameSel) {
             next.setVisibility(View.VISIBLE);
-        }
+        }*/
 
-        /*next.setOnClickListener(v -> {
-            Intent game = new Intent(InitConfigActivity.this, {game activity here})
-            game.putExtra();
-            startActivity(game);
-            finish();
-        });*/
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openGameActivity();
+            }
+        });
+    }
+
+    public void openGameActivity() {
+        Intent intent = new Intent(this, GameActivity.class);
+        startActivity(intent);
     }
 
 }

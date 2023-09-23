@@ -19,12 +19,35 @@ import android.widget.ViewFlipper;
 public class MainActivity extends AppCompatActivity {
 
 
-    private Button button;
-
+    private Button start;
+    private Button quit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
+
+        start = (Button) findViewById(R.id.startButton);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInitConfigActivity();
+            }
+        });
+
+        quit = (Button) findViewById(R.id.quitButton);
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }
+        });
+    }
+
+    public void openInitConfigActivity() {
+        Intent intent = new Intent(this, InitConfigActivity.class);
+        startActivity(intent);
     }
 
 }

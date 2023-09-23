@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.cs2340c_team51.R;
 
 public class MainActivity extends AppCompatActivity {
-    @Override
+
     private Button exit;
+    private Button button;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
@@ -30,6 +32,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openInitConfigActivity();
+            }
+        });
     }
+
+    public void openInitConfigActivity() {
+        Intent intent = new Intent(this, InitConfigActivity.class);
+        startActivity(intent);
+    }
+
     public void updateTe
 }

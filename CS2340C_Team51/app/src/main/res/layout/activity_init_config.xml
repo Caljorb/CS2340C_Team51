@@ -19,11 +19,11 @@
         android:id="@+id/MediumButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="45dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="44dp"
         android:text="@string/medium"
         android:translationZ="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/char1"
+        app:layout_constraintBottom_toTopOf="@+id/char2"
         app:layout_constraintStart_toEndOf="@+id/EasyButt" />
 
     <Button
@@ -45,7 +45,8 @@
         android:text="@string/next"
         android:translationZ="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/char1" />
 
     <ImageView
         android:id="@+id/configBackground"
@@ -62,23 +63,23 @@
 
     <ImageButton
         android:id="@+id/char1"
-        android:layout_width="92dp"
-        android:layout_height="95dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="224dp"
+        android:layout_marginEnd="274dp"
         android:contentDescription="@string/select"
         android:translationZ="3dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintBottom_toBottomOf="@+id/char2"
+        app:layout_constraintEnd_toStartOf="@+id/NextButt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825"
+        app:layout_constraintTop_toTopOf="@+id/char2"
         app:srcCompat="@drawable/char1" />
 
     <ImageButton
         android:id="@+id/char3"
         android:layout_width="92dp"
         android:layout_height="95dp"
-        android:layout_marginEnd="254dp"
+        android:layout_marginEnd="228dp"
         android:layout_marginBottom="52dp"
         android:contentDescription="@string/select_3"
         android:translationZ="4dp"
@@ -97,6 +98,7 @@
         android:translationZ="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/char3"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/char1"
         app:srcCompat="@drawable/mushroomchar" />
 

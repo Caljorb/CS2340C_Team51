@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/game_background">
 
-    <TextView
-        android:id="@+id/difficulty"
-        app:layout_constraintHorizontal_bias="0.05"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_width="146dp"
-        android:layout_height="28dp"
-        android:text="Difficulty: Medium"
-        android:textColor="#F0EAD6"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="-3dp" />
+    <ViewFlipper
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/view_flipper">
+
+        <TextView
+            android:id="@+id/difficulty"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="146dp"
+            android:layout_height="28dp"
+            android:text="Difficulty: Medium"
+            android:textColor="#F0EAD6"
+            tools:layout_editor_absoluteX="-2dp"
+            tools:layout_editor_absoluteY="-3dp" />
+
+    </ViewFlipper>
 
     <Button
-        android:id="@+id/Exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:onClick="Go to end"
-        android:text="End Screen"
-        tools:layout_editor_absoluteX="587dp"
-        tools:layout_editor_absoluteY="6dp" />
+        android:text="End"
+        android:onClick="endScreen"
+        android:alignParentTop="true"
+        android:alginParentStart="true"
+        android:layout_margin="16dp" />
+
+    <ViewSwitcher
+        android:id="@+id/ViewSwitcher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="#0F9D58">
+
+
+
     />
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

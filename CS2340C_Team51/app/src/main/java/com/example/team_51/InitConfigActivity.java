@@ -10,6 +10,8 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 public class InitConfigActivity extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class InitConfigActivity extends AppCompatActivity {
             hp = 50;
             diffSel = true;
         } else if (diffsCheckedRadioButtonId == R.id.hard) {
-            hp = 25;
+            hp = 30;
             diffSel = true;
         }
 
@@ -58,12 +60,27 @@ public class InitConfigActivity extends AppCompatActivity {
         }
 
         // todo: take in user input for name, check for edge cases
+        TextInputLayout nameEntry = findViewById(R.id.nameEntry);
+        String name;
+        if (nameEntry.getEditText() != null && nameEntry.getEditText().getText() != null) {
+            String temp = nameEntry.getEditText().getText().toString();
+            if (temp.trim().length() > 0) {
+                nameSel = true;
+                name = nameEntry.getEditText().getText().toString();
+            }
+        }
 
         // todo: logic to move to game screen
         if (diffSel && charSel && nameSel) {
             next.setVisibility(View.VISIBLE);
-            //Intent game = new Intent(InitConfigActivity.this, )
         }
+
+        /*next.setOnClickListener(v -> {
+            Intent game = new Intent(InitConfigActivity.this, {game activity here})
+            game.putExtra();
+            startActivity(game);
+            finish();
+        });*/
     }
 
 }

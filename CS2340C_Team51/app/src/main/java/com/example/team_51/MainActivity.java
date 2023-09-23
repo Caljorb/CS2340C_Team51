@@ -33,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
                 openInitConfigActivity();
             }
         });
+
+        quit = (Button) findViewById(R.id.quitButton);
+        quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveTaskToBack(true);
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
+            }
+        });
     }
 
     public void openInitConfigActivity() {

@@ -12,8 +12,6 @@ import com.example.cs2340c_team51.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     @Override
 
     private Button exit;

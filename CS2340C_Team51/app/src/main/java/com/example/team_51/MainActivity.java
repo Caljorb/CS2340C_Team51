@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // https://developer.android.com/guide/components/activities/intro-activities
         // use this w/ example repo to figure out how to make an activity
 
-        exit=findVeiwById(R.id.Exit);
+        exit=findViewById(R.id.Exit);
         exit.setOnClickListener(new_View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,4 +1,69 @@
 package com.example.team_51;
 
-public class InitConfigActivity {
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.cs2340c_team51.R;
+
+public class InitConfigActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_init_config);
+
+        int hp = 0;
+        int character = 0; // just represents which char picked, carry over to game
+
+        boolean diffSel = false;
+        boolean charSel = false;
+        boolean nameSel = false;
+
+        Button next = (Button) findViewById(R.id.nextButt);
+        RadioGroup diffs = findViewById(R.id.diffSelect);
+        RadioGroup chars = findViewById(R.id.charSelect);
+
+        int diffsCheckedRadioButtonId = diffs.getCheckedRadioButtonId();
+
+        // pick difficulty
+        if (diffsCheckedRadioButtonId == R.id.easy) {
+            hp = 100;
+            diffSel = true;
+        } else if (diffsCheckedRadioButtonId == R.id.medium) {
+            hp = 50;
+            diffSel = true;
+        } else if (diffsCheckedRadioButtonId == R.id.hard) {
+            hp = 25;
+            diffSel = true;
+        }
+
+        int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
+
+        // pick character
+        if (charsCheckedRadioButtonId == R.id.easy) {
+            character = 1;
+            charSel = true;
+        } else if (charsCheckedRadioButtonId == R.id.medium) {
+            character = 2;
+            charSel = true;
+        } else if (charsCheckedRadioButtonId == R.id.hard) {
+            character = 3;
+            charSel = true;
+        }
+
+        // todo: take in user input for name, check for edge cases
+
+        // todo: logic to move to game screen
+        if (diffSel && charSel && nameSel) {
+            next.setVisibility(View.VISIBLE);
+            //Intent game = new Intent(InitConfigActivity.this, )
+        }
+    }
+
 }

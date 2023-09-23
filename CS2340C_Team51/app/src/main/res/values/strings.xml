@@ -3,10 +3,13 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
-    <string name="continue">Continue</string>
     <string name="select">Select</string>
     <string name="select_2">Select 2</string>
     <string name="select_3">Select 3</string>
     <string name="background">background</string>
     <string name="next">Next</string>
+    <string name="please_insert_name">Please Insert Name</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
 </resources>

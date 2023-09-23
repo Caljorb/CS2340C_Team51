@@ -1,8 +1,9 @@
 package com.example.team_51;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,10 +16,22 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+        String playerName = getIntent().getStringExtra("Player Name");
+        String difficulty = getIntent().getStringExtra("Difficulty");
+
         end = (Button) findViewById(R.id.end);
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openEndScreen();
+            }
+        });
     }
 
-    public void endScreen(View v) {
-        viewFlipper.showNext();
+    public void openEndScreen() {
+        Intent intent = new Intent(this, EndActivity.class);
+        startActivity(intent);
     }
+
+
 }

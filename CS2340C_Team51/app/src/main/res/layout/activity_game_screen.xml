@@ -18,7 +18,7 @@
             android:layout_width="146dp"
             android:layout_height="28dp"
             android:layout_marginStart="16dp"
-            android:text="@string/Difficulty"
+            android:text="Difficulty: Medium"
             android:textColor="#F0EAD6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.06"
@@ -37,6 +37,6 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="16dp"
         android:onClick="endScreen"
-        android:text="@string/End" />
+        android:text="End" />
 
 </RelativeLayout>

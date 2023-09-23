@@ -2,13 +2,21 @@ package com.example.team_51;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
+import android.graphics.Color;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
 
 public class MainActivity extends AppCompatActivity {
+<<<<<<< HEAD
 
+=======
+    TextView txt1;
+    @Override
+>>>>>>> Game-Screen
     private Button exit;
     private Button button;
     @Override

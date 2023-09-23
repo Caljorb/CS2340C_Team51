@@ -7,43 +7,36 @@
     android:background="@drawable/game_background">
 
     <ViewFlipper
+        android:id="@+id/view_flipper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/view_flipper">
+        tools:layout_editor_absoluteX="-170dp"
+        tools:layout_editor_absoluteY="-95dp">
 
         <TextView
             android:id="@+id/difficulty"
-            app:layout_constraintHorizontal_bias="0.05"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="146dp"
             android:layout_height="28dp"
-            android:text="Difficulty: Medium"
+            android:layout_marginStart="16dp"
+            android:text="@string/Difficulty"
             android:textColor="#F0EAD6"
-            tools:layout_editor_absoluteX="-2dp"
-            tools:layout_editor_absoluteY="-3dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.06"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </ViewFlipper>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="End"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
         android:onClick="endScreen"
-        android:alignParentTop="true"
-        android:alginParentStart="true"
-        android:layout_margin="16dp" />
+        android:text="@string/End" />
 
-    <ViewSwitcher
-        android:id="@+id/ViewSwitcher"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="#0F9D58">
-
-
-
-    />
 </RelativeLayout>

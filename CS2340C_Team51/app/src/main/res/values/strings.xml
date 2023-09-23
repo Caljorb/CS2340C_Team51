@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">CS2340C_Team51</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="continue">Continue</string>
+    <string name="select">Select</string>
+    <string name="select_2">Select 2</string>
+    <string name="select_3">Select 3</string>
+    <string name="background">background</string>
+    <string name="next">Next</string>
 </resources>

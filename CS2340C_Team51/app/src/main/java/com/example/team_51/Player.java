@@ -13,18 +13,11 @@ public class Player {
     private Sprite sprite;
     private HealthBar healthBar;
 
-    public Player(Context context, double posX, double posY, String name) {
-        int maxHp;
+    public Player(Context context, double posX, double posY, int hp) {
         this.posX = posX;
         this.posY = posY;
+        this.hp = hp;
 
-        if (name.equals("Marcus")) {
-            maxHp = 120;
-        } else if (name.equals("Ariel")) {
-            maxHp = 75;
-        } else {
-            maxHp = 100;
-        }
         this.healthBar = new HealthBar(context,this);
     }
 

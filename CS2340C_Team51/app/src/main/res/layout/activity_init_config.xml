@@ -6,47 +6,18 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/EasyButt"
+        android:id="@+id/nextButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="31dp"
-        android:text="@string/easy"
-        android:translationZ="5dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/MediumButt"
-        app:layout_constraintEnd_toEndOf="@+id/char1" />
-
-    <Button
-        android:id="@+id/MediumButt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginBottom="44dp"
-        android:text="@string/medium"
-        android:translationZ="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/char2"
-        app:layout_constraintStart_toEndOf="@+id/EasyButt" />
-
-    <Button
-        android:id="@+id/HardButt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:text="@string/hard"
-        android:translationZ="7dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/MediumButt"
-        app:layout_constraintStart_toEndOf="@+id/MediumButt" />
-
-    <Button
-        android:id="@+id/NextButt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="53dp"
-        android:layout_marginBottom="7dp"
         android:text="@string/next"
         android:translationZ="8dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/char1" />
+        app:layout_constraintHorizontal_bias="0.977"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.953" />
 
     <ImageView
         android:id="@+id/configBackground"
@@ -61,45 +32,144 @@
         app:srcCompat="@drawable/parallax_mountain_bg"
         tools:ignore="VisualLintBounds" />
 
-    <ImageButton
-        android:id="@+id/char1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginEnd="274dp"
-        android:contentDescription="@string/select"
-        android:translationZ="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/char2"
-        app:layout_constraintEnd_toStartOf="@+id/NextButt"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameEntry"
+        android:layout_width="292dp"
+        android:layout_height="47dp"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/char2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.453">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEntryBox"
+            android:layout_width="291dp"
+            android:layout_height="48dp"
+            android:hint="@string/please_insert_name"
+            android:translationZ="10dp" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/diffSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.855">
+
+        <RadioButton
+            android:id="@+id/easy"
+            android:layout_width="94dp"
+            android:layout_height="wrap_content"
+            android:text="@string/easy"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <RadioButton
+            android:id="@+id/medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/medium"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="261dp" />
+
+        <RadioButton
+            android:id="@+id/hard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hard"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="443dp"
+            tools:layout_editor_absoluteY="309dp" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/charSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationZ="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.855">
+
+        <RadioButton
+            android:id="@+id/charSel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_1"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="213dp" />
+
+        <RadioButton
+            android:id="@+id/charSel2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_2"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="261dp" />
+
+        <RadioButton
+            android:id="@+id/charSel3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/_3"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="292dp"
+            tools:layout_editor_absoluteY="309dp" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/char1"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:translationZ="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.617"
         app:srcCompat="@drawable/char1" />
 
-    <ImageButton
-        android:id="@+id/char3"
-        android:layout_width="92dp"
-        android:layout_height="95dp"
-        android:layout_marginEnd="228dp"
-        android:layout_marginBottom="52dp"
-        android:contentDescription="@string/select_3"
+    <ImageView
+        android:id="@+id/char2"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/f_09char" />
-
-    <ImageButton
-        android:id="@+id/char2"
-        android:layout_width="92dp"
-        android:layout_height="95dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="52dp"
-        android:contentDescription="@string/select_2"
-        android:translationZ="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/char3"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/char1"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.756"
         app:srcCompat="@drawable/mushroomchar" />
+
+    <ImageView
+        android:id="@+id/char3"
+        android:layout_width="46dp"
+        android:layout_height="48dp"
+        android:translationZ="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.33"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.895"
+        app:srcCompat="@drawable/f_09char" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

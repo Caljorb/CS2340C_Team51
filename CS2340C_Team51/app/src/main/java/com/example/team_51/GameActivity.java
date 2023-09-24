@@ -27,9 +27,9 @@ public class GameActivity extends AppCompatActivity {
             ImageView char2 = findViewById(R.id.char2);
             ImageView char3 = findViewById(R.id.char3);
 
-            if (charsCheckedRadioButtonId == 1) {
+            if (charsCheckedRadioButtonId == R.id.charSel1) {
                 char1.setVisibility(View.VISIBLE);
-            } else if (charsCheckedRadioButtonId == 2) {
+            } else if (charsCheckedRadioButtonId == R.id.charSel2) {
                 char2.setVisibility(View.VISIBLE);
             } else {
                 char3.setVisibility(View.VISIBLE);
@@ -37,7 +37,7 @@ public class GameActivity extends AppCompatActivity {
 
             int diffsCheckedRadioButtonId = intent.getIntExtra("diffsCheckedRadioButtonId", 1);
             TextView hp1 = findViewById(R.id.hp1);
-            TextView diff1 = findViewById(R.id.difEasy);
+            TextView diff1 = findViewById(R.id.diffEasy);
             TextView hp2 = findViewById(R.id.hp2);
             TextView diff2 = findViewById(R.id.diffMedium);
             TextView hp3 = findViewById(R.id.hp3);

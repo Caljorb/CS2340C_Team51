@@ -2,8 +2,11 @@ package com.example.team_51;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,7 +19,44 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
+        Intent intent = getIntent();
 
+        if (intent != null) {
+            int charsCheckedRadioButtonId = intent.getIntExtra("charsCheckedRadioButtonId", 1);
+            ImageView char1 = findViewById(R.id.char1);
+            ImageView char2 = findViewById(R.id.char2);
+            ImageView char3 = findViewById(R.id.char3);
+
+            if (charsCheckedRadioButtonId == 1) {
+                char1.setVisibility(View.VISIBLE);
+            } else if (charsCheckedRadioButtonId == 2) {
+                char2.setVisibility(View.VISIBLE);
+            } else {
+                char3.setVisibility(View.VISIBLE);
+            }
+
+            String diffsCheckedRadioButtonId = intent.getStringExtra("diffsCheckedRadioButtonId");
+            TextView hp1 = findViewById(R.id.hp1);
+            TextView diff1 = findViewById(R.id.diffEasy);
+            TextView hp2 = findViewById(R.id.hp2);
+            TextView diff2 = findViewById(R.id.diffMedium);
+            TextView hp3 = findViewById(R.id.hp3);
+            TextView diff3 = findViewById(R.id.diffHard);
+
+            if (diffsCheckedRadioButtonId.equals(R.id.easy)) {
+                hp1.setVisibility(View.VISIBLE);
+                diff1.setVisibility(View.VISIBLE);
+
+            } else if (diffsCheckedRadioButtonId.equals(R.id.medium)) {
+                hp2.setVisibility(View.VISIBLE);
+                diff2.setVisibility(View.VISIBLE);
+            } else {
+                hp3.setVisibility(View.VISIBLE);
+                diff3.setVisibility(View.VISIBLE);
+            }
+
+
+        }
 
         end = (Button) findViewById(R.id.end);
         end.setOnClickListener(new View.OnClickListener() {

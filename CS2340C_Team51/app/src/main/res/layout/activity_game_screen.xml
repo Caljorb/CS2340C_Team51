@@ -11,7 +11,11 @@
         android:id="@+id/difficulty"
         android:layout_width="139dp"
         android:layout_height="36dp"
-        android:layout_marginStart="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="0dp"
         android:text="Difficulty:"
         android:textColor="#F0EAD6"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,6 +25,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/diffEasy"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="0dp"
+        android:text="Easy"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/diffMedium"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="0dp"
+        android:text="Medium"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/diffHard"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="0dp"
+        android:text="Hard"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/end"
@@ -36,6 +100,7 @@
         android:text="End" />
 
     <ImageView
+        android:id="@+id/char1"
         android:layout_width="62dp"
         android:layout_height="81dp"
         android:layout_alignParentTop="true"
@@ -43,6 +108,86 @@
         android:layout_centerVertical="true"
         android:layout_marginTop="157dp"
         android:layout_marginEnd="588dp"
-        android:src="@drawable/char1" />
+        android:src="@drawable/char1"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/char2"
+        android:layout_width="62dp"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="588dp"
+        android:src="@drawable/mushroomchar"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/char3"
+        android:layout_width="62dp"
+        android:layout_height="81dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="157dp"
+        android:layout_marginEnd="588dp"
+        android:src="@drawable/parallax_mountain_bg"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/hp1"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp"
+        android:text="100"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/hp2"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="130dp"
+        android:text="50"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/hp3"
+        android:layout_width="139dp"
+        android:layout_height="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="128dp"
+        android:text="30"
+        android:textColor="#F0EAD6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:visibility="gone" />
 
 </RelativeLayout>

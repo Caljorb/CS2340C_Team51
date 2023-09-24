@@ -9,7 +9,7 @@
         android:id="@+id/nextButt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="false"
+        android:enabled="true"
         android:text="@string/next"
         android:translationZ="8dp"
         android:visibility="visible"

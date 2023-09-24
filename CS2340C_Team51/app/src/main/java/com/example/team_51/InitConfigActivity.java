@@ -20,74 +20,67 @@ public class InitConfigActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_config);
 
-        int hp = 0;
-        int character = 0; // just represents which char picked, carry over to game
-
-        boolean diffSel = false;
-        boolean charSel = false;
-        boolean nameSel = false;
-
         Button next = (Button) findViewById(R.id.nextButt);
-        RadioGroup diffs = findViewById(R.id.diffSelect);
-        RadioGroup chars = findViewById(R.id.charSelect);
 
-        int diffsCheckedRadioButtonId = diffs.getCheckedRadioButtonId();
+        next.setOnClickListener(v -> {
+            int hp = 0;
+            int character = 0; // just represents which char picked, carry over to game
 
-        // pick difficulty
-        if (diffsCheckedRadioButtonId == R.id.easy) {
-            hp = 100;
-            diffSel = true;
-        } else if (diffsCheckedRadioButtonId == R.id.medium) {
-            hp = 50;
-            diffSel = true;
-        } else if (diffsCheckedRadioButtonId == R.id.hard) {
-            hp = 30;
-            diffSel = true;
-        }
+            boolean diffSel = true;
+            boolean charSel = true;
+            boolean nameSel = true;
 
-        int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
+            RadioGroup diffs = findViewById(R.id.diffSelect);
+            RadioGroup chars = findViewById(R.id.charSelect);
 
-        // pick character
-        if (charsCheckedRadioButtonId == R.id.easy) {
-            character = 1;
-            charSel = true;
-        } else if (charsCheckedRadioButtonId == R.id.medium) {
-            character = 2;
-            charSel = true;
-        } else if (charsCheckedRadioButtonId == R.id.hard) {
-            character = 3;
-            charSel = true;
-        }
+            int diffsCheckedRadioButtonId = diffs.getCheckedRadioButtonId();
 
-        // todo: take in user input for name, check for edge cases
-        TextInputLayout nameEntry = findViewById(R.id.nameEntry);
-        String name;
-        if (nameEntry.getEditText() != null && nameEntry.getEditText().getText() != null) {
-            String temp = nameEntry.getEditText().getText().toString();
-            if (temp.trim().length() > 0) {
-                nameSel = true;
-                name = nameEntry.getEditText().getText().toString();
+            // pick difficulty
+            System.out.println(R.id.easy);
+            System.out.println();
+            if (diffsCheckedRadioButtonId == R.id.easy) {
+                hp = 100;
+                diffSel = true;
+            } else if (diffsCheckedRadioButtonId == R.id.medium) {
+                hp = 50;
+                diffSel = true;
+            } else if (diffsCheckedRadioButtonId == R.id.hard) {
+                hp = 30;
+                diffSel = true;
             }
-        }
 
-        // todo: logic to move to game screen
-        if (diffSel && charSel && nameSel) {
-            next.setEnabled(true);
-        }
+            int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
 
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openGameActivity();
+            // pick character
+            if (charsCheckedRadioButtonId == R.id.easy) {
+                character = 1;
+                charSel = true;
+            } else if (charsCheckedRadioButtonId == R.id.medium) {
+                character = 2;
+                charSel = true;
+            } else if (charsCheckedRadioButtonId == R.id.hard) {
+                character = 3;
+                charSel = true;
+            }
+
+            // todo: take in user input for name, check for edge cases
+            TextInputLayout nameEntry = findViewById(R.id.nameEntry);
+            String name = null;
+            if (nameEntry.getEditText() != null && nameEntry.getEditText().getText() != null) {
+                String temp = nameEntry.getEditText().getText().toString();
+                if (temp.trim().length() > 0) {
+                    nameSel = true;
+                    name = nameEntry.getEditText().getText().toString();
+                }
+            }
+
+            if (diffSel && charSel && nameSel) {
+                Intent intent = new Intent(this, GameActivity.class);
+                intent.putExtra("character", character);
+                intent.putExtra("hp", hp);
+                intent.putExtra("name", name);
+                startActivity(intent);
             }
         });
     }
-
-    public void openGameActivity() {
-        Intent intent = new Intent(this, GameActivity.class);
-        intent.putExtra("character", character);
-        intent.putExtra("hp", hp)
-        startActivity(intent);
-    }
-
 }

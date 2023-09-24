@@ -27,12 +27,18 @@ public class GameActivity extends AppCompatActivity {
             ImageView char2 = findViewById(R.id.char2);
             ImageView char3 = findViewById(R.id.char3);
 
-            if (charsCheckedRadioButtonId == R.id.charSel1) {
+            if (charsCheckedRadioButtonId == (int) R.id.charSel1) {
                 char1.setVisibility(View.VISIBLE);
-            } else if (charsCheckedRadioButtonId == R.id.charSel2) {
+                char2.setVisibility(View.GONE);
+                char3.setVisibility(View.GONE);
+            } else if (charsCheckedRadioButtonId == (int) R.id.charSel2) {
                 char2.setVisibility(View.VISIBLE);
-            } else {
+                char1.setVisibility(View.GONE);
+                char3.setVisibility(View.GONE);
+            } else if (charsCheckedRadioButtonId == (int) R.id.charSel3) {
                 char3.setVisibility(View.VISIBLE);
+                char1.setVisibility(View.GONE);
+                char2.setVisibility(View.GONE);
             }
 
             int diffsCheckedRadioButtonId = intent.getIntExtra("diffsCheckedRadioButtonId", 1);

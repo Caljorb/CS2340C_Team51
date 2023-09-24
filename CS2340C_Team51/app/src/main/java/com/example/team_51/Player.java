@@ -8,7 +8,6 @@ public class Player {
     public static final int MAX_HEALTH_POINTS = 5;
     private double posX;
     private int hp;
-    public static int maxHp;
     private double posY;
     private Sprite sprite;
     private HealthBar healthBar;
@@ -18,12 +17,12 @@ public class Player {
         this.posY = posY;
         this.hp = hp;
 
-        this.healthBar = new HealthBar(context,this);
+        this.healthBar = new HealthBar(context, this);
     }
 
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
-        healthBar.draw(canvas);
+        //healthBar.draw(canvas);
     }
     public double getPlayerPosX() {
         return posX;

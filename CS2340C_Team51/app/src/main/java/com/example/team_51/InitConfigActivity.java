@@ -33,10 +33,6 @@ public class InitConfigActivity extends AppCompatActivity {
             int diffsCheckedRadioButtonId = diffs.getCheckedRadioButtonId();
 
             // pick difficulty
-            System.out.println("Easy: " + R.id.easy);
-            System.out.println("Medium: " + R.id.medium);
-            System.out.println("Hard: " + R.id.hard);
-            System.out.println(diffsCheckedRadioButtonId);
             if (diffsCheckedRadioButtonId == R.id.easy) {
                 hp = 100;
                 diffSel = true;
@@ -47,8 +43,6 @@ public class InitConfigActivity extends AppCompatActivity {
                 hp = 30;
                 diffSel = true;
             }
-            System.out.println("HP: " + hp);
-            System.out.println("diff: " + diffSel);
 
             int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
 
@@ -64,12 +58,12 @@ public class InitConfigActivity extends AppCompatActivity {
                 character = 3;
                 charSel = true;
             }
-            System.out.println("char: " + charSel);
 
-            // todo: take in user input for name, check for edge cases
+            // pick name
             TextInputLayout nameEntry = findViewById(R.id.nameEntry);
             String name = null;
             if (nameEntry.getEditText() != null && nameEntry.getEditText().getText() != null) {
+                // cannot pick null/empty/whitespace strings
                 String temp = nameEntry.getEditText().getText().toString();
                 if (temp.trim().length() > 0) {
                     nameSel = true;
@@ -78,6 +72,7 @@ public class InitConfigActivity extends AppCompatActivity {
             }
             System.out.println("name: " + nameSel);
 
+            // only move to next screen when all true
             if (diffSel && charSel && nameSel) {
                 Intent intent = new Intent(this, GameActivity.class);
                 intent.putExtra("character", character);

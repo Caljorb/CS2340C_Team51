@@ -35,19 +35,19 @@ public class GameActivity extends AppCompatActivity {
                 char3.setVisibility(View.VISIBLE);
             }
 
-            String diffsCheckedRadioButtonId = intent.getStringExtra("diffsCheckedRadioButtonId");
+            int diffsCheckedRadioButtonId = intent.getIntExtra("diffsCheckedRadioButtonId", 1);
             TextView hp1 = findViewById(R.id.hp1);
-            TextView diff1 = findViewById(R.id.diffEasy);
+            TextView diff1 = findViewById(R.id.difEasy);
             TextView hp2 = findViewById(R.id.hp2);
             TextView diff2 = findViewById(R.id.diffMedium);
             TextView hp3 = findViewById(R.id.hp3);
             TextView diff3 = findViewById(R.id.diffHard);
 
-            if (diffsCheckedRadioButtonId.equals(R.id.easy)) {
+            if (diffsCheckedRadioButtonId == R.id.easy) {
                 hp1.setVisibility(View.VISIBLE);
                 diff1.setVisibility(View.VISIBLE);
 
-            } else if (diffsCheckedRadioButtonId.equals(R.id.medium)) {
+            } else if (diffsCheckedRadioButtonId == R.id.medium) {
                 hp2.setVisibility(View.VISIBLE);
                 diff2.setVisibility(View.VISIBLE);
             } else {

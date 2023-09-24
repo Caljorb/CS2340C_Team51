@@ -13,6 +13,9 @@ import com.example.cs2340c_team51.R;
 
 public class GameActivity extends AppCompatActivity {
     private Button end;
+    private int character;
+    private int hp;
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,45 +24,42 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent != null) {
-            int charSel = intent.getIntExtra("charsCheckedRadioButtonId", 1);
-            ImageView char1 = findViewById(R.id.char1);
-            ImageView char2 = findViewById(R.id.char2);
-            ImageView char3 = findViewById(R.id.char3);
+            character = getIntent().getIntExtra("character", 1);
+            hp = getIntent().getIntExtra("hp", 100);
+            name = getIntent().getStringExtra("name");
 
-            if (charSel == 1) {
-                char1.setVisibility(View.VISIBLE);
-                char2.setVisibility(View.GONE);
-                char3.setVisibility(View.GONE);
-            } else if (charSel == 2) {
-                char2.setVisibility(View.VISIBLE);
-                char1.setVisibility(View.GONE);
-                char3.setVisibility(View.GONE);
-            } else if (charSel == 3) {
-                char3.setVisibility(View.VISIBLE);
-                char1.setVisibility(View.GONE);
-                char2.setVisibility(View.GONE);
+            // display character
+            if (character == 1) {
+                findViewById(R.id.char1).setVisibility(View.VISIBLE);
+            } else if (character == 2) {
+                findViewById(R.id.char2).setVisibility(View.VISIBLE);
+            } else if (character == 3) {
+                findViewById(R.id.char3).setVisibility(View.VISIBLE);
             }
 
-            int diffic = intent.getIntExtra("diffsCheckedRadioButtonId", 1);
-            TextView hp1 = findViewById(R.id.hp1);
-            TextView diff1 = findViewById(R.id.diffEasy);
-            TextView hp2 = findViewById(R.id.hp2);
-            TextView diff2 = findViewById(R.id.diffMedium);
-            TextView hp3 = findViewById(R.id.hp3);
-            TextView diff3 = findViewById(R.id.diffHard);
+            String level = "";
 
-            if (diffic == R.id.easy) {
-                hp1.setVisibility(View.VISIBLE);
-                diff1.setVisibility(View.VISIBLE);
-
-            } else if (diffic == R.id.medium) {
-                hp2.setVisibility(View.VISIBLE);
-                diff2.setVisibility(View.VISIBLE);
-            } else {
-                hp3.setVisibility(View.VISIBLE);
-                diff3.setVisibility(View.VISIBLE);
+            // display health and diff
+            if (hp == 100) {
+                findViewById(R.id.hp1).setVisibility(View.VISIBLE);
+                level = "Easy";
+            } else if (hp == 50) {
+                findViewById(R.id.hp2).setVisibility(View.VISIBLE);
+                level = "Medium";
+            } else if (hp == 30) {
+                findViewById(R.id.hp3).setVisibility(View.VISIBLE);
+                level = "Hard";
             }
 
+            // update name
+            TextView nametag = (TextView) findViewById(R.id.name);
+            String setName = "NAME: " + name;
+            nametag.setText(setName);
+
+            // update diff
+            TextView diff = (TextView) findViewById(R.id.difficulty);
+            String setDiff = "DIFFICULTY: " + level;
+            diff.setText(setDiff);
 
         }
 

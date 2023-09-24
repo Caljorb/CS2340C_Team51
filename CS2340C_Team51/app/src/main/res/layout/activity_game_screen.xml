@@ -123,10 +123,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="649dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="727dp"
         android:src="@drawable/char1"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/char2"
@@ -135,8 +135,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="649dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="727dp"
         android:src="@drawable/mushroomchar"
         android:visibility="gone" />
 
@@ -147,8 +147,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="649dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="727dp"
         android:src="@drawable/f_09char"
         android:visibility="gone" />
 
@@ -159,10 +159,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="125dp"
         android:fontFamily="casual"
-        android:text="HP: 100"
         android:textColor="#F0EAD6"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -172,6 +171,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:text="HP: 100"
         android:visibility="gone" />
 
     <TextView
@@ -181,10 +181,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="125dp"
         android:fontFamily="casual"
-        android:text="HP: 50"
         android:textColor="#F0EAD6"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -194,6 +193,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:text="HP: 50"
         android:visibility="gone" />
 
     <TextView
@@ -203,10 +203,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="137dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="125dp"
         android:fontFamily="casual"
-        android:text="HP: 30"
         android:textColor="#F0EAD6"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -216,6 +215,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
+        android:text="HP: 30"
         android:visibility="gone" />
 
 </RelativeLayout>

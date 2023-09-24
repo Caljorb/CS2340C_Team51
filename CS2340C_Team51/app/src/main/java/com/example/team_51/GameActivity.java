@@ -16,8 +16,7 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
 
-        String playerName = getIntent().getStringExtra("Player Name");
-        String difficulty = getIntent().getStringExtra("Difficulty");
+
 
         end = (Button) findViewById(R.id.end);
         end.setOnClickListener(new View.OnClickListener() {

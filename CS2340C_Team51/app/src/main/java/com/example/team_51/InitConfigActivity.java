@@ -85,6 +85,8 @@ public class InitConfigActivity extends AppCompatActivity {
 
     public void openGameActivity() {
         Intent intent = new Intent(this, GameActivity.class);
+        intent.putExtra("character", character);
+        intent.putExtra("hp", hp)
         startActivity(intent);
     }
 

@@ -71,9 +71,9 @@ public class InitConfigActivity extends AppCompatActivity {
         }
 
         // todo: logic to move to game screen
-        /*if (diffSel && charSel && nameSel) {
-            next.setVisibility(View.VISIBLE);
-        }*/
+        if (diffSel && charSel && nameSel) {
+            next.setEnabled(true);
+        }
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override

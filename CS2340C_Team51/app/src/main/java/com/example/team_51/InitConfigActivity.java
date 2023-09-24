@@ -26,9 +26,9 @@ public class InitConfigActivity extends AppCompatActivity {
             int hp = 0;
             int character = 0; // just represents which char picked, carry over to game
 
-            boolean diffSel = true;
-            boolean charSel = true;
-            boolean nameSel = true;
+            boolean diffSel = false;
+            boolean charSel = false;
+            boolean nameSel = false;
 
             RadioGroup diffs = findViewById(R.id.diffSelect);
             RadioGroup chars = findViewById(R.id.charSelect);
@@ -36,8 +36,10 @@ public class InitConfigActivity extends AppCompatActivity {
             int diffsCheckedRadioButtonId = diffs.getCheckedRadioButtonId();
 
             // pick difficulty
-            System.out.println(R.id.easy);
-            System.out.println();
+            System.out.println("Easy: " + R.id.easy);
+            System.out.println("Medium: " + R.id.medium);
+            System.out.println("Hard: " + R.id.hard);
+            System.out.println(diffsCheckedRadioButtonId);
             if (diffsCheckedRadioButtonId == R.id.easy) {
                 hp = 100;
                 diffSel = true;
@@ -48,20 +50,24 @@ public class InitConfigActivity extends AppCompatActivity {
                 hp = 30;
                 diffSel = true;
             }
+            System.out.println("HP: " + hp);
+            System.out.println("diff: " + diffSel);
 
             int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
 
             // pick character
-            if (charsCheckedRadioButtonId == R.id.easy) {
+            System.out.println(charsCheckedRadioButtonId);
+            if (charsCheckedRadioButtonId == R.id.charSel1) {
                 character = 1;
                 charSel = true;
-            } else if (charsCheckedRadioButtonId == R.id.medium) {
+            } else if (charsCheckedRadioButtonId == R.id.charSel2) {
                 character = 2;
                 charSel = true;
-            } else if (charsCheckedRadioButtonId == R.id.hard) {
+            } else if (charsCheckedRadioButtonId == R.id.charSel3) {
                 character = 3;
                 charSel = true;
             }
+            System.out.println("char: " + charSel);
 
             // todo: take in user input for name, check for edge cases
             TextInputLayout nameEntry = findViewById(R.id.nameEntry);
@@ -73,6 +79,7 @@ public class InitConfigActivity extends AppCompatActivity {
                     name = nameEntry.getEditText().getText().toString();
                 }
             }
+            System.out.println("name: " + nameSel);
 
             if (diffSel && charSel && nameSel) {
                 Intent intent = new Intent(this, GameActivity.class);

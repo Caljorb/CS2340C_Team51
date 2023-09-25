@@ -65,7 +65,7 @@ public class InitConfigActivity extends AppCompatActivity {
             if (nameEntry.getEditText() != null && nameEntry.getEditText().getText() != null) {
                 // cannot pick null/empty/whitespace strings
                 String temp = nameEntry.getEditText().getText().toString();
-                if (temp.trim().length() > 0) {
+                if (temp.trim().length() > 0 && !temp.contains(" ")) {
                     nameSel = true;
                     name = nameEntry.getEditText().getText().toString();
                 }

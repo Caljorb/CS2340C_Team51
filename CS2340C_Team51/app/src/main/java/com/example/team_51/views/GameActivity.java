@@ -1,4 +1,4 @@
-package com.example.team_51;
+package com.example.team_51.views;
 
 import android.content.Intent;
 import android.os.Bundle;

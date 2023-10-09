@@ -41,7 +41,8 @@ public class GameActivity extends AppCompatActivity {
 
                 @Override
                 public void onFinish() {
-
+                    String setScore = "SCORE: 0";
+                    score.setText(setScore);
                 }
             }.start();
             score = (TextView) findViewById(R.id.score);
@@ -97,7 +98,12 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void updateScore() {
-        String t = "" + time;
+        String t;
+        if (time <= 0) {
+            t = "0";
+        } else {
+            t = "" + time;
+        }
         String setScore = "SCORE: " + t;
         score.setText(setScore);
     }

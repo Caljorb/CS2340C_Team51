@@ -5,7 +5,7 @@ public class LeaderboardRow {
     private long score;
     private String date;
 
-    LeaderboardRow(String name, long score, String date) {
+    public LeaderboardRow(String name, long score, String date) {
         this.name = name;
         this.score = score;
         this.date = date;

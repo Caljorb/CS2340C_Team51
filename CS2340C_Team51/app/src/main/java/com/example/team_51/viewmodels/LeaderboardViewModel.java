@@ -42,4 +42,8 @@ public class LeaderboardViewModel extends ViewModel {
             }
         });
     }
+
+    public void clearRows() {
+        leaderboardRows.subList(5, leaderboardRows.size()).clear();
+    }
 }

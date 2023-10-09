@@ -2,7 +2,6 @@ package com.example.team_51.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.team_51.model.Leaderboard;
 import com.example.team_51.model.LeaderboardRow;
 
 import java.util.ArrayList;

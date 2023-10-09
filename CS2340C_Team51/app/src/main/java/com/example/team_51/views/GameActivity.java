@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.viewmodels.LeaderboardViewModel;
 
 public class GameActivity extends AppCompatActivity {
     private Button end;
@@ -94,6 +95,8 @@ public class GameActivity extends AppCompatActivity {
 
     public void openEndScreen() {
         Intent intent = new Intent(this, EndActivity.class);
+        intent.putExtra("score", time);
+        intent.putExtra("name", name);
         startActivity(intent);
     }
 

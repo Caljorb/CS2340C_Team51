@@ -12,19 +12,29 @@ import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class EndActivity extends AppCompatActivity {
     private LeaderboardViewModel leaderboardViewModel;
+    private ArrayList<LeaderboardRow> leaderboardRows;
     private long score;
     private String name;
     private String date;
+    private boolean retried;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_screen);
 
         leaderboardViewModel = LeaderboardViewModel.getLeaderboardViewModel();
+        leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
+        retried = getIntent().getBooleanExtra("retried", retried);
+        System.out.println("Retried: " + retried);
+        if (retried) { // only update viewmodel when have retried before
+            leaderboardViewModel.setRows(leaderboardRows);
+        }
+
         score = getIntent().getLongExtra("score", 0);
         name = getIntent().getStringExtra("name");
 
@@ -55,8 +65,10 @@ public class EndActivity extends AppCompatActivity {
         Button retry = findViewById(R.id.retry);
 
         retry.setOnClickListener(v -> {
+            retried = true;
             Intent intent = new Intent(this, InitConfigActivity.class);
             intent.putExtra("leaderboard", leaderboardViewModel.getLeaderboardRows());
+            intent.putExtra("retried", retried);
             startActivity(intent);
         });
     }

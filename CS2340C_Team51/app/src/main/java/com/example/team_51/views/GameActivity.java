@@ -10,7 +10,10 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
+
+import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private Button end;
@@ -21,10 +24,14 @@ public class GameActivity extends AppCompatActivity {
     private final long START_SCORE = 600000;
     private CountDownTimer countDownTimer;
     private TextView score;
+    private ArrayList<LeaderboardRow> leaderboardRows;
+    private boolean retried;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_screen);
+
+
 
         Intent intent = getIntent();
 
@@ -32,6 +39,8 @@ public class GameActivity extends AppCompatActivity {
             character = getIntent().getIntExtra("character", 1);
             hp = getIntent().getIntExtra("hp", 100);
             name = getIntent().getStringExtra("name");
+            leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
+            retried = getIntent().getBooleanExtra("retried", retried);
 
             countDownTimer = new CountDownTimer(START_SCORE, 1000) {
                 @Override
@@ -97,6 +106,8 @@ public class GameActivity extends AppCompatActivity {
         Intent intent = new Intent(this, EndActivity.class);
         intent.putExtra("score", time);
         intent.putExtra("name", name);
+        intent.putExtra("leaderboard", leaderboardRows);
+        intent.putExtra("retried", retried);
         startActivity(intent);
     }
 

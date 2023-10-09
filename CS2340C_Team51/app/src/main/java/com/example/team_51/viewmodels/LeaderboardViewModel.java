@@ -26,8 +26,8 @@ public class LeaderboardViewModel extends ViewModel {
         return leaderboardViewModel;
     }
 
-    public void setRow(int row, LeaderboardRow leaderboardRow) {
-        leaderboardRows.set(row, leaderboardRow);
+    public void setRows(ArrayList<LeaderboardRow> leaderboardRows) {
+        this.leaderboardRows = leaderboardRows;
     }
 
     public void addRow(LeaderboardRow leaderboardRow) {

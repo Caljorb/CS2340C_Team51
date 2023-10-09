@@ -8,15 +8,22 @@ import android.widget.RadioGroup;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.model.LeaderboardRow;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.ArrayList;
+
 public class InitConfigActivity extends AppCompatActivity {
+    private ArrayList<LeaderboardRow> leaderboardRows;
+    private boolean retried;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_init_config);
 
+        leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
+        retried = getIntent().getBooleanExtra("retried", retried);
         Button next = (Button) findViewById(R.id.nextButt);
 
         next.setOnClickListener(v -> {
@@ -78,6 +85,8 @@ public class InitConfigActivity extends AppCompatActivity {
                 intent.putExtra("character", character);
                 intent.putExtra("hp", hp);
                 intent.putExtra("name", name);
+                intent.putExtra("leaderboard", leaderboardRows);
+                intent.putExtra("retried", retried);
                 startActivity(intent);
             }
         });

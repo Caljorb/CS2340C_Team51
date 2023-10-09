@@ -22,16 +22,18 @@ public class EndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_end_screen);
 
-        leaderboardViewModel = new LeaderboardViewModel();
+        leaderboardViewModel = LeaderboardViewModel.getLeaderboardViewModel();
         score = getIntent().getLongExtra("score", 0);
         name = getIntent().getStringExtra("name");
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        LeaderboardRow attempt = new LeaderboardRow(name, score, date);
+
+        // set date for recent attempt
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date d = new Date();
         date = simpleDateFormat.format(d);
 
-        //leaderboardViewModel.setRow(0, name, score, date);
-
+        // set recent attempt
         TextView nameR = findViewById(R.id.nameR);
         nameR.setText(name);
         TextView scoreR = findViewById(R.id.scoreR);
@@ -40,19 +42,8 @@ public class EndActivity extends AppCompatActivity {
         TextView dateR = findViewById(R.id.dateR);
         dateR.setText(date);
 
-    }
+        // add recent attempt to leaderboardViewModel if top score
 
-    private int findRow(LeaderboardRow[] leaderboardRows, long score) {
-        int rtn = 0;
-        for (int i = 0; i < 5; i++) {
-            if (score >= leaderboardRows[i].getScore()) {
-
-            }
-        }
-        return 0;
-    }
-
-    private void shiftRows(LeaderboardRow[] leaderboardRows, int index) {
-
+        // display leaderboard
     }
 }

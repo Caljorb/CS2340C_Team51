@@ -8,8 +8,9 @@ import com.example.team_51.model.LeaderboardRow;
 public class LeaderboardViewModel extends ViewModel {
     private Leaderboard leaderboard;
     private LeaderboardRow[] leaderboardRows;
+    private static LeaderboardViewModel leaderboardViewModel;
 
-    public LeaderboardViewModel() {
+    private LeaderboardViewModel() {
         leaderboardRows = new LeaderboardRow[5];
         for (int i = 0; i < 5; i++) {
             leaderboardRows[i] = new LeaderboardRow("", 0, "");
@@ -17,11 +18,15 @@ public class LeaderboardViewModel extends ViewModel {
         leaderboard = Leaderboard.getLeaderboard(leaderboardRows);
     }
 
-    public void setRow(int row, String name, long score, String date) {
-        leaderboardRows[row].setName(name);
-        leaderboardRows[row].setScore(score);
-        leaderboardRows[row].setDate(date);
+    public static synchronized LeaderboardViewModel getLeaderboardViewModel() {
+        if (leaderboardViewModel == null) {
+            leaderboardViewModel = new LeaderboardViewModel();
+        }
+        return leaderboardViewModel;
     }
-    // must pick correct row beforehand to put in descending order
 
+    public void setRow(int row, LeaderboardRow leaderboardRow) {
+        leaderboardRows[row] = leaderboardRow;
+        // must pick correct row beforehand to put in descending order
+    }
 }

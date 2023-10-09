@@ -56,7 +56,7 @@ public class EndActivity extends AppCompatActivity {
         // add recent attempt to leaderboardViewModel if top score
         leaderboardViewModel.addRow(attempt);
         leaderboardViewModel.sortRows();
-        //leaderboardViewModel.clearRows(); //clears scores outside of top 5
+        leaderboardViewModel.clearRows(); //clears scores outside of top 5
         System.out.println(leaderboardViewModel);
 
         // display leaderboard

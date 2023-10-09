@@ -2,6 +2,7 @@ package com.example.team_51.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
+import com.example.team_51.model.Leaderboard;
 import com.example.team_51.model.LeaderboardRow;
 
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ public class LeaderboardViewModel extends ViewModel {
     private static LeaderboardViewModel leaderboardViewModel;
 
     private LeaderboardViewModel() {
-        leaderboardRows = new ArrayList<>();
+        leaderboardRows = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {
-            leaderboardRows.set(i, new LeaderboardRow("", 0, ""));
+            leaderboardRows.add(new LeaderboardRow("", 0, ""));
         }
     }
 
@@ -45,5 +46,9 @@ public class LeaderboardViewModel extends ViewModel {
 
     public void clearRows() {
         leaderboardRows.subList(5, leaderboardRows.size()).clear();
+    }
+
+    public ArrayList<LeaderboardRow> getLeaderboardRows() {
+        return leaderboardRows;
     }
 }

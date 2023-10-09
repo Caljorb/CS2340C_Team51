@@ -1,6 +1,8 @@
 package com.example.team_51.views;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -48,5 +50,14 @@ public class EndActivity extends AppCompatActivity {
         leaderboardViewModel.clearRows(); //clears scores outside of top 5
 
         // display leaderboard
+
+        // button to retry
+        Button retry = findViewById(R.id.retry);
+
+        retry.setOnClickListener(v -> {
+            Intent intent = new Intent(this, InitConfigActivity.class);
+            intent.putExtra("leaderboard", leaderboardViewModel.getLeaderboardRows());
+            startActivity(intent);
+        });
     }
 }

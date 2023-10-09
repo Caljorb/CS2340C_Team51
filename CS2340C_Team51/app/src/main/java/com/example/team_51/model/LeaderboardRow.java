@@ -1,6 +1,11 @@
 package com.example.team_51.model;
 
-public class LeaderboardRow implements Comparable<LeaderboardRow> {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class LeaderboardRow implements Parcelable {
     private String name;
     private long score;
     private String date;
@@ -10,6 +15,25 @@ public class LeaderboardRow implements Comparable<LeaderboardRow> {
         this.score = score;
         this.date = date;
     }
+
+    protected LeaderboardRow(Parcel in) {
+        name = in.readString();
+        score = in.readLong();
+        date = in.readString();
+    }
+
+    public static final Creator<LeaderboardRow> CREATOR = new Creator<LeaderboardRow>() {
+        @Override
+        public LeaderboardRow createFromParcel(Parcel in) {
+            return new LeaderboardRow(in);
+        }
+
+        @Override
+        public LeaderboardRow[] newArray(int size) {
+            return new LeaderboardRow[size];
+        }
+    };
+    // what is this
 
     public String getName() {
         return name;
@@ -36,7 +60,14 @@ public class LeaderboardRow implements Comparable<LeaderboardRow> {
     }
 
     @Override
-    public int compareTo(LeaderboardRow leaderboardRow) {
-        return Integer.compare((int) this.score, (int) leaderboardRow.score);
+    public int describeContents() {
+        return 0; // what do i do with this
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) { // what is this
+        parcel.writeString(name);
+        parcel.writeLong(score);
+        parcel.writeString(date);
     }
 }

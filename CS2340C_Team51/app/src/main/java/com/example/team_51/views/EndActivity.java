@@ -68,6 +68,38 @@ public class EndActivity extends AppCompatActivity {
         TextView date1 = findViewById(R.id.date1);
         date1.setText(leaderboardViewModel.getLeaderboardRow(0).getDate());
 
+        TextView name2 = findViewById(R.id.name2);
+        name2.setText(leaderboardViewModel.getLeaderboardRow(1).getName());
+        TextView score2 = findViewById(R.id.score2);
+        String setScore2 = " " + leaderboardViewModel.getLeaderboardRow(1).getScore() + " ";
+        score2.setText(setScore2);
+        TextView date2 = findViewById(R.id.date2);
+        date2.setText(leaderboardViewModel.getLeaderboardRow(1).getDate());
+
+        TextView name3 = findViewById(R.id.name3);
+        name3.setText(leaderboardViewModel.getLeaderboardRow(2).getName());
+        TextView score3 = findViewById(R.id.score3);
+        String setScore3 = " " + leaderboardViewModel.getLeaderboardRow(2).getScore() + " ";
+        score3.setText(setScore3);
+        TextView date3 = findViewById(R.id.date3);
+        date3.setText(leaderboardViewModel.getLeaderboardRow(2).getDate());
+
+        TextView name4 = findViewById(R.id.name4);
+        name4.setText(leaderboardViewModel.getLeaderboardRow(3).getName());
+        TextView score4 = findViewById(R.id.score4);
+        String setScore4 = " " + leaderboardViewModel.getLeaderboardRow(3).getScore() + " ";
+        score4.setText(setScore4);
+        TextView date4 = findViewById(R.id.date4);
+        date4.setText(leaderboardViewModel.getLeaderboardRow(3).getDate());
+
+        TextView name5 = findViewById(R.id.name5);
+        name5.setText(leaderboardViewModel.getLeaderboardRow(4).getName());
+        TextView score5 = findViewById(R.id.score5);
+        String setScore5 = " " + leaderboardViewModel.getLeaderboardRow(4).getScore() + " ";
+        score5.setText(setScore5);
+        TextView date5 = findViewById(R.id.date5);
+        date5.setText(leaderboardViewModel.getLeaderboardRow(4).getDate());
+
 
         // button to retry
         Button retry = findViewById(R.id.retry);

@@ -43,6 +43,8 @@ public class EndActivity extends AppCompatActivity {
         dateR.setText(date);
 
         // add recent attempt to leaderboardViewModel if top score
+        leaderboardViewModel.addRow(attempt);
+        leaderboardViewModel.sortRows();
 
         // display leaderboard
     }

@@ -1,6 +1,6 @@
 package com.example.team_51.model;
 
-public class LeaderboardRow {
+public class LeaderboardRow implements Comparable<LeaderboardRow> {
     private String name;
     private long score;
     private String date;
@@ -33,5 +33,10 @@ public class LeaderboardRow {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    @Override
+    public int compareTo(LeaderboardRow leaderboardRow) {
+        return Integer.compare((int) this.score, (int) leaderboardRow.score);
     }
 }

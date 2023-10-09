@@ -2,20 +2,20 @@ package com.example.team_51.viewmodels;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.team_51.model.Leaderboard;
 import com.example.team_51.model.LeaderboardRow;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 public class LeaderboardViewModel extends ViewModel {
-    private Leaderboard leaderboard;
-    private LeaderboardRow[] leaderboardRows;
+    private ArrayList<LeaderboardRow> leaderboardRows;
     private static LeaderboardViewModel leaderboardViewModel;
 
     private LeaderboardViewModel() {
-        leaderboardRows = new LeaderboardRow[5];
+        leaderboardRows = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            leaderboardRows[i] = new LeaderboardRow("", 0, "");
+            leaderboardRows.set(i, new LeaderboardRow("", 0, ""));
         }
-        leaderboard = Leaderboard.getLeaderboard(leaderboardRows);
     }
 
     public static synchronized LeaderboardViewModel getLeaderboardViewModel() {
@@ -26,7 +26,20 @@ public class LeaderboardViewModel extends ViewModel {
     }
 
     public void setRow(int row, LeaderboardRow leaderboardRow) {
-        leaderboardRows[row] = leaderboardRow;
-        // must pick correct row beforehand to put in descending order
+        leaderboardRows.set(row, leaderboardRow);
+    }
+
+    public void addRow(LeaderboardRow leaderboardRow) {
+        leaderboardRows.add(leaderboardRow);
+        // adds to end, call sort after
+    }
+
+    public void sortRows() {
+        leaderboardRows.sort(new Comparator<LeaderboardRow>() {
+            @Override
+            public int compare(LeaderboardRow leaderboardRow, LeaderboardRow t1) {
+                return (int) (leaderboardRow.getScore() - t1.getScore());
+            }
+        });
     }
 }

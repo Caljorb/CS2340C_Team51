@@ -70,4 +70,9 @@ public class LeaderboardRow implements Parcelable {
         parcel.writeLong(score);
         parcel.writeString(date);
     }
+
+    @Override
+    public String toString() {
+        return name + " " + score + " " + date;
+    }
 }

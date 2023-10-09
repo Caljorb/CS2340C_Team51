@@ -30,7 +30,6 @@ public class EndActivity extends AppCompatActivity {
         leaderboardViewModel = LeaderboardViewModel.getLeaderboardViewModel();
         leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
         retried = getIntent().getBooleanExtra("retried", retried);
-        System.out.println("Retried: " + retried);
         if (retried) { // only update viewmodel when have retried before
             leaderboardViewModel.setRows(leaderboardRows);
         }
@@ -38,12 +37,12 @@ public class EndActivity extends AppCompatActivity {
         score = getIntent().getLongExtra("score", 0);
         name = getIntent().getStringExtra("name");
 
-        LeaderboardRow attempt = new LeaderboardRow(name, score, date);
-
         // set date for recent attempt
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
         Date d = new Date();
         date = simpleDateFormat.format(d);
+
+        LeaderboardRow attempt = new LeaderboardRow(name, score, date);
 
         // set recent attempt
         TextView nameR = findViewById(R.id.nameR);
@@ -57,16 +56,25 @@ public class EndActivity extends AppCompatActivity {
         // add recent attempt to leaderboardViewModel if top score
         leaderboardViewModel.addRow(attempt);
         leaderboardViewModel.sortRows();
-        leaderboardViewModel.clearRows(); //clears scores outside of top 5
+        //leaderboardViewModel.clearRows(); //clears scores outside of top 5
+        System.out.println(leaderboardViewModel);
 
         // display leaderboard
+        TextView name1 = findViewById(R.id.name1);
+        name1.setText(leaderboardViewModel.getLeaderboardRow(0).getName());
+        TextView score1 = findViewById(R.id.score1);
+        String setScore1 = " " + leaderboardViewModel.getLeaderboardRow(0).getScore() + " ";
+        score1.setText(setScore1);
+        TextView date1 = findViewById(R.id.date1);
+        date1.setText(leaderboardViewModel.getLeaderboardRow(0).getDate());
+
 
         // button to retry
         Button retry = findViewById(R.id.retry);
 
         retry.setOnClickListener(v -> {
             retried = true;
-            Intent intent = new Intent(this, InitConfigActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.putExtra("leaderboard", leaderboardViewModel.getLeaderboardRows());
             intent.putExtra("retried", retried);
             startActivity(intent);

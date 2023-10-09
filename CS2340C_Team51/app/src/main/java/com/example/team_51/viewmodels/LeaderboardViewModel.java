@@ -39,7 +39,7 @@ public class LeaderboardViewModel extends ViewModel {
         leaderboardRows.sort(new Comparator<LeaderboardRow>() {
             @Override
             public int compare(LeaderboardRow leaderboardRow, LeaderboardRow t1) {
-                return (int) (leaderboardRow.getScore() - t1.getScore());
+                return (int) (t1.getScore() - leaderboardRow.getScore());
             }
         });
     }
@@ -50,5 +50,18 @@ public class LeaderboardViewModel extends ViewModel {
 
     public ArrayList<LeaderboardRow> getLeaderboardRows() {
         return leaderboardRows;
+    }
+
+    public LeaderboardRow getLeaderboardRow(int index) {
+        return leaderboardRows.get(index);
+    }
+
+    @Override
+    public String toString() {
+        String rtn = "";
+        for (LeaderboardRow l : leaderboardRows) {
+            rtn += " \n" + l.toString();
+        }
+        return rtn;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.team_51;
+package com.example.team_51.model;
 
 import android.content.Context;
 import android.graphics.Paint;

@@ -2,6 +2,7 @@ package com.example.team_51.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +16,10 @@ public class GameActivity extends AppCompatActivity {
     private int character;
     private int hp;
     private String name;
+    private long time;
+    private final long START_SCORE = 600000;
+    private CountDownTimer countDownTimer;
+    private TextView score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +31,21 @@ public class GameActivity extends AppCompatActivity {
             character = getIntent().getIntExtra("character", 1);
             hp = getIntent().getIntExtra("hp", 100);
             name = getIntent().getStringExtra("name");
+
+            countDownTimer = new CountDownTimer(START_SCORE, 1000) {
+                @Override
+                public void onTick(long l) {
+                    time = l;
+                    updateScore();
+                }
+
+                @Override
+                public void onFinish() {
+
+                }
+            }.start();
+            score = (TextView) findViewById(R.id.score);
+
 
             // display character
             if (character == 1) {
@@ -76,5 +96,9 @@ public class GameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void updateScore() {
+        String t = "" + time;
+        String setScore = "SCORE: " + t;
+        score.setText(setScore);
+    }
 }

@@ -10,14 +10,24 @@ public class Player {
     private int hp;
     private double posY;
     private Sprite sprite;
-    private HealthBar healthBar;
+    private static Player player;
 
-    public Player(Context context, double posX, double posY, int hp) {
+    private Player(double posX, double posY, int hp) {
         this.posX = posX;
         this.posY = posY;
         this.hp = hp;
 
-        this.healthBar = new HealthBar(context, this);
+    }
+
+    private Player() { // change values later
+        this(0.0, 0.0, 100);
+    }
+
+    public static synchronized Player getPlayer() { // implement singleton
+        if (player == null) {
+            player = new Player();
+        }
+        return player;
     }
 
     public void draw(Canvas canvas) {

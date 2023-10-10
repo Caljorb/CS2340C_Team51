@@ -2,6 +2,8 @@ package com.example.team_51.model;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import androidx.core.content.ContextCompat;
 
@@ -13,29 +15,36 @@ public class Player extends Circle {
     public static final int MAX_HEALTH_POINTS = 5;
     private double posX;
     private int hp;
+    private String name;
     private double posY;
     private Sprite sprite;
     private static Player player;
 
-    private Player(Context context, double posX, double posY, double radius, int hp) {
+
+    private Player(Context context, double posX, double posY, double radius, int hp, String name) {
         super(context, ContextCompat.getColor(context, R.color.player),
                 posX, posY, radius);
         this.posX = posX;
         this.posY = posY;
         this.hp = hp;
-
+        this.name = name;
     }
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
-                                                double radius, int hp) { // implement singleton
+                                                double radius, int hp, String name) {
         if (player == null) {
-            player = new Player(context, posX, posY, radius, hp);
+            player = new Player(context, posX, posY, radius, hp, name);
         }
         return player;
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
         super.draw(canvas, gameDisplay);
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(48f);
+        canvas.drawText("Name: " + name, 90, 100, paint);
+        canvas.drawText("Health: " + hp, 90, 150, paint);
     }
     public double getPlayerPosX() {
         return posX;

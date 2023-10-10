@@ -34,10 +34,15 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_game_screen);
 
-        game = new Game(this);
+        Intent intent = getIntent();
+
+        hp = getIntent().getIntExtra("hp", 100);
+        name = getIntent().getStringExtra("name");
+
+        game = new Game(this, hp, name);
         setContentView(game);
 
-        Intent intent = getIntent();
+
 
         /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);

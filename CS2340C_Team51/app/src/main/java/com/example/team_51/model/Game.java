@@ -15,14 +15,14 @@ import androidx.annotation.NonNull;
 import com.example.team_51.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 
-public class Game extends SurfaceView  implements SurfaceHolder.Callback {
+public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private final Player player;
     private GameDisplay gameDisplay;
     private Tilemap tilemap;
-    private int diff;
+    //private int diff;
 
-    public Game(Context context) {
+    public Game(Context context, int diff, String name) {
         super(context);
 
         SurfaceHolder surfaceHolder = getHolder();
@@ -31,10 +31,9 @@ public class Game extends SurfaceView  implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, surfaceHolder);
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = Player.getPlayer(context, 2240, 1024, 32, 100);
-        // have to account for health
+        player = Player.getPlayer(context, 2240, 1024, 32, diff, name);
+        // have to account for health, display diff
         // need sprite
-        // where is center
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

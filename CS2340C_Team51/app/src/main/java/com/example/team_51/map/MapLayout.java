@@ -20,6 +20,8 @@ public class MapLayout {
             createMapStart();
         } else if (map == 1) {
             createMapMid();
+        } else {
+            createMapEnd();
         }
     }
 
@@ -88,8 +90,39 @@ public class MapLayout {
             borderVert
         };
     }
-    
-    // todo: create end map
+
+    private void createMapEnd() {
+        int[] borderVert = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
+                            4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
+        int[] stone = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                       1, 1, 1, 1, 1, 1, 1, 2, 4};
+        int[] stoneGrass = {4, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
+                            2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 4};
+        int[] stoneGrassWater = {4, 2, 2, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                 2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 4};
+        int[] stoneEntrance = {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                               1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4};
+        int[] grass = {4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
+                2, 2, 2, 2, 2, 2, 2, 2, 4};
+
+        layout = new int[][] {
+            borderVert,
+            grass,
+            stoneGrass,
+            stoneEntrance,
+            stoneEntrance,
+            stoneGrass,
+            stoneGrassWater,
+            stoneGrass,
+            stone,
+            stone,
+            stoneGrass,
+            stoneGrassWater,
+            stoneGrass,
+            grass,
+            borderVert
+        };
+    }
     
     // todo: create next buttons to move maps, and move to end screen
 }

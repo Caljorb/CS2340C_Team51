@@ -31,7 +31,7 @@ public class Player {
     }
 
     public void draw(Canvas canvas) {
-        sprite.draw(canvas);
+        //sprite.draw(canvas);
         //healthBar.draw(canvas);
     }
     public double getPlayerPosX() {

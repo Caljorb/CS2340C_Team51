@@ -54,7 +54,6 @@ public class InitConfigActivity extends AppCompatActivity {
             int charsCheckedRadioButtonId = chars.getCheckedRadioButtonId();
 
             // pick character
-            System.out.println(charsCheckedRadioButtonId);
             if (charsCheckedRadioButtonId == R.id.charSel1) {
                 character = 1;
                 charSel = true;

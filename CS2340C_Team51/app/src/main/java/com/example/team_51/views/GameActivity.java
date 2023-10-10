@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 
@@ -26,12 +27,14 @@ public class GameActivity extends AppCompatActivity {
     private TextView score;
     private ArrayList<LeaderboardRow> leaderboardRows;
     private boolean retried;
+    private Game game;  // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_screen);
+        //setContentView(R.layout.activity_game_screen);
 
-
+        game = new Game(this);
+        setContentView(game);
 
         Intent intent = getIntent();
 

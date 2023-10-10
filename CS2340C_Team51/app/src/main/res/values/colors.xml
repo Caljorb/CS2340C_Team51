@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="border">#FFFFFFFF</color>
     <color name="health">#39FF14</color>
+    <color name="player">#9E5454</color>
 </resources>

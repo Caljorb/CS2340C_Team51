@@ -10,6 +10,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.example.team_51.model.SpriteSheet;
+import com.example.team_51.viewmodels.GameDisplay;
 
 public class Tilemap {
 
@@ -49,13 +50,20 @@ public class Tilemap {
 
     }
 
-
-
     private Rect getRectByIndex(int r, int c) {
         return new Rect(c * TILE_WIDTH_PIXELS,
                 r * TILE_HEIGHT_PIXELS,
                 (c + 1) * TILE_WIDTH_PIXELS,
                 (r + 1) * TILE_HEIGHT_PIXELS
+        );
+    }
+
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        canvas.drawBitmap(
+                mapBitmap,
+                gameDisplay.getGameRect(),
+                gameDisplay.DISPLAY_RECT,
+                null
         );
     }
 }

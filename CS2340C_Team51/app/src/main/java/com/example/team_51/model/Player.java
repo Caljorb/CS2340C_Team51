@@ -3,7 +3,11 @@ package com.example.team_51.model;
 import android.content.Context;
 import android.graphics.Canvas;
 
-public class Player {
+import androidx.core.content.ContextCompat;
+
+import com.example.cs2340c_team51.R;
+
+public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
     public static final int MAX_HEALTH_POINTS = 5;
     private double posX;
@@ -12,20 +16,19 @@ public class Player {
     private Sprite sprite;
     private static Player player;
 
-    private Player(double posX, double posY, int hp) {
+    private Player(Context context, double posX, double posY, double radius, int hp) {
+        super(context, ContextCompat.getColor(context, R.color.player),
+                posX, posY, radius);
         this.posX = posX;
         this.posY = posY;
         this.hp = hp;
 
     }
 
-    private Player() { // change values later
-        this(0.0, 0.0, 100);
-    }
-
-    public static synchronized Player getPlayer() { // implement singleton
+    public static synchronized Player getPlayer(Context context, double posX, double radius,
+                                                double posY, int hp) { // implement singleton
         if (player == null) {
-            player = new Player();
+            player = new Player(context, posX, posY, radius, hp);
         }
         return player;
     }

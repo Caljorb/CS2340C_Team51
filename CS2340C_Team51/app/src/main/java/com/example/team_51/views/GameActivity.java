@@ -1,6 +1,7 @@
 package com.example.team_51.views;
 
 import android.content.Intent;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -27,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     private TextView score;
     private ArrayList<LeaderboardRow> leaderboardRows;
     private boolean retried;
-    private Game game;  // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +39,7 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        if (intent != null) {
+        /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);
             hp = getIntent().getIntExtra("hp", 100);
             name = getIntent().getStringExtra("name");
@@ -102,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 openEndScreen();
             }
-        });
+        });*/
     }
 
     public void openEndScreen() {

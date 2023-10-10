@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import androidx.core.content.ContextCompat;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.viewmodels.GameDisplay;
 
 public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
@@ -25,17 +26,16 @@ public class Player extends Circle {
 
     }
 
-    public static synchronized Player getPlayer(Context context, double posX, double radius,
-                                                double posY, int hp) { // implement singleton
+    public static synchronized Player getPlayer(Context context, double posX, double posY,
+                                                double radius, int hp) { // implement singleton
         if (player == null) {
             player = new Player(context, posX, posY, radius, hp);
         }
         return player;
     }
 
-    public void draw(Canvas canvas) {
-        //sprite.draw(canvas);
-        //healthBar.draw(canvas);
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+        super.draw(canvas, gameDisplay);
     }
     public double getPlayerPosX() {
         return posX;

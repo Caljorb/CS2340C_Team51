@@ -15,9 +15,6 @@ public class GameDisplay {
     private double gameCenterY;
     private double displayOffsetX;
     private double displayOffsetY;
-    private double gameToDisplayCoordinatesOffsetX;
-    private double gameToDisplayCoordinatesOffsetY;
-
 
     public GameDisplay(int widthPixels, int heightPixels, GameObject centerObject) {
         this.widthPixels = widthPixels;
@@ -41,19 +38,19 @@ public class GameDisplay {
     }
 
     public double gameToDisplayCoordinatesX(double x) {
-        return x + gameToDisplayCoordinatesOffsetX;
+        return x + displayOffsetX;
     }
 
     public double gameToDisplayCoordinatesY(double y) {
-        return y + gameToDisplayCoordinatesOffsetY;
+        return y + displayOffsetY;
     }
 
     public Rect getGameRect() {
         return new Rect(
-                (int) (gameCenterX - widthPixels / 2),
-                (int) (gameCenterY - heightPixels / 2),
-                (int) (gameCenterX + widthPixels / 2),
-                (int) (gameCenterY + heightPixels / 2)
+                (int) ((gameCenterX - widthPixels) / 2),
+                (int) ((gameCenterY - heightPixels) / 2),
+                (int) ((gameCenterX + widthPixels) / 2),
+                (int) ((gameCenterY + heightPixels) / 2)
         );
     }
 }

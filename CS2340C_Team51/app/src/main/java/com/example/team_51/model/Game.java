@@ -1,5 +1,7 @@
 package com.example.team_51.model;
 
+import static com.example.team_51.map.MapLayout.TILE_HEIGHT_PIXELS;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -29,15 +31,17 @@ public class Game extends SurfaceView  implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, surfaceHolder);
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = Player.getPlayer(context, 0, 0, 32, 100);
-        //have to account for health
+        player = Player.getPlayer(context, 2240, 1024, 32, 100);
+        // have to account for health
+        // need sprite
+        // where is center
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay =
                 new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
-        tilemap = new Tilemap(spriteSheet);
+        tilemap = new Tilemap(spriteSheet, 0); // uses start map first
         setFocusable(true);
     }
 
@@ -46,6 +50,7 @@ public class Game extends SurfaceView  implements SurfaceHolder.Callback {
         super.draw(canvas);
 
         tilemap.draw(canvas, gameDisplay);
+        player.draw(canvas, gameDisplay);
     }
 
     @Override

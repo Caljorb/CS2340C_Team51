@@ -19,8 +19,8 @@ public class Tilemap {
     private SpriteSheet spriteSheet;
     private Bitmap mapBitmap;
 
-    public Tilemap(SpriteSheet spriteSheet) {
-        mapLayout = new MapLayout();
+    public Tilemap(SpriteSheet spriteSheet, int map) {
+        mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
     }

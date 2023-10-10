@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -24,6 +25,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int diff;
     private int character;
     private long points;
+    private Button button;
 
     public Game(Context context, int diff, String name, int character, long points) {
         super(context);
@@ -31,6 +33,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
+        this.button = new Button(context, new Rect(100, 50, 200, 150));
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -62,6 +65,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
         canvas.drawText("Score: " + points, 80, 250, paint);
 
+        button.draw(canvas, gameDisplay);
         player.draw(canvas, gameDisplay);
     }
 

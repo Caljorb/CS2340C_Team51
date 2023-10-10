@@ -14,7 +14,7 @@ import com.example.team_51.viewmodels.GameDisplay;
 
 public class Tilemap {
 
-    private final MapLayout mapLayout;
+    private MapLayout mapLayout;
     private Tile[][] tilemap;
     private SpriteSheet spriteSheet;
     private Bitmap mapBitmap;
@@ -65,5 +65,9 @@ public class Tilemap {
                 gameDisplay.DISPLAY_RECT,
                 null
         );
+    }
+
+    public void updateMap(int map) {
+        mapLayout = new MapLayout(map);
     }
 }

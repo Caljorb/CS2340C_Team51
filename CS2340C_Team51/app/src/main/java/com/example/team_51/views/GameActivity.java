@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.team_51.map.Tilemap;
 import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private Button end;
+    private com.example.team_51.model.Button next;
     private int character;
     private int hp;
     private String name;
@@ -22,6 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private ArrayList<LeaderboardRow> leaderboardRows;
     private boolean retried;
+    private int screen;
     private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class GameActivity extends AppCompatActivity {
         hp = getIntent().getIntExtra("hp", 100);
         name = getIntent().getStringExtra("name");
         character = getIntent().getIntExtra("character", 1);
-
+        screen = 0;
 
 
         game = new Game(this, hp, name, character, START_SCORE);
@@ -50,6 +53,10 @@ public class GameActivity extends AppCompatActivity {
                 game.updatePoints(0);
             }
         }.start();
+
+        game.getButton().setOnClickListener(v -> {
+            screen = openNextScreen(screen);
+        });
 
         /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);
@@ -125,5 +132,16 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("leaderboard", leaderboardRows);
         intent.putExtra("retried", retried);
         startActivity(intent);
+    }
+
+    public int openNextScreen(int x) {
+        if (x == 0) {
+            game.updateTilemap(x + 1);
+        } else if (x == 1) {
+            game.updateTilemap(x + 1);
+        } else {
+            openEndScreen();
+        }
+        return x + 1;
     }
 }

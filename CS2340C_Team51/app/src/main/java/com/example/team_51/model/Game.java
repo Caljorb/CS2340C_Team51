@@ -33,7 +33,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
-        this.button = new Button(context, new Rect(100, 50, 200, 150));
+        this.button = new Button(context, new Rect(2048, 832, 2176, 896));
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -106,5 +106,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void updatePoints(long points) {
         this.points = points;
+    }
+
+    public Button getButton() {
+        return button;
+    }
+
+    public void updateTilemap(int map) {
+        tilemap.updateMap(map);
     }
 }

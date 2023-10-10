@@ -1,6 +1,5 @@
 package com.example.team_51.model;
 
-import static com.example.team_51.map.MapLayout.TILE_HEIGHT_PIXELS;
 
 import android.app.Activity;
 import android.content.Context;
@@ -29,6 +28,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super(context);
 
         this.diff = diff;
+        this.character = character;
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -36,8 +36,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, surfaceHolder);
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = Player.getPlayer(context, 2240, 1024, 32, diff, name, spriteSheet,
-                character);
+        int[] hpChar = new int[]{diff, character};
+        player = Player.getPlayer(context, 2240, 1024, 32, name, spriteSheet,
+                hpChar);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

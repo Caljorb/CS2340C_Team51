@@ -18,25 +18,27 @@ public class Player extends Circle {
     private String name;
     private double posY;
     private Sprite sprite;
+    private int[] hpChar;
     private static Player player;
 
 
-    private Player(Context context, double posX, double posY, double radius, int hp, String name,
-                   SpriteSheet spriteSheet, int character) {
+    private Player(Context context, double posX, double posY, double radius, String name,
+                   SpriteSheet spriteSheet, int[] hpChar) {
         super(context, ContextCompat.getColor(context, R.color.player),
                 posX, posY, radius);
         this.posX = posX;
         this.posY = posY;
-        this.hp = hp;
+        this.hpChar = new int[]{hpChar[0], hpChar[1]};
+        this.hp = hpChar[0];
         this.name = name;
-        this.sprite = spriteSheet.getPlayerSprite(character);
+        this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
     }
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
-                                                double radius, int hp, String name,
-                                                SpriteSheet spriteSheet, int character) {
+                                                double radius, String name,
+                                                SpriteSheet spriteSheet, int[] hpChar) {
         if (player == null) {
-            player = new Player(context, posX, posY, radius, hp, name, spriteSheet, character);
+            player = new Player(context, posX, posY, radius, name, spriteSheet, hpChar);
         }
         return player;
     }

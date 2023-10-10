@@ -23,8 +23,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameDisplay gameDisplay;
     private Tilemap tilemap;
     private int diff;
+    private int character;
 
-    public Game(Context context, int diff, String name) {
+    public Game(Context context, int diff, String name, int character) {
         super(context);
 
         this.diff = diff;
@@ -35,7 +36,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, surfaceHolder);
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
-        player = Player.getPlayer(context, 2240, 1024, 32, diff, name);
+        player = Player.getPlayer(context, 2240, 1024, 32, diff, name, spriteSheet,
+                character);
         // need sprite
 
         DisplayMetrics displayMetrics = new DisplayMetrics();

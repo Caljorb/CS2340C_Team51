@@ -38,8 +38,9 @@ public class GameActivity extends AppCompatActivity {
 
         hp = getIntent().getIntExtra("hp", 100);
         name = getIntent().getStringExtra("name");
+        character = getIntent().getIntExtra("character", 1);
 
-        game = new Game(this, hp, name);
+        game = new Game(this, hp, name, character);
         setContentView(game);
 
 

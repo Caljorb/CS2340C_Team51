@@ -21,30 +21,34 @@ public class Player extends Circle {
     private static Player player;
 
 
-    private Player(Context context, double posX, double posY, double radius, int hp, String name) {
+    private Player(Context context, double posX, double posY, double radius, int hp, String name,
+                   SpriteSheet spriteSheet, int character) {
         super(context, ContextCompat.getColor(context, R.color.player),
                 posX, posY, radius);
         this.posX = posX;
         this.posY = posY;
         this.hp = hp;
         this.name = name;
+        this.sprite = spriteSheet.getPlayerSprite(character);
     }
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
-                                                double radius, int hp, String name) {
+                                                double radius, int hp, String name,
+                                                SpriteSheet spriteSheet, int character) {
         if (player == null) {
-            player = new Player(context, posX, posY, radius, hp, name);
+            player = new Player(context, posX, posY, radius, hp, name, spriteSheet, character);
         }
         return player;
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
-        super.draw(canvas, gameDisplay);
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setTextSize(48f);
         canvas.drawText("Name: " + name, 80, 100, paint);
         canvas.drawText("Health: " + hp, 80, 150, paint);
+        sprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX),
+                (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
     public double getPlayerPosX() {
         return posX;

@@ -1,19 +1,14 @@
 package com.example.team_51.views;
 
 import android.content.Intent;
-import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cs2340c_team51.R;
 import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
-import com.example.team_51.viewmodels.LeaderboardViewModel;
 
 import java.util.ArrayList;
 
@@ -25,7 +20,6 @@ public class GameActivity extends AppCompatActivity {
     private long time;
     private final long START_SCORE = 600000;
     private CountDownTimer countDownTimer;
-    private TextView score;
     private ArrayList<LeaderboardRow> leaderboardRows;
     private boolean retried;
     private Game game;
@@ -40,10 +34,22 @@ public class GameActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         character = getIntent().getIntExtra("character", 1);
 
-        game = new Game(this, hp, name, character);
+
+
+        game = new Game(this, hp, name, character, START_SCORE);
         setContentView(game);
 
+        countDownTimer = new CountDownTimer(START_SCORE, 1000) {
+            @Override
+            public void onTick(long l) {
+                game.updatePoints(l);
+            }
 
+            @Override
+            public void onFinish() {
+                game.updatePoints(0);
+            }
+        }.start();
 
         /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);
@@ -119,16 +125,5 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("leaderboard", leaderboardRows);
         intent.putExtra("retried", retried);
         startActivity(intent);
-    }
-
-    public void updateScore() {
-        String t;
-        if (time <= 0) {
-            t = "0";
-        } else {
-            t = "" + time;
-        }
-        String setScore = "SCORE: " + t;
-        score.setText(setScore);
     }
 }

@@ -23,12 +23,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Tilemap tilemap;
     private int diff;
     private int character;
+    private long points;
 
-    public Game(Context context, int diff, String name, int character) {
+    public Game(Context context, int diff, String name, int character, long points) {
         super(context);
 
         this.diff = diff;
         this.character = character;
+        this.points = points;
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -58,6 +60,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         paint.setColor(Color.WHITE);
         paint.setTextSize(48f);
         canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
+        canvas.drawText("Score: " + points, 80, 250, paint);
 
         player.draw(canvas, gameDisplay);
     }
@@ -95,5 +98,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         } else {
             return "Hard";
         }
+    }
+
+    public void updatePoints(long points) {
+        this.points = points;
     }
 }

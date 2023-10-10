@@ -5,6 +5,8 @@ import static com.example.team_51.map.MapLayout.TILE_HEIGHT_PIXELS;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
@@ -20,10 +22,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private final Player player;
     private GameDisplay gameDisplay;
     private Tilemap tilemap;
-    //private int diff;
+    private int diff;
 
     public Game(Context context, int diff, String name) {
         super(context);
+
+        this.diff = diff;
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -49,6 +53,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
 
         tilemap.draw(canvas, gameDisplay);
+        Paint paint = new Paint();
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(48f);
+        canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
+
         player.draw(canvas, gameDisplay);
     }
 
@@ -75,5 +84,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void update() {
         gameDisplay.update();
+    }
+
+    private String diffSelect(int diff) {
+        if (diff == 100) {
+            return "Easy";
+        } else if (diff == 50) {
+            return "Medium";
+        } else {
+            return "Hard";
+        }
     }
 }

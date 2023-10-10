@@ -43,8 +43,8 @@ public class Player extends Circle {
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setTextSize(48f);
-        canvas.drawText("Name: " + name, 90, 100, paint);
-        canvas.drawText("Health: " + hp, 90, 150, paint);
+        canvas.drawText("Name: " + name, 80, 100, paint);
+        canvas.drawText("Health: " + hp, 80, 150, paint);
     }
     public double getPlayerPosX() {
         return posX;

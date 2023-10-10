@@ -36,7 +36,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
         player = Player.getPlayer(context, 2240, 1024, 32, diff, name);
-        // have to account for health, display diff
         // need sprite
 
         DisplayMetrics displayMetrics = new DisplayMetrics();

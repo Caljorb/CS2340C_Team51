@@ -19,8 +19,8 @@ public class SpriteSheet {
                 R.drawable.sprite_sheet, bitmapOptions);
     }
 
-    public Sprite getPlayerSprite() {
-        return null; // does nothing yet
+    public Sprite getPlayerSprite(int character) {
+        return getSpriteByIndex(1, character - 1);
     }
 
     public Bitmap getBitmap() {

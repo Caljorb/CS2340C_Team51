@@ -38,7 +38,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         SpriteSheet spriteSheet = new SpriteSheet(context);
         player = Player.getPlayer(context, 2240, 1024, 32, diff, name, spriteSheet,
                 character);
-        // need sprite
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);

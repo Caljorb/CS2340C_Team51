@@ -1,10 +1,10 @@
-package com.example.team_51.map;
+package com.example.team_51.model.map;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.example.team_51.model.Sprite;
-import com.example.team_51.model.SpriteSheet;
+import com.example.team_51.viewmodels.SpriteSheet;
 
 public class WaterTile extends Tile {
 

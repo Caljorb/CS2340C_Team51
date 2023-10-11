@@ -1,8 +1,10 @@
-package com.example.team_51.model;
+package com.example.team_51.viewmodels;
 
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
+
+import com.example.team_51.model.Game;
 
 public class GameLoop extends Thread {
     public static final double MAX_UPS = 30.0; // updates per second

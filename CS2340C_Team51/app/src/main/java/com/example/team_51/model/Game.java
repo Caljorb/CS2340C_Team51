@@ -16,8 +16,10 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import com.example.team_51.map.Tilemap;
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
+import com.example.team_51.viewmodels.GameLoop;
+import com.example.team_51.viewmodels.SpriteSheet;
 import com.example.team_51.views.EndActivity;
 import com.example.team_51.views.GameActivity;
 

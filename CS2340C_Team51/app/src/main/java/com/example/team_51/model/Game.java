@@ -21,6 +21,8 @@ import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.views.EndActivity;
 import com.example.team_51.views.GameActivity;
 
+import java.util.ArrayList;
+
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private final Player player;
@@ -129,10 +131,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                                 new Intent(GameActivity.getGameContext(), EndActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        //intent.putExtra("score", GameActivity.time);
-                        //intent.putExtra("name", player.getName());
-                        //intent.putExtra("leaderboard", leaderboardRows);
-                        //intent.putExtra("retried", retried);
+                        // god i hope this works
+                        intent.putExtra("score", points);
+                        intent.putExtra("name", player.getName());
+                        ArrayList<LeaderboardRow> leaderboardRows = intent.
+                                getParcelableArrayListExtra("leaderboard");
+                        intent.putExtra("leaderboard", leaderboardRows);
+                        boolean retried = intent.getBooleanExtra("retried", false);
+                        // maybe works
+                        intent.putExtra("retried", retried);
                         GameActivity.getGameContext().startActivity(intent);
                     }
                 }

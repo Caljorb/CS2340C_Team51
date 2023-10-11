@@ -60,7 +60,7 @@ public class GameLoop extends Thread { // change
                 if (canvas == null) {
                     break;
                 }
-                
+
                 synchronized (surfaceHolder) {
                     game.update();
                     updateCount++;

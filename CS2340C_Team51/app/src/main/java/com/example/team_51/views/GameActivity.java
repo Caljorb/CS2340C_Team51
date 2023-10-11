@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
     private static Context context;
+    private static Intent intent;
     private Button end;
     private com.example.team_51.model.Button next;
     private int character;
@@ -32,6 +33,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         GameActivity.context = getApplicationContext();
+        GameActivity.intent = getIntent();
 
         Intent intent = getIntent();
 
@@ -127,6 +129,10 @@ public class GameActivity extends AppCompatActivity {
 
     public static Context getGameContext() {
         return GameActivity.context;
+    }
+
+    public static Intent getGameIntent() {
+        return GameActivity.intent;
     }
 
     public void openEndScreen() {

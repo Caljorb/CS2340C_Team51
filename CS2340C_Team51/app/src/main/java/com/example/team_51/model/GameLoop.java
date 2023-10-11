@@ -4,8 +4,8 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-public class GameLoop extends Thread { // change
-    public static final double MAX_UPS = 30.0;
+public class GameLoop extends Thread {
+    public static final double MAX_UPS = 30.0; // updates per second
     private static final double UPS_PERIOD = 1E+3 / MAX_UPS;
     private Game game;
     private SurfaceHolder surfaceHolder;
@@ -38,7 +38,6 @@ public class GameLoop extends Thread { // change
         Log.d("GameLoop.java", "run()");
         super.run();
 
-        // Declare time and cycle count variables
         int updateCount = 0;
         int frameCount = 0;
 
@@ -46,24 +45,24 @@ public class GameLoop extends Thread { // change
         long elapsedTime;
         long sleepTime;
 
-        // Game loop
+        // game loop
         Canvas canvas = null;
         startTime = System.currentTimeMillis();
         while (isRunning) {
 
-            // Try to update and render game
+            // renders game
             try {
                 canvas = surfaceHolder.lockCanvas();
 
-                if (canvas == null) {
-                    break;
+                if (canvas == null) { // occurs after game ends
+                    break; // stop rendering game
                 }
 
                 synchronized (surfaceHolder) {
                     game.update();
-                    updateCount++;
+                    updateCount++; // add to number of updates
 
-                    game.draw(canvas);
+                    game.draw(canvas); // render game
                 }
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
@@ -78,7 +77,7 @@ public class GameLoop extends Thread { // change
                 }
             }
 
-            // Pause game loop to not exceed target UPS
+            // stop game loop past certain amount of updates
             elapsedTime = System.currentTimeMillis() - startTime;
             sleepTime = (long) (updateCount * UPS_PERIOD - elapsedTime);
             if (sleepTime > 0) {
@@ -89,7 +88,7 @@ public class GameLoop extends Thread { // change
                 }
             }
 
-            // Skip frames to keep up with target UPS
+            // skip frames to match updates per second
             while (sleepTime < 0 && updateCount < MAX_UPS - 1) {
                 game.update();
                 updateCount++;
@@ -97,7 +96,7 @@ public class GameLoop extends Thread { // change
                 sleepTime = (long) (updateCount * UPS_PERIOD - elapsedTime);
             }
 
-            // Calculate average UPS and FPS
+            // calculate updates and frames per second
             elapsedTime = System.currentTimeMillis() - startTime;
             if (elapsedTime >= 1000) {
                 averageUPS = updateCount / (1E-3 * elapsedTime);

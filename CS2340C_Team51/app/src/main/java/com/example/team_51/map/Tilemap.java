@@ -32,6 +32,7 @@ public class Tilemap {
     }
 
     private void createTilemap() {
+        // construct map layout
         int[][] layout = mapLayout.getLayout();
         tilemap = new Tile[NUMBER_OF_ROW_TILES][NUMBER_OF_COLUMN_TILES];
         for (int r = 0; r < NUMBER_OF_ROW_TILES; r++) {
@@ -40,13 +41,14 @@ public class Tilemap {
                         layout[r][c], spriteSheet, getRectByIndex(r, c));
             }
         }
+        // construct bitmap
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
         mapBitmap = Bitmap.createBitmap(
                 NUMBER_OF_COLUMN_TILES * TILE_WIDTH_PIXELS,
                 NUMBER_OF_ROW_TILES * TILE_HEIGHT_PIXELS,
                 config
         );
-
+        // draw bitmap
         Canvas mapCanvas = new Canvas(mapBitmap);
         for (int r = 0; r < NUMBER_OF_ROW_TILES; r++) {
             for (int c = 0; c < NUMBER_OF_COLUMN_TILES; c++) {
@@ -56,6 +58,7 @@ public class Tilemap {
 
     }
 
+    //selects single tile
     private Rect getRectByIndex(int r, int c) {
         return new Rect(c * TILE_WIDTH_PIXELS,
                 r * TILE_HEIGHT_PIXELS,
@@ -68,7 +71,7 @@ public class Tilemap {
         canvas.drawBitmap(
                 mapBitmap,
                 gameDisplay.getGameRect(),
-                gameDisplay.DISPLAY_RECT,
+                gameDisplay.getDisplayRect(),
                 null
         );
     }
@@ -79,10 +82,10 @@ public class Tilemap {
 
     public void update() {
         swap = button.getIsPressed();
-        if (swap) {
+        if (swap) { // swap to new map when button pressed
             System.out.println("Map: " + map);
             updateMap(map);
-            createTilemap();
+            createTilemap(); // make new map
         }
     }
 
@@ -92,5 +95,5 @@ public class Tilemap {
 
     public void incrementMap() {
         map++;
-    }
+    } // update map number
 }

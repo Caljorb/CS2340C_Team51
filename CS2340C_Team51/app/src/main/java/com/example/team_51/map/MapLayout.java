@@ -3,8 +3,8 @@ package com.example.team_51.map;
 public class MapLayout {
     public static final int TILE_WIDTH_PIXELS = 64;
     public static final int TILE_HEIGHT_PIXELS = 64;
-    public static final int NUMBER_OF_ROW_TILES = 15; // 15
-    public static final int NUMBER_OF_COLUMN_TILES = 35; // 35
+    public static final int NUMBER_OF_ROW_TILES = 15;
+    public static final int NUMBER_OF_COLUMN_TILES = 35;
 
     private int[][] layout;
     public MapLayout(int map) {
@@ -15,7 +15,7 @@ public class MapLayout {
         return layout;
     }
 
-    private void createLayout(int map) {
+    private void createLayout(int map) { // pick what map to display
         if (map == 0) {
             createMapStart();
         } else if (map == 1) {
@@ -25,7 +25,7 @@ public class MapLayout {
         }
     }
 
-    private void createMapStart() {
+    private void createMapStart() { // make first map
         int[] borderVert = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                             4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
         int[] grass = {4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -54,7 +54,7 @@ public class MapLayout {
         };
     }
 
-    private void createMapMid() {
+    private void createMapMid() { // make second map
         int[] borderVert = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                             4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
         int[] mud1 = {4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0,
@@ -91,7 +91,7 @@ public class MapLayout {
         };
     }
 
-    private void createMapEnd() {
+    private void createMapEnd() { // make final map
         int[] borderVert = {4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4,
                             4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4};
         int[] stone = {4, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -123,6 +123,4 @@ public class MapLayout {
             borderVert
         };
     }
-    
-    // todo: create next buttons to move maps, and move to end screen
 }

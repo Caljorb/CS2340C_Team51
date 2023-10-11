@@ -11,7 +11,7 @@ public class Sprite {
         this.spriteSheet = spriteSheet;
         this.rect = rect;
     }
-    public void draw(Canvas canvas, int x, int y) {
+    public void draw(Canvas canvas, int x, int y) { // put sprite on screen
         canvas.drawBitmap(spriteSheet.getBitmap(),
                 rect,
                 new Rect(x, y, x + getWidth(), y + getHeight()),

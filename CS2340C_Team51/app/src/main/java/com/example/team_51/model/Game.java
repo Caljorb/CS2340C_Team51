@@ -39,8 +39,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
-        this.button = new Button(context, new Rect(2048, 832, 2176, 896),
-                "Next");
+        this.button = new Button(context, new Rect(2048, 832, 2176, 896));
         button.setClickable(true);
 
         SurfaceHolder surfaceHolder = getHolder();
@@ -117,7 +116,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        // Handle user input touch event actions
+        // button presses
         switch (event.getActionMasked()) {
         case MotionEvent.ACTION_DOWN:
             if (button.isPressed((double) event.getX(), (double) event.getY())) {
@@ -129,15 +128,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     Intent intent =
                                 new Intent(GameActivity.getGameContext(), EndActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-                    // god i hope this works
+                    // allow starting activity outside activity class
                     intent.putExtra("score", points);
                     intent.putExtra("name", player.getName());
                     ArrayList<LeaderboardRow> leaderboardRows = intent.
                                 getParcelableArrayListExtra("leaderboard");
                     intent.putExtra("leaderboard", leaderboardRows);
                     boolean retried = intent.getBooleanExtra("retried", false);
-                    // maybe works
                     intent.putExtra("retried", retried);
                     GameActivity.getGameContext().startActivity(intent);
                 }
@@ -154,13 +151,5 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void updatePoints(long points) {
         this.points = points;
-    }
-
-    public Button getButton() {
-        return button;
-    }
-
-    public void updateTilemap(int map) {
-        tilemap.updateMap(map);
     }
 }

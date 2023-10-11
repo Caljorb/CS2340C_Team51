@@ -10,7 +10,7 @@ public class LeaderboardRow implements Parcelable {
     private long score;
     private String date;
 
-    public LeaderboardRow(String name, long score, String date) {
+    public LeaderboardRow(String name, long score, String date) { // store 3 elements for a row
         this.name = name;
         this.score = score;
         this.date = date;

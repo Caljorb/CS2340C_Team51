@@ -34,7 +34,7 @@ public class LeaderboardViewModel extends ViewModel {
         // adds to end, call sort after
     }
 
-    public void sortRows() {
+    public void sortRows() { // use for easy sorting
         leaderboardRows.sort(new Comparator<LeaderboardRow>() {
             @Override
             public int compare(LeaderboardRow leaderboardRow, LeaderboardRow t1) {
@@ -43,6 +43,7 @@ public class LeaderboardViewModel extends ViewModel {
         });
     }
 
+    // keep only 5 entries in leaderboard data
     public void clearRows() {
         leaderboardRows.subList(5, leaderboardRows.size()).clear();
     }

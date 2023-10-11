@@ -21,13 +21,16 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         GameActivity.context = getApplicationContext();
 
+        // get values to make game
         hp = getIntent().getIntExtra("hp", 100);
         name = getIntent().getStringExtra("name");
         character = getIntent().getIntExtra("character", 1);
 
+        // make game
         game = new Game(this, hp, name, character, startScore);
         setContentView(game);
 
+        // make point keeper
         countDownTimer = new CountDownTimer(startScore, 1000) {
             @Override
             public void onTick(long l) {

@@ -22,7 +22,7 @@ abstract class Tile {
     }
 
     public static Tile getTile(int type, SpriteSheet spriteSheet, Rect mapLocationRect) {
-        switch (TileType.values()[type]) {
+        switch (TileType.values()[type]) { // selects tile to make
         case MUD_TILE:
             return new MudTile(spriteSheet, mapLocationRect);
         case STONE_TILE:

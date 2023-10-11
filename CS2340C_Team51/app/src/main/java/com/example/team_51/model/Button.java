@@ -11,24 +11,21 @@ import com.example.team_51.viewmodels.GameDisplay;
 public class Button extends androidx.appcompat.widget.AppCompatButton {
 
     private Rect rect;
-    private String text;
     private boolean isPressed;
 
     private Button(Context context) {
         super(context);
     }
 
-    public Button(Context context, Rect rect, String text) {
+    public Button(Context context, Rect rect) {
         this(context);
         this.rect = rect;
-        this.text = text;
-        this.setText(text);
     }
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
-        canvas.drawRect(rect, paint);
+        canvas.drawRect(rect, paint); // draw button
     }
 
     public void update() {
@@ -37,7 +34,7 @@ public class Button extends androidx.appcompat.widget.AppCompatButton {
 
     public boolean isPressed(double touchPosX, double touchPosY) {
         return ((touchPosX > rect.left && touchPosX < rect.right)
-                && touchPosY > rect.top && touchPosY < rect.bottom);
+                && touchPosY > rect.top && touchPosY < rect.bottom); // check if pressed button
     }
 
     public void setIsPressed(boolean isPressed) {

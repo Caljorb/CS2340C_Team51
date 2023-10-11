@@ -43,7 +43,7 @@ public class Player extends Circle {
             player.setPlayer(name, spriteSheet, hpChar);
         }
         return player;
-    }
+    } // singleton to limit to a single instance
 
     public void draw(Canvas canvas, GameDisplay gameDisplay) {
         Paint paint = new Paint();

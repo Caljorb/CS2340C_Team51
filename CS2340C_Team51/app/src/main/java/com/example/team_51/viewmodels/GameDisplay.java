@@ -5,7 +5,7 @@ import android.graphics.Rect;
 import com.example.team_51.model.GameObject;
 
 public class GameDisplay {
-    public final Rect DISPLAY_RECT;
+    private final Rect displayRect;
     private final int widthPixels;
     private final int heightPixels;
     private final GameObject centerObject;
@@ -19,7 +19,7 @@ public class GameDisplay {
     public GameDisplay(int widthPixels, int heightPixels, GameObject centerObject) {
         this.widthPixels = widthPixels;
         this.heightPixels = heightPixels;
-        DISPLAY_RECT = new Rect(0, 0, widthPixels, heightPixels);
+        displayRect = new Rect(0, 0, widthPixels, heightPixels);
 
         this.centerObject = centerObject;
 
@@ -52,5 +52,9 @@ public class GameDisplay {
                 (int) ((gameCenterX + widthPixels) / 2),
                 (int) ((gameCenterY + heightPixels) / 2)
         );
+    }
+
+    public Rect getDisplayRect() {
+        return displayRect;
     }
 }

@@ -128,12 +128,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                         Intent intent =
                                 new Intent(GameActivity.getGameContext(), EndActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        GameActivity.getGameContext().startActivity(intent);
+
                         //intent.putExtra("score", GameActivity.time);
-                        //intent.putExtra("name", name);
+                        //intent.putExtra("name", player.getName());
                         //intent.putExtra("leaderboard", leaderboardRows);
                         //intent.putExtra("retried", retried);
-
+                        GameActivity.getGameContext().startActivity(intent);
                     }
                 }
                 return true;

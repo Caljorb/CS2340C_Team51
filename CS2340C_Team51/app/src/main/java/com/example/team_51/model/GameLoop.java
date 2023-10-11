@@ -56,6 +56,11 @@ public class GameLoop extends Thread { // change
             // Try to update and render game
             try {
                 canvas = surfaceHolder.lockCanvas();
+
+                if (canvas == null) {
+                    break;
+                }
+                
                 synchronized (surfaceHolder) {
                     game.update();
                     updateCount++;

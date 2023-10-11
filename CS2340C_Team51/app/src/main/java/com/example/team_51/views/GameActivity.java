@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
     private long time;
     private final long START_SCORE = 600000;
     private CountDownTimer countDownTimer;
-    private ArrayList<LeaderboardRow> leaderboardRows;
+    public ArrayList<LeaderboardRow> leaderboardRows;
     private boolean retried;
     private int screen;
     private Game game;

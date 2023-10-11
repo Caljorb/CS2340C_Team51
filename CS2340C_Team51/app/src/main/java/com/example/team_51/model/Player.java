@@ -61,6 +61,11 @@ public class Player extends Circle {
     public int getHp() {
         return hp;
     }
+
+    public String getName() {
+        return name;
+    }
+
     public void update() {
 
     }

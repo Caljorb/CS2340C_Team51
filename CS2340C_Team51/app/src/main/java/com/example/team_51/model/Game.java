@@ -34,7 +34,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
-        this.button = new Button(context, new Rect(2048, 832, 2176, 896));
+        this.button = new Button(context, new Rect(2048, 832, 2176, 896),
+                "Next");
         button.setClickable(true);
 
         SurfaceHolder surfaceHolder = getHolder();
@@ -52,7 +53,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameDisplay =
                 new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
-        tilemap = new Tilemap(spriteSheet, 0); // uses start map first
+        tilemap = new Tilemap(spriteSheet, 0, button); // uses start map first
         setFocusable(true);
     }
 
@@ -93,6 +94,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
+        button.update();
+        tilemap.update();
         gameDisplay.update();
     }
 
@@ -112,14 +115,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Handle user input touch event actions
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                if (button.isPressed()) {
-                    
+                updateTilemap(1);
+                if (button.isPressed((double) event.getX(), (double) event.getY())) {
+                    button.setIsPressed(true);
+                    System.out.println("Press butotnoon");
                 }
-                tilemap.updateMap(tilemap.getMap() + 1);
                 return true;
-
+            case MotionEvent.ACTION_UP:
+                button.setIsPressed(false);
+                return true;
         }
-
         return super.onTouchEvent(event);
     }
 

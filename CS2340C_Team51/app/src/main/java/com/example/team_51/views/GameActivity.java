@@ -54,9 +54,9 @@ public class GameActivity extends AppCompatActivity {
             }
         }.start();
 
-        game.getButton().setOnClickListener(v -> {
+        /*game.getButton().setOnClickListener(v -> {
             screen = openNextScreen(screen);
-        });
+        });*/
 
         /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);
@@ -136,9 +136,9 @@ public class GameActivity extends AppCompatActivity {
 
     public int openNextScreen(int x) {
         if (x == 0) {
-            game.updateTilemap(x + 1);
+            game.updateTilemap(1);
         } else if (x == 1) {
-            game.updateTilemap(x + 1);
+            game.updateTilemap(2);
         } else {
             openEndScreen();
         }

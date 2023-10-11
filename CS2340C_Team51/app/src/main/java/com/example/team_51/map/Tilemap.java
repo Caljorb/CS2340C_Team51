@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.example.team_51.model.Button;
 import com.example.team_51.model.SpriteSheet;
 import com.example.team_51.viewmodels.GameDisplay;
 
@@ -19,9 +20,12 @@ public class Tilemap {
     private SpriteSheet spriteSheet;
     private Bitmap mapBitmap;
     private int map;
+    private boolean swap;
+    private Button button;
 
-    public Tilemap(SpriteSheet spriteSheet, int map) {
+    public Tilemap(SpriteSheet spriteSheet, int map, Button button) {
         this.map = map;
+        this.button = button;
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
@@ -71,6 +75,11 @@ public class Tilemap {
 
     public void updateMap(int map) {
         mapLayout = new MapLayout(map);
+    }
+
+    public void update() {
+        swap = button.getIsPressed();
+        mapLayout = new MapLayout(map + 1);
     }
 
     public int getMap() {

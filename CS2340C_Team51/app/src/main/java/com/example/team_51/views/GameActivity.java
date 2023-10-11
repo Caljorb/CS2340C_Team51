@@ -1,5 +1,6 @@
 package com.example.team_51.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -14,6 +15,7 @@ import com.example.team_51.model.LeaderboardRow;
 import java.util.ArrayList;
 
 public class GameActivity extends AppCompatActivity {
+    private static Context context;
     private Button end;
     private com.example.team_51.model.Button next;
     private int character;
@@ -29,7 +31,7 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_game_screen);
+        GameActivity.context = getApplicationContext();
 
         Intent intent = getIntent();
 
@@ -37,6 +39,8 @@ public class GameActivity extends AppCompatActivity {
         name = getIntent().getStringExtra("name");
         character = getIntent().getIntExtra("character", 1);
         screen = 0;
+        leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
+        retried = getIntent().getBooleanExtra("retried", retried);
 
 
         game = new Game(this, hp, name, character, START_SCORE);
@@ -121,6 +125,10 @@ public class GameActivity extends AppCompatActivity {
         });*/
     }
 
+    public static Context getGameContext() {
+        return GameActivity.context;
+    }
+
     public void openEndScreen() {
         Intent intent = new Intent(this, EndActivity.class);
         intent.putExtra("score", time);
@@ -128,16 +136,5 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("leaderboard", leaderboardRows);
         intent.putExtra("retried", retried);
         startActivity(intent);
-    }
-
-    public int openNextScreen(int x) {
-        if (x == 0) {
-            game.updateTilemap(1);
-        } else if (x == 1) {
-            game.updateTilemap(2);
-        } else {
-            openEndScreen();
-        }
-        return x + 1;
     }
 }

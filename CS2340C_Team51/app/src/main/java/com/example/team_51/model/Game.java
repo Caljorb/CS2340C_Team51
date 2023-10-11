@@ -3,6 +3,7 @@ package com.example.team_51.model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -17,6 +18,8 @@ import androidx.annotation.NonNull;
 
 import com.example.team_51.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
+import com.example.team_51.views.EndActivity;
+import com.example.team_51.views.GameActivity;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
@@ -27,6 +30,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int character;
     private long points;
     private Button button;
+    private boolean end;
 
     public Game(Context context, int diff, String name, int character, long points) {
         super(context);
@@ -118,6 +122,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 if (button.isPressed((double) event.getX(), (double) event.getY())) {
                     button.setIsPressed(true);
                     tilemap.incrementMap();
+                    if (tilemap.getMap() > 2) {
+                        // button opens end screen
+                        // and passes all data
+                        Intent intent =
+                                new Intent(GameActivity.getGameContext(), EndActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        GameActivity.getGameContext().startActivity(intent);
+                        //intent.putExtra("score", GameActivity.time);
+                        //intent.putExtra("name", name);
+                        //intent.putExtra("leaderboard", leaderboardRows);
+                        //intent.putExtra("retried", retried);
+
+                    }
                 }
                 return true;
             case MotionEvent.ACTION_UP:
@@ -138,4 +155,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void updateTilemap(int map) {
         tilemap.updateMap(map);
     }
+
+    public boolean isEnd() {
+        return end;
+    }
+
 }

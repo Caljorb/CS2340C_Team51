@@ -1,4 +1,4 @@
-package com.example.team_51.map;
+package com.example.team_51.model.map;
 
 public class MapLayout {
     public static final int TILE_WIDTH_PIXELS = 64;

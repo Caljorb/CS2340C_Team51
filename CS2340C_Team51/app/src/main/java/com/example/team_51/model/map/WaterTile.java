@@ -1,4 +1,4 @@
-package com.example.team_51.map;
+package com.example.team_51.model.map;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -6,14 +6,13 @@ import android.graphics.Rect;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.SpriteSheet;
 
-public class GrassTile extends Tile {
+public class WaterTile extends Tile {
 
     private final Sprite sprite;
-    public GrassTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
+    public WaterTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
         super(mapLocationRect);
-        sprite = spriteSheet.getGrassSprite();
+        sprite = spriteSheet.getWaterSprite();
     }
-    // 57:24 of tilemap video has layering sprites
 
     @Override
     public void draw(Canvas canvas) {

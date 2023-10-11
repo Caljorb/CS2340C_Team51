@@ -1,9 +1,4 @@
-package com.example.team_51.map;
-
-import static com.example.team_51.map.MapLayout.NUMBER_OF_ROW_TILES;
-import static com.example.team_51.map.MapLayout.NUMBER_OF_COLUMN_TILES;
-import static com.example.team_51.map.MapLayout.TILE_HEIGHT_PIXELS;
-import static com.example.team_51.map.MapLayout.TILE_WIDTH_PIXELS;
+package com.example.team_51.model.map;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -34,9 +29,9 @@ public class Tilemap {
     private void createTilemap() {
         // construct map layout
         int[][] layout = mapLayout.getLayout();
-        tilemap = new Tile[NUMBER_OF_ROW_TILES][NUMBER_OF_COLUMN_TILES];
-        for (int r = 0; r < NUMBER_OF_ROW_TILES; r++) {
-            for (int c = 0; c < NUMBER_OF_COLUMN_TILES; c++) {
+        tilemap = new Tile[MapLayout.NUMBER_OF_ROW_TILES][MapLayout.NUMBER_OF_COLUMN_TILES];
+        for (int r = 0; r < MapLayout.NUMBER_OF_ROW_TILES; r++) {
+            for (int c = 0; c < MapLayout.NUMBER_OF_COLUMN_TILES; c++) {
                 tilemap[r][c] = Tile.getTile(
                         layout[r][c], spriteSheet, getRectByIndex(r, c));
             }
@@ -44,14 +39,14 @@ public class Tilemap {
         // construct bitmap
         Bitmap.Config config = Bitmap.Config.ARGB_8888;
         mapBitmap = Bitmap.createBitmap(
-                NUMBER_OF_COLUMN_TILES * TILE_WIDTH_PIXELS,
-                NUMBER_OF_ROW_TILES * TILE_HEIGHT_PIXELS,
+                MapLayout.NUMBER_OF_COLUMN_TILES * MapLayout.TILE_WIDTH_PIXELS,
+                MapLayout.NUMBER_OF_ROW_TILES * MapLayout.TILE_HEIGHT_PIXELS,
                 config
         );
         // draw bitmap
         Canvas mapCanvas = new Canvas(mapBitmap);
-        for (int r = 0; r < NUMBER_OF_ROW_TILES; r++) {
-            for (int c = 0; c < NUMBER_OF_COLUMN_TILES; c++) {
+        for (int r = 0; r < MapLayout.NUMBER_OF_ROW_TILES; r++) {
+            for (int c = 0; c < MapLayout.NUMBER_OF_COLUMN_TILES; c++) {
                 tilemap[r][c].draw(mapCanvas);
             }
         }
@@ -60,10 +55,10 @@ public class Tilemap {
 
     //selects single tile
     private Rect getRectByIndex(int r, int c) {
-        return new Rect(c * TILE_WIDTH_PIXELS,
-                r * TILE_HEIGHT_PIXELS,
-                (c + 1) * TILE_WIDTH_PIXELS,
-                (r + 1) * TILE_HEIGHT_PIXELS
+        return new Rect(c * MapLayout.TILE_WIDTH_PIXELS,
+                r * MapLayout.TILE_HEIGHT_PIXELS,
+                (c + 1) * MapLayout.TILE_WIDTH_PIXELS,
+                (r + 1) * MapLayout.TILE_HEIGHT_PIXELS
         );
     }
 

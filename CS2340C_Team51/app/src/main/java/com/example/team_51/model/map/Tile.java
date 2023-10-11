@@ -1,4 +1,4 @@
-package com.example.team_51.map;
+package com.example.team_51.model.map;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;

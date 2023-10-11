@@ -1,4 +1,4 @@
-package com.example.team_51.map;
+package com.example.team_51.model.map;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -6,12 +6,12 @@ import android.graphics.Rect;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.SpriteSheet;
 
-public class StoneTile extends Tile {
+public class MudTile extends Tile {
 
     private final Sprite sprite;
-    public StoneTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
+    public MudTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
         super(mapLocationRect);
-        sprite = spriteSheet.getStoneSprite();
+        sprite = spriteSheet.getMudSprite();
     }
 
     @Override

@@ -32,7 +32,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int character;
     private long points;
     private Button button;
-    private boolean end;
 
     public Game(Context context, int diff, String name, int character, long points) {
         super(context);
@@ -120,33 +119,35 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         // Handle user input touch event actions
         switch (event.getActionMasked()) {
-            case MotionEvent.ACTION_DOWN:
-                if (button.isPressed((double) event.getX(), (double) event.getY())) {
-                    button.setIsPressed(true);
-                    tilemap.incrementMap();
-                    if (tilemap.getMap() > 2) {
-                        // button opens end screen
-                        // and passes all data
-                        Intent intent =
+        case MotionEvent.ACTION_DOWN:
+            if (button.isPressed((double) event.getX(), (double) event.getY())) {
+                button.setIsPressed(true);
+                tilemap.incrementMap();
+                if (tilemap.getMap() > 2) {
+                    // button opens end screen
+                    // and passes all data
+                    Intent intent =
                                 new Intent(GameActivity.getGameContext(), EndActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                        // god i hope this works
-                        intent.putExtra("score", points);
-                        intent.putExtra("name", player.getName());
-                        ArrayList<LeaderboardRow> leaderboardRows = intent.
+                    // god i hope this works
+                    intent.putExtra("score", points);
+                    intent.putExtra("name", player.getName());
+                    ArrayList<LeaderboardRow> leaderboardRows = intent.
                                 getParcelableArrayListExtra("leaderboard");
-                        intent.putExtra("leaderboard", leaderboardRows);
-                        boolean retried = intent.getBooleanExtra("retried", false);
-                        // maybe works
-                        intent.putExtra("retried", retried);
-                        GameActivity.getGameContext().startActivity(intent);
-                    }
+                    intent.putExtra("leaderboard", leaderboardRows);
+                    boolean retried = intent.getBooleanExtra("retried", false);
+                    // maybe works
+                    intent.putExtra("retried", retried);
+                    GameActivity.getGameContext().startActivity(intent);
                 }
-                return true;
-            case MotionEvent.ACTION_UP:
-                button.setIsPressed(false);
-                return true;
+            }
+            return true;
+        case MotionEvent.ACTION_UP:
+            button.setIsPressed(false);
+            return true;
+        default:
+
         }
         return super.onTouchEvent(event);
     }
@@ -162,9 +163,4 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void updateTilemap(int map) {
         tilemap.updateMap(map);
     }
-
-    public boolean isEnd() {
-        return end;
-    }
-
 }

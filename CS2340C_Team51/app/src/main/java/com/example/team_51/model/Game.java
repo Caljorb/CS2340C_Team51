@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -34,6 +35,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.character = character;
         this.points = points;
         this.button = new Button(context, new Rect(2048, 832, 2176, 896));
+        button.setClickable(true);
 
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
@@ -102,6 +104,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         } else {
             return "Hard";
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        // Handle user input touch event actions
+        switch (event.getActionMasked()) {
+            case MotionEvent.ACTION_DOWN:
+                if (button.isPressed()) {
+                    
+                }
+                tilemap.updateMap(tilemap.getMap() + 1);
+                return true;
+
+        }
+
+        return super.onTouchEvent(event);
     }
 
     public void updatePoints(long points) {

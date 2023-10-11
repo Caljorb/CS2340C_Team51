@@ -18,8 +18,10 @@ public class Tilemap {
     private Tile[][] tilemap;
     private SpriteSheet spriteSheet;
     private Bitmap mapBitmap;
+    private int map;
 
     public Tilemap(SpriteSheet spriteSheet, int map) {
+        this.map = map;
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
@@ -69,5 +71,9 @@ public class Tilemap {
 
     public void updateMap(int map) {
         mapLayout = new MapLayout(map);
+    }
+
+    public int getMap() {
+        return map;
     }
 }

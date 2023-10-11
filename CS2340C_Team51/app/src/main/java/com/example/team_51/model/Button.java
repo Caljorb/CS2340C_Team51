@@ -26,4 +26,8 @@ public class Button extends androidx.appcompat.widget.AppCompatButton {
         paint.setColor(Color.BLUE);
         canvas.drawRect(rect, paint);
     }
+
+    public void update() {
+
+    }
 }

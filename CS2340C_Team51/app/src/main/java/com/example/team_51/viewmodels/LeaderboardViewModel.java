@@ -38,7 +38,12 @@ public class LeaderboardViewModel extends ViewModel {
         leaderboardRows.sort(new Comparator<LeaderboardRow>() {
             @Override
             public int compare(LeaderboardRow leaderboardRow, LeaderboardRow t1) {
-                return (int) (t1.getScore() - leaderboardRow.getScore());
+                int score = (int) (t1.getScore() - leaderboardRow.getScore());
+                if (score == 0) {
+                    return -1;
+                    // return 0 < if t1
+                }
+                return score;
             }
         });
     }

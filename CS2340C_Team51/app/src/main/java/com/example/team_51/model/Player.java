@@ -39,6 +39,8 @@ public class Player extends Circle {
                                                 SpriteSheet spriteSheet, int[] hpChar) {
         if (player == null) {
             player = new Player(context, posX, posY, radius, name, spriteSheet, hpChar);
+        } else {
+            player.setPlayer(name, spriteSheet, hpChar);
         }
         return player;
     }
@@ -60,6 +62,13 @@ public class Player extends Circle {
     }
     public int getHp() {
         return hp;
+    }
+
+    private void setPlayer(String name, SpriteSheet spriteSheet, int[] hpChar) {
+        this.hpChar = new int[]{hpChar[0], hpChar[1]};
+        this.hp = hpChar[0];
+        this.name = name;
+        this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
     }
 
     public String getName() {

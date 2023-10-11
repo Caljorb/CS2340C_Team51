@@ -40,10 +40,6 @@ public class GameActivity extends AppCompatActivity {
         hp = getIntent().getIntExtra("hp", 100);
         name = getIntent().getStringExtra("name");
         character = getIntent().getIntExtra("character", 1);
-        screen = 0;
-        leaderboardRows = getIntent().getParcelableArrayListExtra("leaderboard");
-        retried = getIntent().getBooleanExtra("retried", retried);
-
 
         game = new Game(this, hp, name, character, START_SCORE);
         setContentView(game);

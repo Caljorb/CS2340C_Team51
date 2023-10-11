@@ -13,7 +13,7 @@ public class GameActivity extends AppCompatActivity {
     private int character;
     private int hp;
     private String name;
-    private final long startScore = 600000;
+    private final long startScore = 60000;
     private CountDownTimer countDownTimer;
     private Game game;
     @Override

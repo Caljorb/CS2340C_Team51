@@ -7,9 +7,11 @@ import static org.junit.Assert.*;
 import android.content.Context;
 
 import com.example.team_51.model.Button;
+import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.model.Player;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -39,8 +41,8 @@ public class ExampleUnitTest {
     // Method to check that leaderboardViewModel is a singleton (Caleb)
     @Test
     public void isLeaderboardSingleton() {
+        // check making two pointers point to same address
         LeaderboardViewModel leaderboardViewModel1 = LeaderboardViewModel.getLeaderboardViewModel();
-
         int address1 = System.identityHashCode(leaderboardViewModel1);
         System.out.println("Memory: " + address1);
 
@@ -50,6 +52,7 @@ public class ExampleUnitTest {
 
         assertEquals("Addresses should point to same spot in memory.", address1, address2);
 
+        // check changing one changes other (1 instance)
         String beforeSet = leaderboardViewModel1.toString();
         System.out.println(beforeSet);
         leaderboardViewModel2.setRows(makeTestRows());
@@ -63,10 +66,40 @@ public class ExampleUnitTest {
                 leaderboardViewModel2.toString());
     }
 
-    // Method to check that selected character picks correct sprite (Caleb)
+    // Method to check player is a singleton (Caleb)
     @Test
-    public void correctSprite() {
-        // idk
+    public void isPlayerSingleton() {
+        // check making two pointers point to same address
+        int[] hpChar1 = new int[]{100, 1};
+        Player player1 = Player.getPlayer(null, 0, 0,0 ,"Bob",
+                new SpriteSheet(null), hpChar1);
+        int address1 = System.identityHashCode(player1);
+        System.out.println("Memory: " + address1);
+
+        Player player2 = Player.getPlayer(null, 0, 0,0 ,"Bob",
+                new SpriteSheet(null), hpChar1);
+        int address2 = System.identityHashCode(player2);
+        System.out.println("Memory: " + address2);
+
+        assertEquals("Addresses should point to same spot in memory.", address1, address2);
+
+        // Trying to get a player with a different name updates name
+        int[] hpChar2 = new int[]{50, 2};
+        String beforeSet = player1.getName();
+        System.out.println(beforeSet);
+        player2 = Player.getPlayer(null, 0, 0,0,
+                "Joe", new SpriteSheet(null), hpChar2);
+        String afterSet = player1.getName();
+        System.out.println(afterSet);
+
+        assertNotEquals("Changing 2nd reference should also change 1st" +
+                " because they reference same instance", beforeSet, afterSet);
+
+        // Check that is same address
+        int address3 = System.identityHashCode(player2);
+
+        assertEquals("Addresses should be same even though data was updated.",
+                address1, address3);
     }
 
     // Method to check selecting difficulty updates the text for difficulty

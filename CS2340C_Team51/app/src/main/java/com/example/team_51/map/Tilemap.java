@@ -80,13 +80,17 @@ public class Tilemap {
     public void update() {
         swap = button.getIsPressed();
         if (swap) {
-            updateMap(map + 1);
+            System.out.println("Map: " + map);
+            updateMap(map);
             createTilemap();
         }
-
     }
 
     public int getMap() {
         return map;
+    }
+
+    public void incrementMap() {
+        map++;
     }
 }

@@ -117,8 +117,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_DOWN:
                 if (button.isPressed((double) event.getX(), (double) event.getY())) {
                     button.setIsPressed(true);
-                    System.out.println("Press butotnoon");
-
+                    tilemap.incrementMap();
                 }
                 return true;
             case MotionEvent.ACTION_UP:

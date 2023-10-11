@@ -20,7 +20,7 @@ public class MapLayout {
             createMapStart();
         } else if (map == 1) {
             createMapMid();
-        } else {
+        } else if (map == 2){
             createMapEnd();
         }
     }

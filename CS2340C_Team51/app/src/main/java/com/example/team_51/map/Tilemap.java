@@ -79,7 +79,11 @@ public class Tilemap {
 
     public void update() {
         swap = button.getIsPressed();
-        mapLayout = new MapLayout(map + 1);
+        if (swap) {
+            updateMap(map + 1);
+            createTilemap();
+        }
+
     }
 
     public int getMap() {

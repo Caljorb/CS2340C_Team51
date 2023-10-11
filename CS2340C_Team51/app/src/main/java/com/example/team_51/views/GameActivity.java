@@ -54,10 +54,6 @@ public class GameActivity extends AppCompatActivity {
             }
         }.start();
 
-        /*game.getButton().setOnClickListener(v -> {
-            screen = openNextScreen(screen);
-        });*/
-
         /*if (intent != null) {
             character = getIntent().getIntExtra("character", 1);
             hp = getIntent().getIntExtra("hp", 100);

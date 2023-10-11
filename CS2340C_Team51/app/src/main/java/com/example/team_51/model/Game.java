@@ -115,10 +115,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // Handle user input touch event actions
         switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
-                updateTilemap(1);
                 if (button.isPressed((double) event.getX(), (double) event.getY())) {
                     button.setIsPressed(true);
                     System.out.println("Press butotnoon");
+
                 }
                 return true;
             case MotionEvent.ACTION_UP:

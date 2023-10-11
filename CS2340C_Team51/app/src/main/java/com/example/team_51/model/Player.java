@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.cs2340c_team51.R;
 import com.example.team_51.viewmodels.GameDisplay;
+import com.example.team_51.viewmodels.SpriteSheet;
 
 public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;

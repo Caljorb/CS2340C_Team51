@@ -3,7 +3,7 @@ package com.example.team_51.model.map;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.example.team_51.model.SpriteSheet;
+import com.example.team_51.viewmodels.SpriteSheet;
 
 abstract class Tile {
 

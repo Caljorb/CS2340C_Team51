@@ -1,4 +1,4 @@
-package com.example.team_51.model;
+package com.example.team_51.viewmodels;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 
 import com.example.cs2340c_team51.R;
+import com.example.team_51.model.Sprite;
 
 public class SpriteSheet {
     private static final int SPRITE_WIDTH_PIXELS = 64;

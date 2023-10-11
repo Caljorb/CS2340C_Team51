@@ -2,6 +2,8 @@ package com.example.team_51.model;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+import com.example.team_51.viewmodels.SpriteSheet;
+
 public class Sprite {
 
     private final SpriteSheet spriteSheet;

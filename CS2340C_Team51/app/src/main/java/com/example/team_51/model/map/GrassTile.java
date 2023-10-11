@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.example.team_51.model.Sprite;
-import com.example.team_51.model.SpriteSheet;
+import com.example.team_51.viewmodels.SpriteSheet;
 
 public class GrassTile extends Tile {
 

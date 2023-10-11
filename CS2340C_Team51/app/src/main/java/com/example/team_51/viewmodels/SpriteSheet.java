@@ -16,8 +16,12 @@ public class SpriteSheet {
     public SpriteSheet(Context context) {
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
         bitmapOptions.inScaled = false;
-        bitmap = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.sprite_sheet, bitmapOptions);
+        try {
+            bitmap = BitmapFactory.decodeResource(context.getResources(),
+                    R.drawable.sprite_sheet, bitmapOptions);
+        } catch (NullPointerException npe) {
+            bitmap = null;
+        }
     }
 
     public Sprite getPlayerSprite(int character) {

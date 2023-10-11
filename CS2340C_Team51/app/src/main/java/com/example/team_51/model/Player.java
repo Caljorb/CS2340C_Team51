@@ -25,8 +25,7 @@ public class Player extends Circle {
 
     private Player(Context context, double posX, double posY, double radius, String name,
                    SpriteSheet spriteSheet, int[] hpChar) {
-        super(context, ContextCompat.getColor(context, R.color.player),
-                posX, posY, radius);
+        super(Color.WHITE, posX, posY, radius);
         this.posX = posX;
         this.posY = posY;
         this.hpChar = new int[]{hpChar[0], hpChar[1]};

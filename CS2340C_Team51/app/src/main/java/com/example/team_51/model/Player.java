@@ -5,9 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import androidx.core.content.ContextCompat;
-
-import com.example.cs2340c_team51.R;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -73,6 +70,22 @@ public class Player extends Circle {
 
     public String getName() {
         return name;
+    }
+
+    public boolean checkName(String nameEntry) {
+        boolean nameSel = false;
+        if (nameEntry != null) {
+            // cannot pick null/empty/whitespace strings
+            String temp = nameEntry;
+            if (temp.trim().length() > 0 && !temp.contains(" ")) {
+                nameSel = true;
+            }
+        }
+        return nameSel;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void update() {

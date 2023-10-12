@@ -35,6 +35,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private Button button;
 
+    public Game(int diff, String name, int character, long points) {
+        super(null);
+        this.diff = diff;
+        this.character = character;
+        this.points = points;
+
+        int[] hpChar = new int[]{diff, character};
+        player = Player.getPlayer(null, 2240, 1024, 32, name,
+                new SpriteSheet(null), hpChar);
+    }
+
+
     public Game(Context context, int diff, String name, int character, long points) {
         super(context);
 
@@ -153,5 +165,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void updatePoints(long points) {
         this.points = points;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

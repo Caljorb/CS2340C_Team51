@@ -117,7 +117,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameDisplay.update();
     }
 
-    private String diffSelect(int diff) {
+    public String diffSelect(int diff) {
         if (diff == 100) {
             return "Easy";
         } else if (diff == 50) {
@@ -177,6 +177,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public long getPoints() {
         return points;
+    }
+
+    public int getDiff() {
+        return diff;
+    }
+
+    public void setDiff(int diff) {
+        this.diff = diff;
     }
 
 }

@@ -1,19 +1,17 @@
 package com.example.cs2340c_team51;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
-
-import android.content.Context;
-
-import com.example.team_51.model.Button;
-import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.model.Player;
-import com.example.team_51.model.map.Tilemap;
-import com.example.team_51.viewmodels.GameLoop;
+import com.example.team_51.model.Game;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
+
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -35,8 +33,50 @@ public class ExampleUnitTest {
     // Method for score being put in leaderboard even when score == 0
 
     // Method to check name has NO whitespace at all, no null name, or empty name
+    @Test
+    public void nameCheck() {
+        int[] hpChar1 = new int[]{100, 1};
+        Player player = Player.getPlayer(null, 0, 0, 0, null,
+                new SpriteSheet(null), hpChar1);
 
-    // Method to check starting health based on difficulty
+        assertFalse(player.checkName(player.getName()));
+
+        player.setName(" dLee");
+        assertFalse(player.checkName(player.getName()));
+
+        player.setName("daniel lee");
+        assertFalse(player.checkName(player.getName()));
+
+        player.setName(" ");
+        assertFalse(player.checkName(player.getName()));
+
+        player.setName("");
+        assertFalse(player.checkName(player.getName()));
+
+        player.setName("danielLee");
+        assertTrue(player.checkName(player.getName()));
+    }
+
+    // Method to check starting health based on difficulty - Daniel
+    @Test
+    public void diffCheck() {
+        Game game1 = new Game(100, "daniel", 1, 0);
+        Player player1 = game1.getPlayer();
+        int hp1 = player1.getHp();
+        assertEquals("Hp does not correspond with easy difficulty", hp1, 100);
+
+
+        Game game2 = new Game(50, "daniel", 1, 0);
+        Player player2 = game2.getPlayer();
+        int hp2 = player2.getHp();
+        assertEquals("Hp does not correspond with medium difficulty", hp2, 50);
+
+        Game game3 = new Game(30, "daniel", 1, 0);
+        Player player3 = game3.getPlayer();
+        int hp3 = player3.getHp();
+        assertEquals("Hp does not correspond with hard difficulty", hp3, 30);
+
+    }
 
     // Method to check that leaderboardViewModel is a singleton (Caleb)
     @Test

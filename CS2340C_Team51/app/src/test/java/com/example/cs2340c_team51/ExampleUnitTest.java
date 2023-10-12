@@ -13,6 +13,7 @@ import com.example.team_51.viewmodels.SpriteSheet;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -70,9 +71,6 @@ public class ExampleUnitTest {
 
         assertEquals(temp1, temp2);
     }
-
-
-    // Method for score being put in leaderboard even when score == 0
 
     // Method to check name has NO whitespace at all, no null name, or empty name
     @Test
@@ -184,8 +182,39 @@ public class ExampleUnitTest {
                 address1, address3);
     }
 
-    // Method to check selecting difficulty updates the text for difficulty
+    // Method to check selecting difficulty updates the text for difficulty (Kavya)
+    @Test
+    public void diffUpdateCheck() {
+        Game game = new Game(100, "g1", 1, 0);
+        String temp = game.diffSelect(game.getDiff());
+        game.setDiff(50);
+        String temp1 = game.diffSelect(game.getDiff());
+        assertNotEquals(temp, temp1);
+        game.setDiff(30);
+        String temp2 = game.diffSelect(game.getDiff());
+        assertNotEquals(temp, temp2);
+    }
 
+    // Method for score being put in leaderboard even when score == 0 (Kavya)
+    @Test
+    public void checkLbScoreZero() {
+        LeaderboardViewModel lb = LeaderboardViewModel.getLeaderboardViewModel();
+        String st = lb.toString();
+        ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>();
+        LeaderboardRow temp1 = new LeaderboardRow("row1", 0, "10/10/23");
+        LeaderboardRow temp2 = new LeaderboardRow("row2", 0, "09/10/23");
+        LeaderboardRow temp3 = new LeaderboardRow("row3", 0, "08/10/23");
+        LeaderboardRow temp4 = new LeaderboardRow("row4", 0, "07/10/23");
+        LeaderboardRow temp5 = new LeaderboardRow("row5", 0, "06/10/23");
+        leaderboardRows.add(temp1);
+        leaderboardRows.add(temp2);
+        leaderboardRows.add(temp3);
+        leaderboardRows.add(temp4);
+        leaderboardRows.add(temp5);
+        lb.setRows(leaderboardRows);
+        String st1 = lb.toString();
+        assertNotEquals(st, st1);
+    }
 
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);

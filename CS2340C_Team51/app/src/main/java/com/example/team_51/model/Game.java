@@ -170,4 +170,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public Player getPlayer() {
         return player;
     }
+
+    public boolean checkPoints(long points) {
+        return points >= 0;
+    }
+
+    public long getPoints() {
+        return points;
+    }
+
 }

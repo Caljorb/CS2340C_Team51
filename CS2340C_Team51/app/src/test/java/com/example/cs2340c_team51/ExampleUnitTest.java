@@ -26,9 +26,51 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
     } // example test for reference
 
-    // Method for score not going below 0 here
+    // Method for score not going below 0 here (Rashmith)
 
-    // Method for Leaderboard sort scores properly here
+    @Test
+    public void scoreCheck() {
+        Game game = new Game(100, "rashmith", 1, 1000);
+        assertTrue(game.checkPoints(game.getPoints()));
+
+        Game game1 = new Game(80, "daniel", 2, 0);
+        assertTrue(game1.checkPoints(game1.getPoints()));
+
+        Game game2 = new Game(30, "caleb", 3, -15000);
+        assertFalse(game2.checkPoints(game2.getPoints()));
+
+    }
+
+
+    // Method for Leaderboard sort scores properly here (Rashmith)
+
+    @Test
+    public void leaderboardSortCheck() {
+        ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>();
+        leaderboardRows.add(new LeaderboardRow("lr1", 100, "10/11/23"));
+        leaderboardRows.add(new LeaderboardRow("lr2", 28, "10/11/23"));
+        leaderboardRows.add(new LeaderboardRow("lr3", 672, "10/12/23"));
+        leaderboardRows.add(new LeaderboardRow("lr4", 1000, "10/13/23"));
+        leaderboardRows.add(new LeaderboardRow("lr5", 0, "10/13/23"));
+
+        ArrayList<LeaderboardRow> leaderboardRowsCorrect = new ArrayList<>();
+        leaderboardRowsCorrect.add(new LeaderboardRow("lr4", 1000, "10/13/23"));
+        leaderboardRowsCorrect.add(new LeaderboardRow("lr3", 672, "10/12/23"));
+        leaderboardRowsCorrect.add(new LeaderboardRow("lr1", 100, "10/11/23"));
+        leaderboardRowsCorrect.add(new LeaderboardRow("lr2", 28, "10/11/23"));
+        leaderboardRowsCorrect.add(new LeaderboardRow("lr5", 0, "10/13/23"));
+
+        LeaderboardViewModel lr = LeaderboardViewModel.getLeaderboardViewModel();
+        lr.setRows(leaderboardRows);
+        lr.sortRows();
+
+        String temp1 = lr.toString();
+        lr.setRows(leaderboardRowsCorrect);
+        String temp2 = lr.toString();
+
+        assertEquals(temp1, temp2);
+    }
+
 
     // Method for score being put in leaderboard even when score == 0
 

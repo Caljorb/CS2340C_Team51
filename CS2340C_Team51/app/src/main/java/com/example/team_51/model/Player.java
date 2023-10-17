@@ -90,7 +90,7 @@ public class Player extends Circle implements MovementStrategy {
     }
 
     public void update() {
-        // use to update position using draw and a canvas?
+        // use to update position logically
     }
 
     @Override

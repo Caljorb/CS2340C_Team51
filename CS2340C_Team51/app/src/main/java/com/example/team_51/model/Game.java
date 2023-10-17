@@ -114,6 +114,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         button.update();
         tilemap.update();
+        player.update();
         gameDisplay.update();
     }
 

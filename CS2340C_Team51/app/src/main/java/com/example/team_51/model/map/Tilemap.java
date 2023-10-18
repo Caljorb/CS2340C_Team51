@@ -21,6 +21,7 @@ public class Tilemap {
     private Player player;
     private double exitYTop;
     private double exitYBottom;
+    private int[][] walls;
 
     public Tilemap(SpriteSheet spriteSheet, int map, Player player) {
         this.map = map;
@@ -29,6 +30,7 @@ public class Tilemap {
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
+        createWalls();
     }
 
     private void createTilemap() {
@@ -55,7 +57,18 @@ public class Tilemap {
                 tilemap[r][c].draw(mapCanvas);
             }
         }
+    }
 
+    private void createWalls() {
+        int[][] temp = mapLayout.getLayout();
+        for (int i = 0; i < 35; i++) {
+            for (int j = 0; j < 15; j++) {
+                if (temp[i][j] != 3 || temp[i][j] != 4) {
+                    temp[i][j] = 0; // if not border or water, set to 0
+                }
+            }
+        }
+        walls = temp;
     }
 
     //selects single tile

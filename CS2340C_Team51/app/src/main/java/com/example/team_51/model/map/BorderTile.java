@@ -10,7 +10,7 @@ public class BorderTile extends Tile {
 
     private final Sprite sprite;
     public BorderTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
-        super(mapLocationRect);
+        super(mapLocationRect); // borderTile is a wall
         sprite = spriteSheet.getBorderSprite();
     }
 

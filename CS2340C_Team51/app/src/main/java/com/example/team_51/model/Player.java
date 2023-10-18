@@ -84,10 +84,7 @@ public class Player extends Circle implements MovementStrategy {
 
     @Override
     public void update() {
-        // i think just call move here
-        // set posX from moveBall
         move();
-        // set posY from moveBall
     }
 
 
@@ -129,23 +126,27 @@ public class Player extends Circle implements MovementStrategy {
         this.name = name;
     }
 
-    /*public void update(double posX, double posY) {
-        // use to update position logically
-        this.posX = posX;
-        this.posY = posY;
-    }*/
-
     @Override
     public void move() {
         veloX = moveBall.getControllerX() * MAX_SPEED;
         veloY = moveBall.getControllerY() * MAX_SPEED;
 
-        posX += veloX;
-        posY += veloY;
+        double tempX = posX + veloX;
+        double tempY = posY + veloY;
+
+        if (!checkOutOfBounds(tempX, tempY)) {
+            posX = tempX;
+            posY = tempY;
+        }
+        //posX += veloX;
+        //posY += veloY;
     }
 
     @Override
     public boolean checkOutOfBounds(double posX, double posY) {
-        return false;
+        boolean xIn = posX > 1110 && posX < 3300;
+        boolean yIn = posY > 500 && posY < 1400;
+
+        return !(xIn && yIn);
     }
 }

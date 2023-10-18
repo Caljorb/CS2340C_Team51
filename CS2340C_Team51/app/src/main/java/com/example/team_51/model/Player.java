@@ -5,11 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle implements MovementStrategy, Subscriber {
+public class Player extends Circle implements MovementStrategy, MoveSubscriber, WallSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 5;
@@ -170,5 +171,11 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
     @Override
     public void update(MoveBall moveBall) {
         move(moveBall);
+    }
+
+    @Override
+    public boolean isWall(Tilemap tilemap) {
+        // todo: 
+        return false; // temp value
     }
 }

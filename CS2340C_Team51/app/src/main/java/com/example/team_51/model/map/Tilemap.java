@@ -81,11 +81,6 @@ public class Tilemap {
     }
 
     public void update() {
-        // Game Plan: swap = true if you get the position for exit on correct map
-        // each map must have position for exit
-        // update last map to have an exit
-        //
-
         boolean swap = false;
 
         if (player.getPlayerPosX() > 3236

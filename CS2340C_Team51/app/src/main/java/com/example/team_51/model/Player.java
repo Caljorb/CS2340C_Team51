@@ -138,8 +138,6 @@ public class Player extends Circle implements MovementStrategy {
             posX = tempX;
             posY = tempY;
         }
-        //posX += veloX;
-        //posY += veloY;
     }
 
     @Override

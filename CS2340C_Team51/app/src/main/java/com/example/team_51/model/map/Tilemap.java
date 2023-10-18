@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 
 import com.example.team_51.model.Button;
+import com.example.team_51.model.Player;
 import com.example.team_51.viewmodels.SpriteSheet;
 import com.example.team_51.viewmodels.GameDisplay;
 
@@ -16,11 +17,14 @@ public class Tilemap {
     private Bitmap mapBitmap;
     private int map;
     private boolean swap;
-    private Button button;
+    //private Button button;
+    private Player player;
+    private double exitX;
+    private double exitY;
 
-    public Tilemap(SpriteSheet spriteSheet, int map, Button button) {
+    public Tilemap(SpriteSheet spriteSheet, int map, Player player) {
         this.map = map;
-        this.button = button;
+        this.player = player;
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
@@ -76,7 +80,12 @@ public class Tilemap {
     }
 
     public void update() {
-        swap = button.getIsPressed();
+        // Game Plan: swap = true if you get the position for exit on correct map
+        // each map must have position for exit
+        // update last map to have an exit
+        //
+        swap =
+        //swap = button.getIsPressed();
         if (swap) { // swap to new map when button pressed
             System.out.println("Map: " + map);
             updateMap(map);
@@ -91,4 +100,24 @@ public class Tilemap {
     public void incrementMap() {
         map++;
     } // update map number
+
+    private double setExitX(int map) {
+        if (map == 0) {
+            // insert exit 1 location x
+        } else if (map == 1) {
+            // "    "
+        } else {
+            // "    "
+        }
+    }
+
+    private double setExitY(int map) {
+        if (map == 0) {
+            // insert exit 1 location y
+        } else if (map == 1) {
+            // "    "
+        } else {
+            // "    "
+        }
+    }
 }

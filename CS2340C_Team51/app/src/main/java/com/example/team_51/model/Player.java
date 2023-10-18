@@ -175,7 +175,14 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
 
     @Override
     public boolean isWall(Tilemap tilemap) {
-        // todo: 
+        // todo: make a temporary 2d array using tilemap.getWalls()
+        // todo: initialize 2 doubles to track coordinates on map tileX, tileY
+        // todo:
+
+        int[][] walls = tilemap.getWalls();
+        double tileX = 0;
+        double tileY = 0;
+
         return false; // temp value
     }
 }

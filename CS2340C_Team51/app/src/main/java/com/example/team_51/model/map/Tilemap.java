@@ -60,11 +60,12 @@ public class Tilemap {
     }
 
     private void createWalls() {
-        int[][] temp = mapLayout.getLayout();
-        for (int i = 0; i < 35; i++) {
-            for (int j = 0; j < 15; j++) {
-                if (temp[i][j] != 3 || temp[i][j] != 4) {
-                    temp[i][j] = 0; // if not border or water, set to 0
+        int[][] temp = new int[15][35]; //mapLayout.getLayout();
+
+        for (int r = 0; r < MapLayout.NUMBER_OF_ROW_TILES; r++) {
+            for (int c = 0; c < MapLayout.NUMBER_OF_COLUMN_TILES; c++) {
+                if (mapLayout.getLayout()[r][c] != 3 || mapLayout.getLayout()[r][c] != 4) {
+                    temp[r][c] = 0; // if not border or water, set to 0
                 }
             }
         }
@@ -133,5 +134,9 @@ public class Tilemap {
             exitYTop = 1192;
             exitYBottom = 1273;
         }
+    }
+
+    public int[][] getWalls() {
+        return walls;
     }
 }

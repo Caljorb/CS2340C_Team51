@@ -96,8 +96,9 @@ public class Tilemap {
 
         if (swap) { // swap to new map when button pressed
             incrementMap();
-            player.setPosX(1125); //will find in testing
-            //player.setPosY((exitYTop + exitYBottom) / 2);
+            if (map < 3) {
+                player.setPosX(1125); // first column of map
+            }
             setExitY(map);
             System.out.println("Map: " + map);
             updateMap(map);

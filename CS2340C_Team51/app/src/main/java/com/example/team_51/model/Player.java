@@ -9,7 +9,7 @@ import android.view.KeyEvent;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle implements MovementStrategy {
+public class Player extends Circle {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
     public static final int MAX_HEALTH_POINTS = 5;
     private double posX;
@@ -52,6 +52,13 @@ public class Player extends Circle implements MovementStrategy {
         sprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX),
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
+
+    @Override
+    public void update() {
+        // set posX from class
+        // set posY from class
+    }
+
     public double getPlayerPosX() {
         return posX;
     }
@@ -89,37 +96,9 @@ public class Player extends Circle implements MovementStrategy {
         this.name = name;
     }
 
-    public void update() {
+    public void update(double posX, double posY) {
         // use to update position logically
-    }
-
-    @Override
-    public boolean moveOnPress(int keyCode, KeyEvent keyEvent) {
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-            posX -= 50; // 50 is placeholder value rn
-            break;
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            posX += 50;
-            break;
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-            posY -= 50;
-            break;
-        case KeyEvent.KEYCODE_DPAD_UP:
-            posY += 50;
-            break;
-        default:
-            // idk default case yet
-        }
-
-        if (!checkOutOfBounds(posX, posY)) {
-            update();
-        }
-        return true; // idk bruh
-    }
-
-    public boolean checkOutOfBounds(double posX, double posY) {
-        // find what the dimensions of the screen are to prevent oob
-        return false; // placeholder for now
+        this.posX = posX;
+        this.posY = posY;
     }
 }

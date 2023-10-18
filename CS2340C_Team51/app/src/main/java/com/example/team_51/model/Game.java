@@ -112,9 +112,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        button.update();
+        button.update(); // does legit nothing
         tilemap.update();
-        player.update();
         gameDisplay.update();
     }
 
@@ -187,5 +186,4 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void setDiff(int diff) {
         this.diff = diff;
     }
-
 }

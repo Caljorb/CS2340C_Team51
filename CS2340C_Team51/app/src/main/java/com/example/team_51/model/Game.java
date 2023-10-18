@@ -34,6 +34,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int character;
     private long points;
     private Button button;
+    private MoveBall moveBall;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -56,6 +57,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.button = new Button(context, new Rect(2048, 832, 2176, 896));
         button.setClickable(true);
 
+        moveBall = new MoveBall(225, 750, 80);
+
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
 
@@ -63,7 +66,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         SpriteSheet spriteSheet = new SpriteSheet(context);
         int[] hpChar = new int[]{diff, character};
-        player = Player.getPlayer(context, 2240, 1024, 32, name, spriteSheet,
+        player = Player.getPlayer(context, 2240, 1024, moveBall, name, spriteSheet,
                 hpChar);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -87,6 +90,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Score: " + points, 80, 250, paint);
 
         button.draw(canvas, gameDisplay);
+        moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
     }
 
@@ -112,7 +116,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        button.update(); // does legit nothing
+        button.update();
+        moveBall.update();
+        player.update();
         tilemap.update();
         gameDisplay.update();
     }
@@ -133,6 +139,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         // button presses
         switch (event.getActionMasked()) {
         case MotionEvent.ACTION_DOWN:
+            if (moveBall.isPressed((double) event.getX(), (double) event.getY())) {
+                moveBall.setIsPressed(true);
+                System.out.println("Touched MoveBall");
+            }
+
             if (button.isPressed((double) event.getX(), (double) event.getY())) {
                 button.setIsPressed(true);
                 tilemap.incrementMap();
@@ -154,8 +165,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
             return true;
+        case MotionEvent.ACTION_MOVE:
+            if (moveBall.getIsPressed()) {
+                moveBall.setController((double) event.getX(), (double) event.getY());
+                System.out.println("Moving MoveBall");
+            }
+            return true;
         case MotionEvent.ACTION_UP:
             button.setIsPressed(false);
+            moveBall.setIsPressed(false);
+            moveBall.resetController();
+            System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
+                    + player.getPlayerPosY());
             return true;
         default:
 

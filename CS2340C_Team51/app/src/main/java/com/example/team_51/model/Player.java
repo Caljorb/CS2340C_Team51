@@ -7,10 +7,12 @@ import android.graphics.Paint;
 import android.view.KeyEvent;
 
 import com.example.team_51.viewmodels.GameDisplay;
+import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle {
+public class Player extends Circle implements MovementStrategy {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
+    public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 5;
     private double posX;
     private int hp;
@@ -19,11 +21,26 @@ public class Player extends Circle {
     private Sprite sprite;
     private int[] hpChar;
     private static Player player;
+    private double veloX;
+    private double veloY;
+    private MoveBall moveBall;
 
+
+    private Player(Context context, double posX, double posY, MoveBall moveBall, String name,
+                   SpriteSheet spriteSheet, int[] hpChar) {
+        super(Color.WHITE, posX, posY, 32);
+        this.posX = posX;
+        this.posY = posY;
+        this.moveBall = moveBall;
+        this.hpChar = new int[]{hpChar[0], hpChar[1]};
+        this.hp = hpChar[0];
+        this.name = name;
+        this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+    }
 
     private Player(Context context, double posX, double posY, double radius, String name,
                    SpriteSheet spriteSheet, int[] hpChar) {
-        super(Color.WHITE, posX, posY, radius);
+        super(Color.WHITE, posX, posY, 32);
         this.posX = posX;
         this.posY = posY;
         this.hpChar = new int[]{hpChar[0], hpChar[1]};
@@ -31,6 +48,17 @@ public class Player extends Circle {
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
     }
+
+    public static synchronized Player getPlayer(Context context, double posX, double posY,
+                                                MoveBall moveBall, String name,
+                                                SpriteSheet spriteSheet, int[] hpChar) {
+        if (player == null) {
+            player = new Player(context, posX, posY, moveBall, name, spriteSheet, hpChar);
+        } else {
+            player.setPlayer(name, spriteSheet, hpChar);
+        }
+        return player;
+    } // singleton to limit to a single instance
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
                                                 double radius, String name,
@@ -53,11 +81,16 @@ public class Player extends Circle {
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
 
+
     @Override
     public void update() {
-        // set posX from class
-        // set posY from class
+        // i think just call move here
+        // set posX from moveBall
+        move();
+        // set posY from moveBall
     }
+
+
 
     public double getPlayerPosX() {
         return posX;
@@ -96,9 +129,23 @@ public class Player extends Circle {
         this.name = name;
     }
 
-    public void update(double posX, double posY) {
+    /*public void update(double posX, double posY) {
         // use to update position logically
         this.posX = posX;
         this.posY = posY;
+    }*/
+
+    @Override
+    public void move() {
+        veloX = moveBall.getControllerX() * MAX_SPEED;
+        veloY = moveBall.getControllerY() * MAX_SPEED;
+
+        posX += veloX;
+        posY += veloY;
+    }
+
+    @Override
+    public boolean checkOutOfBounds(double posX, double posY) {
+        return false;
     }
 }

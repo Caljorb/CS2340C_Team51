@@ -10,7 +10,7 @@ import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle implements MovementStrategy, MoveSubscriber, WallSubscriber {
+public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 5;
@@ -81,11 +81,14 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
 
-
     @Override
     public void update() {
-        update(moveBall);
-        //move();
+        // bruh
+    }
+
+
+    public void update(Tilemap tilemap) {
+        update(moveBall, tilemap);
     }
 
 
@@ -136,7 +139,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
     }
 
     @Override
-    public void move(MoveBall moveBall) {
+    public void move(MoveBall moveBall, Tilemap tilemap) {
         veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
         veloY = moveBall.getControllerY() * MAX_SPEED;
 
@@ -149,7 +152,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
         if (!checkOutOfBounds(tempX, tempY)) {
             posX = tempX;
             posY = tempY;
-        } else if (isWall()) {
+        } else if (isWall(tilemap)) {
             posX -= veloX;
             posY -= veloY; // prob works idk
         }
@@ -172,8 +175,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
     }
 
     @Override
-    public void update(MoveBall moveBall) {
-        move(moveBall);
+    public void update(MoveBall moveBall, Tilemap tilemap) {
+        move(moveBall, tilemap);
     }
 
     @Override

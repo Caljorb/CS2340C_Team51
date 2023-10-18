@@ -98,8 +98,12 @@ public class MapLayout {
                        1, 1, 1, 1, 1, 1, 1, 2, 4};
         int[] stoneGrass = {4, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2,
                             2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 4};
+        int[] stoneGrassExit = {4, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
+            2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1};
         int[] stoneGrassWater = {4, 2, 2, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                                  2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 4};
+        int[] stoneGrassWaterExit = {4, 2, 2, 3, 3, 3, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+            1, 2, 3, 2, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1};
         int[] stoneEntrance = {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                                1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 4};
         int[] grass = {4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,
@@ -117,8 +121,8 @@ public class MapLayout {
             stone,
             stone,
             stoneGrass,
-            stoneGrassWater,
-            stoneGrass,
+            stoneGrassWaterExit,
+            stoneGrassExit,
             grass,
             borderVert
         };

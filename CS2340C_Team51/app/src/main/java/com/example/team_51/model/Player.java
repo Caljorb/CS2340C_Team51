@@ -139,8 +139,8 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
         veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
         veloY = moveBall.getControllerY() * MAX_SPEED;
 
-        System.out.println(veloX); // velocity not updated after first retry
-        System.out.println(veloY);
+        //System.out.println(veloX);
+        //System.out.println(veloY);
 
         double tempX = posX + veloX;
         double tempY = posY + veloY;

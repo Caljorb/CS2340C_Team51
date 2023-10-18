@@ -147,4 +147,12 @@ public class Player extends Circle implements MovementStrategy {
 
         return !(xIn && yIn);
     }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
 }

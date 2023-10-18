@@ -19,11 +19,12 @@ public class Tilemap {
     private boolean swap;
     //private Button button;
     private Player player;
-    private double exitX;
-    private double exitY;
+    private double exitYTop;
+    private double exitYBottom;
 
     public Tilemap(SpriteSheet spriteSheet, int map, Player player) {
         this.map = map;
+        setExitY(map);
         this.player = player;
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
@@ -84,9 +85,18 @@ public class Tilemap {
         // each map must have position for exit
         // update last map to have an exit
         //
-        swap =
-        //swap = button.getIsPressed();
+
+        boolean swap = false;
+
+        if (player.getPlayerPosX() > 3236
+                && (player.getPlayerPosY() >  exitYTop && player.getPlayerPosY() < exitYBottom)) {
+            swap = true;
+            System.out.println("Exit");
+        }
+
         if (swap) { // swap to new map when button pressed
+            incrementMap();
+            setExitY(map);
             System.out.println("Map: " + map);
             updateMap(map);
             createTilemap(); // make new map
@@ -101,23 +111,16 @@ public class Tilemap {
         map++;
     } // update map number
 
-    private double setExitX(int map) {
+    private void setExitY(int map) {
         if (map == 0) {
-            // insert exit 1 location x
+            exitYTop = 1145;
+            exitYBottom = 1210;
         } else if (map == 1) {
-            // "    "
+            exitYTop = 690;
+            exitYBottom = 780;
         } else {
-            // "    "
-        }
-    }
-
-    private double setExitY(int map) {
-        if (map == 0) {
-            // insert exit 1 location y
-        } else if (map == 1) {
-            // "    "
-        } else {
-            // "    "
+            exitYTop = 1192;
+            exitYBottom = 1273;
         }
     }
 }

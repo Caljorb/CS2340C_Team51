@@ -167,8 +167,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             return true;
         case MotionEvent.ACTION_MOVE:
             if (moveBall.getIsPressed()) {
+                System.out.println("Moving");
                 moveBall.setController((double) event.getX(), (double) event.getY());
-                System.out.println("Moving MoveBall");
             }
             return true;
         case MotionEvent.ACTION_UP:
@@ -177,6 +177,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             moveBall.resetController();
             System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
                     + player.getPlayerPosY());
+            if (tilemap.getMap() > 2) {
+                player.setPosX(2240);
+                player.setPosY(1024);
+
+                Intent intent =
+                        new Intent(GameActivity.getGameContext(), EndActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // allow starting activity outside activity class
+                intent.putExtra("score", points);
+                intent.putExtra("name", player.getName());
+                ArrayList<LeaderboardRow> leaderboardRows = intent.
+                        getParcelableArrayListExtra("leaderboard");
+                intent.putExtra("leaderboard", leaderboardRows);
+                boolean retried = intent.getBooleanExtra("retried", false);
+                intent.putExtra("retried", retried);
+                GameActivity.getGameContext().startActivity(intent);
+            }
             return true;
         default:
 

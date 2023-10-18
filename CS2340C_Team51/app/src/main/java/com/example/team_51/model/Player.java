@@ -55,7 +55,7 @@ public class Player extends Circle implements MovementStrategy {
         if (player == null) {
             player = new Player(context, posX, posY, moveBall, name, spriteSheet, hpChar);
         } else {
-            player.setPlayer(name, spriteSheet, hpChar);
+            player.setPlayer(moveBall, name, spriteSheet, hpChar);
         }
         return player;
     } // singleton to limit to a single instance
@@ -99,6 +99,14 @@ public class Player extends Circle implements MovementStrategy {
         return hp;
     }
 
+    private void setPlayer(MoveBall moveBall, String name, SpriteSheet spriteSheet, int[] hpChar) {
+        this.moveBall = moveBall;
+        this.hpChar = new int[]{hpChar[0], hpChar[1]};
+        this.hp = hpChar[0];
+        this.name = name;
+        this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+    }
+
     private void setPlayer(String name, SpriteSheet spriteSheet, int[] hpChar) {
         this.hpChar = new int[]{hpChar[0], hpChar[1]};
         this.hp = hpChar[0];
@@ -128,8 +136,11 @@ public class Player extends Circle implements MovementStrategy {
 
     @Override
     public void move() {
-        veloX = moveBall.getControllerX() * MAX_SPEED;
+        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
         veloY = moveBall.getControllerY() * MAX_SPEED;
+
+        System.out.println(veloX); // velocity not updated after first retry
+        System.out.println(veloY);
 
         double tempX = posX + veloX;
         double tempY = posY + veloY;

@@ -86,7 +86,6 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         // bruh
     }
 
-
     public void update(Tilemap tilemap) {
         update(moveBall, tilemap);
     }
@@ -152,9 +151,9 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         if (!checkOutOfBounds(tempX, tempY)) {
             posX = tempX;
             posY = tempY;
-        } else if (isWall(tilemap)) {
-            posX -= veloX;
-            posY -= veloY; // prob works idk
+        } else if (!isWall(tilemap, tempX, tempY)) {
+            posX = tempX;
+            posY = tempY; // prob works idk
         }
     }
 
@@ -179,11 +178,18 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         move(moveBall, tilemap);
     }
 
-    @Override
-    public boolean isWall(Tilemap tilemap) {
+    public boolean isWall(Tilemap tilemap, double posX, double posY) {
         int[][] walls = tilemap.getWalls();
         double tileX = 1117.4; // where tile 1 starts X
         double tileY = 500.6; // where tile 1 starts Y
+
+        /*
+        nvm this is the real todo: 1. using the starting tiles, find a formula that maps them
+                                      to each location of the walls array
+                                   2. use this to instantly access that array location
+                                      based on player location
+                                   3. if that spot is a wall, return true, else false
+         */
 
         /*
         todo: 1. iterate through walls

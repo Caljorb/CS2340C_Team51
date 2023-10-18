@@ -4,13 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.view.KeyEvent;
 
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle implements MovementStrategy {
+public class Player extends Circle implements MovementStrategy, Subscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 400.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 5;
@@ -84,7 +83,8 @@ public class Player extends Circle implements MovementStrategy {
 
     @Override
     public void update() {
-        move();
+        update(moveBall);
+        //move();
     }
 
 
@@ -135,7 +135,7 @@ public class Player extends Circle implements MovementStrategy {
     }
 
     @Override
-    public void move() {
+    public void move(MoveBall moveBall) {
         veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
         veloY = moveBall.getControllerY() * MAX_SPEED;
 
@@ -165,5 +165,10 @@ public class Player extends Circle implements MovementStrategy {
 
     public void setPosY(double posY) {
         this.posY = posY;
+    }
+
+    @Override
+    public void update(MoveBall moveBall) {
+        move(moveBall);
     }
 }

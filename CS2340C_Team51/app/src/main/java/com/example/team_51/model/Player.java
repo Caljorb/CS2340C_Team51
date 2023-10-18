@@ -149,6 +149,9 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
         if (!checkOutOfBounds(tempX, tempY)) {
             posX = tempX;
             posY = tempY;
+        } else if (isWall()) {
+            posX -= veloX;
+            posY -= veloY; // prob works idk
         }
     }
 
@@ -175,14 +178,19 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber, 
 
     @Override
     public boolean isWall(Tilemap tilemap) {
-        // todo: make a temporary 2d array using tilemap.getWalls()
-        // todo: initialize 2 doubles to track coordinates on map tileX, tileY
-        // todo:
-
         int[][] walls = tilemap.getWalls();
-        double tileX = 0;
-        double tileY = 0;
+        double tileX = 1117.4; // where tile 1 starts X
+        double tileY = 500.6; // where tile 1 starts Y
 
-        return false; // temp value
+        /*
+        todo: 1. iterate through walls
+              2. each iteration, add 64 to both tileX and tileY
+                    - note: reset tileX to 1117.4 after getting through a row
+              3. each iteration, compare posX/posY to tileX/tileY
+                    - if equal, return true
+                        - note: return true if within 64 of tileX and tileY ? (possibly)
+         */
+
+        return false; // player was not in any walls
     }
 }

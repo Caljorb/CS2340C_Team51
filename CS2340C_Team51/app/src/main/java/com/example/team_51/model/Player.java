@@ -5,11 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Player extends Circle implements MovementStrategy, Subscriber {
+import java.util.Arrays;
+
+public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     public static final int MAX_HEALTH_POINTS = 5;
@@ -80,11 +83,13 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
 
-
     @Override
     public void update() {
-        update(moveBall);
-        //move();
+        // bruh
+    }
+
+    public void update(Tilemap tilemap) {
+        update(moveBall, tilemap);
     }
 
 
@@ -135,7 +140,7 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
     }
 
     @Override
-    public void move(MoveBall moveBall) {
+    public void move(MoveBall moveBall, Tilemap tilemap) {
         veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
         veloY = moveBall.getControllerY() * MAX_SPEED;
 
@@ -144,6 +149,11 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
 
         double tempX = posX + veloX;
         double tempY = posY + veloY;
+
+        if (isWall(tilemap, tempX, tempY)) {
+            tempX = posX; // dont let move if there is a wall
+            tempY = posY;
+        }
 
         if (!checkOutOfBounds(tempX, tempY)) {
             posX = tempX;
@@ -168,7 +178,29 @@ public class Player extends Circle implements MovementStrategy, Subscriber {
     }
 
     @Override
-    public void update(MoveBall moveBall) {
-        move(moveBall);
+    public void update(MoveBall moveBall, Tilemap tilemap) {
+        move(moveBall, tilemap);
+    }
+
+    public boolean isWall(Tilemap tilemap, double posX, double posY) {
+        int[][] walls = tilemap.getWalls();
+
+        /*for (int[] w : walls) {
+            System.out.println(Arrays.toString(w));
+        }*/
+
+        double tileX = 1117.4; // where tile 1 starts X
+        double tileY = 500.6; // where tile 1 starts Y
+
+        int c = (int) ((posX - tileX + 32) / 64.0); // find tile index based on player pos
+        int r = (int) ((posY - tileY + 32) / 64.0);
+
+        if (walls[r][c] == 3 || walls[r][c] == 4) {
+            System.out.println("C: " + c + ", R: " + r);
+            System.out.println("True");
+            return true;
+        }
+
+        return false; // player was not in any walls
     }
 }

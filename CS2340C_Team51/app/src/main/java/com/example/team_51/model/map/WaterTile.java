@@ -10,7 +10,7 @@ public class WaterTile extends Tile {
 
     private final Sprite sprite;
     public WaterTile(SpriteSheet spriteSheet, Rect mapLocationRect) {
-        super(mapLocationRect);
+        super(mapLocationRect); // waterTile is a wall
         sprite = spriteSheet.getWaterSprite();
     }
 

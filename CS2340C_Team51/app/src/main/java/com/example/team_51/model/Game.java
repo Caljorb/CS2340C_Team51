@@ -117,7 +117,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         //button.update();
         moveBall.update();
-        player.update();
+        //player.update();
+        player.update(tilemap);
         tilemap.update();
         gameDisplay.update();
     }
@@ -166,7 +167,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             return true;
         case MotionEvent.ACTION_MOVE:
             if (moveBall.getIsPressed()) {
-                System.out.println("Moving");
+                //System.out.println("Moving");
                 moveBall.setController((double) event.getX(), (double) event.getY());
             }
             return true;

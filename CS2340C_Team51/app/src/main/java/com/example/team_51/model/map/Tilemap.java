@@ -21,6 +21,7 @@ public class Tilemap {
     private Player player;
     private double exitYTop;
     private double exitYBottom;
+    private int[][] walls;
 
     public Tilemap(SpriteSheet spriteSheet, int map, Player player) {
         this.map = map;
@@ -29,6 +30,7 @@ public class Tilemap {
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
+        createWalls();
     }
 
     private void createTilemap() {
@@ -55,7 +57,10 @@ public class Tilemap {
                 tilemap[r][c].draw(mapCanvas);
             }
         }
+    }
 
+    private void createWalls() {
+        walls = mapLayout.getLayout();
     }
 
     //selects single tile
@@ -81,11 +86,6 @@ public class Tilemap {
     }
 
     public void update() {
-        // Game Plan: swap = true if you get the position for exit on correct map
-        // each map must have position for exit
-        // update last map to have an exit
-        //
-
         boolean swap = false;
 
         if (player.getPlayerPosX() > 3236
@@ -97,12 +97,13 @@ public class Tilemap {
         if (swap) { // swap to new map when button pressed
             incrementMap();
             if (map < 3) {
-                player.setPosX(1125); // first column of map
+                player.setPosX(1125); // first column of map add 32???
             }
             setExitY(map);
             System.out.println("Map: " + map);
             updateMap(map);
             createTilemap(); // make new map
+            createWalls(); // make new walls
         }
     }
 
@@ -125,5 +126,9 @@ public class Tilemap {
             exitYTop = 1192;
             exitYBottom = 1273;
         }
+    }
+
+    public int[][] getWalls() {
+        return walls;
     }
 }

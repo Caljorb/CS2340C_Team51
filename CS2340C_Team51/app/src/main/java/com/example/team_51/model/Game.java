@@ -19,8 +19,8 @@ import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
-import com.example.team_51.views.EndActivity;
 import com.example.team_51.views.GameActivity;
+import com.example.team_51.views.WinActivity;
 
 import java.util.ArrayList;
 
@@ -182,7 +182,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 player.setPosY(1024);
 
                 Intent intent =
-                        new Intent(GameActivity.getGameContext(), EndActivity.class);
+                        new Intent(GameActivity.getGameContext(), WinActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 // allow starting activity outside activity class
                 intent.putExtra("score", points);

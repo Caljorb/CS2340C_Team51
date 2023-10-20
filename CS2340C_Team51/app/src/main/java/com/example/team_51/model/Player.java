@@ -10,6 +10,8 @@ import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
+import java.util.Arrays;
+
 public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
@@ -148,12 +150,14 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         double tempX = posX + veloX;
         double tempY = posY + veloY;
 
+        if (isWall(tilemap, tempX, tempY)) {
+            tempX = posX; // dont let move if there is a wall
+            tempY = posY;
+        }
+
         if (!checkOutOfBounds(tempX, tempY)) {
             posX = tempX;
             posY = tempY;
-        } else if (!isWall(tilemap, tempX, tempY)) {
-            posX = tempX;
-            posY = tempY; // prob works idk
         }
     }
 
@@ -180,25 +184,22 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
 
     public boolean isWall(Tilemap tilemap, double posX, double posY) {
         int[][] walls = tilemap.getWalls();
+
+        /*for (int[] w : walls) {
+            System.out.println(Arrays.toString(w));
+        }*/
+
         double tileX = 1117.4; // where tile 1 starts X
         double tileY = 500.6; // where tile 1 starts Y
 
-        /*
-        nvm this is the real todo: 1. using the starting tiles, find a formula that maps them
-                                      to each location of the walls array
-                                   2. use this to instantly access that array location
-                                      based on player location
-                                   3. if that spot is a wall, return true, else false
-         */
+        int c = (int) ((posX - tileX + 32) / 64.0); // find tile index based on player pos
+        int r = (int) ((posY - tileY + 32) / 64.0);
 
-        /*
-        todo: 1. iterate through walls
-              2. each iteration, add 64 to both tileX and tileY
-                    - note: reset tileX to 1117.4 after getting through a row
-              3. each iteration, compare posX/posY to tileX/tileY
-                    - if equal, return true
-                        - note: return true if within 64 of tileX and tileY ? (possibly)
-         */
+        if (walls[r][c] == 3 || walls[r][c] == 4) {
+            System.out.println("C: " + c + ", R: " + r);
+            System.out.println("True");
+            return true;
+        }
 
         return false; // player was not in any walls
     }

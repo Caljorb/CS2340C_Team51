@@ -60,16 +60,7 @@ public class Tilemap {
     }
 
     private void createWalls() {
-        int[][] temp = new int[15][35]; //mapLayout.getLayout();
-
-        for (int r = 0; r < MapLayout.NUMBER_OF_ROW_TILES; r++) {
-            for (int c = 0; c < MapLayout.NUMBER_OF_COLUMN_TILES; c++) {
-                if (mapLayout.getLayout()[r][c] != 3 || mapLayout.getLayout()[r][c] != 4) {
-                    temp[r][c] = 0; // if not border or water, set to 0
-                }
-            }
-        }
-        walls = temp;
+        walls = mapLayout.getLayout();
     }
 
     //selects single tile
@@ -106,12 +97,13 @@ public class Tilemap {
         if (swap) { // swap to new map when button pressed
             incrementMap();
             if (map < 3) {
-                player.setPosX(1125); // first column of map
+                player.setPosX(1125); // first column of map add 32???
             }
             setExitY(map);
             System.out.println("Map: " + map);
             updateMap(map);
             createTilemap(); // make new map
+            createWalls(); // make new walls
         }
     }
 

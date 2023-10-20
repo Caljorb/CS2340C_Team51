@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/win_bg">
 
     <Button
         android:id="@+id/toLeaderboard"
@@ -19,13 +20,15 @@
         android:id="@+id/winText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Congratulations You Won"
-        android:textColor="#009688"
+        android:text="Congratulations You Won!"
+        android:textColor="#FFFFFF"
         android:textSize="48sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintVertical_bias="0.215" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

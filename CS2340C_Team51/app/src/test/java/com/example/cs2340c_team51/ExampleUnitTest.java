@@ -5,10 +5,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.model.MoveBall;
 import com.example.team_51.model.Player;
-import com.example.team_51.model.Game;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -260,8 +260,35 @@ public class ExampleUnitTest {
     // Test after last exit player moves to win screen
 
     // Test player respawns at center after a retry
+    @Test
+    public void checkRespawn() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "dlee",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(2, player);
 
-    // Test if tile is 3 or 4 it is a wall
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+
+        assertEquals(2240, player.getPlayerPosX(), 0.0);
+        assertEquals(1024, player.getPlayerPosY(), 0.0);
+
+    }
+
+    // Test if tile is 3 or 4 it is a wall - Daniel
+    @Test
+    public void checkIfWall() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "dlee",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(2, player);
+
+        assertTrue(player.isWall(tilemap, 1110, 500));
+        assertFalse(player.isWall(tilemap, 2240, 1024));
+    }
 
     // Test player position is set to very left of screen after map change
     

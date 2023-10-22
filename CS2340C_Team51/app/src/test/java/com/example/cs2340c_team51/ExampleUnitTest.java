@@ -212,13 +212,9 @@ public class ExampleUnitTest {
     }
 
     // Test for player movement following player input
-
     @Test
     public void checkMovementDir() {
         MoveBall moveBall = new MoveBall();
-        int[] hpChar1 = new int[]{100, 1};
-        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
-                new SpriteSheet(null), hpChar1);
 
         moveBall.setController(110, 100);
         assertTrue(moveBall.getControllerX() > 0);
@@ -236,7 +232,27 @@ public class ExampleUnitTest {
         assertEquals(0, moveBall.getControllerX(), 0.0);
         assertTrue(moveBall.getControllerY() < 0);
     }
-    
+
+
+    // Test you cant move out of bounds
+    @Test
+    public void checkOutOfBounds() {
+        int[] hpChar1 = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                new SpriteSheet(null), hpChar1);
+        // put player before x coords
+        player.checkOutOfBounds(1109, 501);
+
+        // put player after x coords
+        player.checkOutOfBounds(3301, 501);
+
+        // put player before y coords
+        assertTrue(player.checkOutOfBounds(1111, 499));
+
+        // put player after y coords
+        assertTrue(player.checkOutOfBounds(1111, 1401));
+    }
 
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);

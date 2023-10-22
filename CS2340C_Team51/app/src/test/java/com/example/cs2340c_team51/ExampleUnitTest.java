@@ -292,6 +292,7 @@ public class ExampleUnitTest {
 
     // Test player position is set to very left of screen after map change
     
+    // Test player cannot move back after moving to a new map
 
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);

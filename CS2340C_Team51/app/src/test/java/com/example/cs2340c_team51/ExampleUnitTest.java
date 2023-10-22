@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import com.example.team_51.model.LeaderboardRow;
+import com.example.team_51.model.MoveBall;
 import com.example.team_51.model.Player;
 import com.example.team_51.model.Game;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
@@ -13,7 +14,6 @@ import com.example.team_51.viewmodels.SpriteSheet;
 
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -177,7 +177,6 @@ public class ExampleUnitTest {
         assertEquals("Addresses should be same even though data was updated.",
                 address1, address3);
     }
-
     // Method to check selecting difficulty updates the text for difficulty (Kavya)
     @Test
     public void diffUpdateCheck() {
@@ -211,6 +210,33 @@ public class ExampleUnitTest {
         String st1 = lb.toString();
         assertNotEquals(st, st1);
     }
+
+    // Test for player movement following player input
+
+    @Test
+    public void checkMovementDir() {
+        MoveBall moveBall = new MoveBall();
+        int[] hpChar1 = new int[]{100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                new SpriteSheet(null), hpChar1);
+
+        moveBall.setController(110, 100);
+        assertTrue(moveBall.getControllerX() > 0);
+        assertEquals(0, moveBall.getControllerY(), 0.0);
+
+        moveBall.setController(90, 100);
+        assertTrue(moveBall.getControllerX() < 0);
+        assertEquals(0, moveBall.getControllerY(), 0.0);
+
+        moveBall.setController(100, 110);
+        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertTrue(moveBall.getControllerY() > 0);
+
+        moveBall.setController(100, 90);
+        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertTrue(moveBall.getControllerY() < 0);
+    }
+    
 
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);

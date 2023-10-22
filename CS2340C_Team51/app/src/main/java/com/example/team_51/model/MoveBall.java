@@ -38,6 +38,15 @@ public class MoveBall {
         smallRadius = radius / 2;
     }
 
+    public MoveBall() {
+        bigCircCentX = 100;
+        bigCircCentY = 100;
+        smallCircCentX = 100;
+        smallCircCentY = 100;
+        bigRadius = 50;
+        smallRadius = 25;
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawCircle(bigCircCentX, bigCircCentY, bigRadius, bigPaint);
         canvas.drawCircle(smallCircCentX, smallCircCentY, smallRadius, smallPaint);

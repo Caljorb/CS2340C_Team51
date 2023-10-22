@@ -161,6 +161,22 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         }
     }
 
+    public void move(MoveBall moveBall) {
+        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
+        veloY = moveBall.getControllerY() * MAX_SPEED;
+
+        //System.out.println(veloX);
+        //System.out.println(veloY);
+
+        double tempX = posX + veloX;
+        double tempY = posY + veloY;
+
+        if (!checkOutOfBounds(tempX, tempY)) {
+            posX = tempX;
+            posY = tempY;
+        }
+    }
+
     @Override
     public boolean checkOutOfBounds(double posX, double posY) {
         boolean xIn = posX > 1110 && posX < 3300;

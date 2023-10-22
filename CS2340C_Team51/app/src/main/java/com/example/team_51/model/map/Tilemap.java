@@ -33,6 +33,14 @@ public class Tilemap {
         createWalls();
     }
 
+    public Tilemap(int map, Player player) {
+        this.map = map;
+        this.player = player;
+        mapLayout = new MapLayout(map);
+        setExitY(map);
+        createWalls();
+    }
+
     private void createTilemap() {
         // construct map layout
         int[][] layout = mapLayout.getLayout();
@@ -105,6 +113,31 @@ public class Tilemap {
             createTilemap(); // make new map
             createWalls(); // make new walls
         }
+    }
+
+    public boolean updateTest() {
+        boolean swap = false;
+
+        if (player.getPlayerPosX() > 3236
+                && (player.getPlayerPosY() >  exitYTop && player.getPlayerPosY() < exitYBottom)) {
+            swap = true;
+            System.out.println("Exit");
+        }
+
+        if (swap) { // swap to new map when button pressed
+            incrementMap();
+            if (map < 3) {
+                player.setPosX(1125); // first column of map add 32???
+            } else {
+                player.setPosX(2240);
+                player.setPosY(1024);
+                return true;
+            }
+            setExitY(map);
+            System.out.println("Map: " + map);
+            updateMap(map);
+        }
+        return false;
     }
 
     public int getMap() {

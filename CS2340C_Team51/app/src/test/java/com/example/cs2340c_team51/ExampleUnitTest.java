@@ -9,6 +9,7 @@ import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.model.MoveBall;
 import com.example.team_51.model.Player;
 import com.example.team_51.model.Game;
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -253,6 +254,17 @@ public class ExampleUnitTest {
         // put player after y coords
         assertTrue(player.checkOutOfBounds(1111, 1401));
     }
+
+    // Test player moves to next map when they reach the exit
+
+    // Test after last exit player moves to win screen
+
+    // Test player respawns at center after a retry
+
+    // Test if tile is 3 or 4 it is a wall
+
+    // Test player position is set to very left of screen after map change
+    
 
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);

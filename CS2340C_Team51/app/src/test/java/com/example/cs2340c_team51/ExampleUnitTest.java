@@ -255,9 +255,33 @@ public class ExampleUnitTest {
         assertTrue(player.checkOutOfBounds(1111, 1401));
     }
 
-    // Test player moves to next map when they reach the exit
+    // Test player moves to next map when they reach the exit (Rashmith)
+    @Test
+    public void checkMoveMaps() {
+        int[] hpChar1 = new int[]{100,1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                                        new SpriteSheet(null), hpChar1);
+        Tilemap tilemap = new Tilemap(0, player);
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+        assertEquals(1, tilemap.getMap())
+    }
 
-    // Test after last exit player moves to win screen
+    // Test after last exit player moves to win screen (Rashmith)
+    @Test
+    public void checkChangeScreens() {
+        int[] hpChar1 = new int[]{100,1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                                        new SpriteSheet(null), hpChar1);
+        Tilemap tilemap = new Tilemap(0, player);
+        player.setPosX(3237);
+        player.setPosY(1200);
+        assertTrue(tilemap.updateTest());
+        
+    }
 
     // Test player respawns at center after a retry
     @Test

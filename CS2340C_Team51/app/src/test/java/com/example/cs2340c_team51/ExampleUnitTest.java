@@ -5,15 +5,16 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import com.example.team_51.model.LeaderboardRow;
-import com.example.team_51.model.Player;
 import com.example.team_51.model.Game;
+import com.example.team_51.model.LeaderboardRow;
+import com.example.team_51.model.MoveBall;
+import com.example.team_51.model.Player;
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
 
 import org.junit.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -22,10 +23,6 @@ import java.util.ArrayList;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
-    @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    } // example test for reference
 
     // Method for score not going below 0 here (Rashmith)
 
@@ -181,7 +178,6 @@ public class ExampleUnitTest {
         assertEquals("Addresses should be same even though data was updated.",
                 address1, address3);
     }
-
     // Method to check selecting difficulty updates the text for difficulty (Kavya)
     @Test
     public void diffUpdateCheck() {
@@ -216,11 +212,126 @@ public class ExampleUnitTest {
         assertNotEquals(st, st1);
     }
 
+    // Test for player movement following player input
+    @Test
+    public void checkMovementDir() {
+        MoveBall moveBall = new MoveBall();
+
+        moveBall.setController(110, 100);
+        assertTrue(moveBall.getControllerX() > 0);
+        assertEquals(0, moveBall.getControllerY(), 0.0);
+
+        moveBall.setController(90, 100);
+        assertTrue(moveBall.getControllerX() < 0);
+        assertEquals(0, moveBall.getControllerY(), 0.0);
+
+        moveBall.setController(100, 110);
+        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertTrue(moveBall.getControllerY() > 0);
+
+        moveBall.setController(100, 90);
+        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertTrue(moveBall.getControllerY() < 0);
+    }
+
+
+    // Test you cant move out of bounds
+    @Test
+    public void checkOutOfBounds() {
+        int[] hpChar1 = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                new SpriteSheet(null), hpChar1);
+        // put player before x coords
+        player.checkOutOfBounds(1109, 501);
+
+        // put player after x coords
+        player.checkOutOfBounds(3301, 501);
+
+        // put player before y coords
+        assertTrue(player.checkOutOfBounds(1111, 499));
+
+        // put player after y coords
+        assertTrue(player.checkOutOfBounds(1111, 1401));
+    }
+
+    // Test player moves to next map when they reach the exit
+
+    // Test after last exit player moves to win screen
+
+    // Test player respawns at center after a retry
+    @Test
+    public void checkRespawn() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "dlee",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(2, player);
+
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+
+        assertEquals(2240, player.getPlayerPosX(), 0.0);
+        assertEquals(1024, player.getPlayerPosY(), 0.0);
+
+    }
+
+    // Test if tile is 3 or 4 it is a wall - Daniel
+    @Test
+    public void checkIfWall() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "dlee",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(2, player);
+
+        assertTrue(player.isWall(tilemap, 1110, 500));
+        assertFalse(player.isWall(tilemap, 2240, 1024));
+    }
+
+    // Test player position is set to very left of screen after map change
+
+    // Test player cannot move back after moving to a new map
+
     private ArrayList<LeaderboardRow> makeTestRows() {
         ArrayList<LeaderboardRow> leaderboardRows = new ArrayList<>(5);
         for (int i = 0; i < 5; i++) {
             leaderboardRows.add(new LeaderboardRow("Bob" + i, i * 2, "Today"));
         }
         return leaderboardRows;
+    }
+
+    // A player spawns at the beginning of the screen after exiting (Kavya)
+
+    @Test
+    public void checkLeftSideChange() {
+        int[] hpChar1 = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                new SpriteSheet(null), hpChar1);
+        Tilemap tilemap = new Tilemap(0, player);
+
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+        assertEquals(1125, player.getPlayerPosX(), 0.0);
+    }
+
+    // A player cannot move back after moving to a new map (Kavya)
+
+    @Test
+    public void checkNoMoveBack() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, player);
+
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+        player.setPosX(player.getPlayerPosX() - 32);
+        assertEquals(1, tilemap.getMap());
     }
 }

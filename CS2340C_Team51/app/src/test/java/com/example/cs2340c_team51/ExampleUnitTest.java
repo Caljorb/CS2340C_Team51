@@ -266,7 +266,7 @@ public class ExampleUnitTest {
         player.setPosX(3237);
         player.setPosY(1200);
         tilemap.updateTest();
-        assertEquals(1, tilemap.getMap())
+        assertEquals(1, tilemap.getMap());
     }
 
     // Test after last exit player moves to win screen (Rashmith)
@@ -276,7 +276,7 @@ public class ExampleUnitTest {
         MoveBall moveBall = new MoveBall();
         Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
                                         new SpriteSheet(null), hpChar1);
-        Tilemap tilemap = new Tilemap(0, player);
+        Tilemap tilemap = new Tilemap(2, player);
         player.setPosX(3237);
         player.setPosY(1200);
         assertTrue(tilemap.updateTest());

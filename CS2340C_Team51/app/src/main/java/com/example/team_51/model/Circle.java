@@ -1,6 +1,5 @@
 package com.example.team_51.model;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 

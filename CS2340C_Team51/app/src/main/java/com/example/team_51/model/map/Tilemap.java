@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-import com.example.team_51.model.Button;
+import com.example.team_51.model.Player;
 import com.example.team_51.viewmodels.SpriteSheet;
 import com.example.team_51.viewmodels.GameDisplay;
 
@@ -16,14 +16,28 @@ public class Tilemap {
     private Bitmap mapBitmap;
     private int map;
     private boolean swap;
-    private Button button;
+    //private Button button;
+    private Player player;
+    private double exitYTop;
+    private double exitYBottom;
+    private int[][] walls;
 
-    public Tilemap(SpriteSheet spriteSheet, int map, Button button) {
+    public Tilemap(SpriteSheet spriteSheet, int map, Player player) {
         this.map = map;
-        this.button = button;
+        setExitY(map);
+        this.player = player;
         mapLayout = new MapLayout(map);
         this.spriteSheet = spriteSheet;
         createTilemap();
+        createWalls();
+    }
+
+    public Tilemap(int map, Player player) {
+        this.map = map;
+        this.player = player;
+        mapLayout = new MapLayout(map);
+        setExitY(map);
+        createWalls();
     }
 
     private void createTilemap() {
@@ -50,7 +64,10 @@ public class Tilemap {
                 tilemap[r][c].draw(mapCanvas);
             }
         }
+    }
 
+    private void createWalls() {
+        walls = mapLayout.getLayout();
     }
 
     //selects single tile
@@ -76,12 +93,50 @@ public class Tilemap {
     }
 
     public void update() {
-        swap = button.getIsPressed();
+        boolean swap = false;
+
+        if (player.getPlayerPosX() > 3236
+                && (player.getPlayerPosY() >  exitYTop && player.getPlayerPosY() < exitYBottom)) {
+            swap = true;
+            System.out.println("Exit");
+        }
+
         if (swap) { // swap to new map when button pressed
+            incrementMap();
+            if (map < 3) {
+                player.setPosX(1125); // first column of map add 32???
+            }
+            setExitY(map);
             System.out.println("Map: " + map);
             updateMap(map);
             createTilemap(); // make new map
+            createWalls(); // make new walls
         }
+    }
+
+    public boolean updateTest() {
+        boolean swap = false;
+
+        if (player.getPlayerPosX() > 3236
+                && (player.getPlayerPosY() >  exitYTop && player.getPlayerPosY() < exitYBottom)) {
+            swap = true;
+            System.out.println("Exit");
+        }
+
+        if (swap) { // swap to new map when button pressed
+            incrementMap();
+            if (map < 3) {
+                player.setPosX(1125); // first column of map add 32???
+            } else {
+                player.setPosX(2240);
+                player.setPosY(1024);
+                return true;
+            }
+            setExitY(map);
+            System.out.println("Map: " + map);
+            updateMap(map);
+        }
+        return false;
     }
 
     public int getMap() {
@@ -91,4 +146,21 @@ public class Tilemap {
     public void incrementMap() {
         map++;
     } // update map number
+
+    private void setExitY(int map) {
+        if (map == 0) {
+            exitYTop = 1145;
+            exitYBottom = 1210;
+        } else if (map == 1) {
+            exitYTop = 690;
+            exitYBottom = 780;
+        } else {
+            exitYTop = 1192;
+            exitYBottom = 1273;
+        }
+    }
+
+    public int[][] getWalls() {
+        return walls;
+    }
 }

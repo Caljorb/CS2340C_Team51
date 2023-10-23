@@ -291,7 +291,7 @@ public class ExampleUnitTest {
     }
 
     // Test player position is set to very left of screen after map change
-    
+
     // Test player cannot move back after moving to a new map
 
     private ArrayList<LeaderboardRow> makeTestRows() {
@@ -300,5 +300,38 @@ public class ExampleUnitTest {
             leaderboardRows.add(new LeaderboardRow("Bob" + i, i * 2, "Today"));
         }
         return leaderboardRows;
+    }
+
+    // A player spawns at the beginning of the screen after exiting (Kavya)
+
+    @Test
+    public void checkLeftSideChange() {
+        int[] hpChar1 = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 1000, 1000, moveBall, "",
+                new SpriteSheet(null), hpChar1);
+        Tilemap tilemap = new Tilemap(0, player);
+
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+        assertEquals(1125, player.getPlayerPosX(), 0.0);
+    }
+
+    // A player cannot move back after moving to a new map (Kavya)
+
+    @Test
+    public void checkNoMoveBack() {
+        MoveBall moveball = new MoveBall();
+        int[] hpChar = new int[] {100, 1};
+        Player player = Player.getPlayer(null, 1000, 1000, moveball, "",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, player);
+
+        player.setPosX(3237);
+        player.setPosY(1200);
+        tilemap.updateTest();
+        player.setPosX(player.getPlayerPosX() - 32);
+        assertEquals(1, tilemap.getMap());
     }
 }

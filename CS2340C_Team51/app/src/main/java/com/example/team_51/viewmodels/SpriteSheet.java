@@ -28,6 +28,14 @@ public class SpriteSheet {
         return getSpriteByIndex(1, character - 1);
     }
 
+    public Sprite getEnemySprite(int enemy) {
+        if (enemy < 2) {
+            return getSpriteByIndex(1, enemy + 2);
+        } else {
+            return getSpriteByIndex(2, enemy - 3);
+        }
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }

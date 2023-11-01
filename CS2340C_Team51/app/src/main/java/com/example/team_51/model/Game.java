@@ -15,6 +15,7 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import com.example.team_51.model.enemies.Enemy;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
@@ -34,7 +35,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private Button button;
     private MoveBall moveBall;
-    private Enemy enemy;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -69,9 +69,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player = Player.getPlayer(context, 2240, 1024, moveBall, name, spriteSheet,
                 hpChar);
 
-        enemy = new Enemy(context, 2400, 1200, spriteSheet, (1000 / diff), 1);
-        // comment out later, i have to do factory method
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay =
@@ -95,7 +92,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //button.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
-        enemy.draw(canvas, gameDisplay); // idk
     }
 
     @Override

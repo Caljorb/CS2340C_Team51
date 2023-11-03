@@ -1,6 +1,9 @@
 package com.example.team_51.model.enemies;
 
+import android.graphics.Canvas;
+
 import com.example.team_51.model.Sprite;
+import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.SpriteSheet;
 
 public class Snake implements Enemy {
@@ -14,7 +17,12 @@ public class Snake implements Enemy {
         this.sprite = spriteSheet.getEnemySprite(3);
     }
     @Override
-    public void spawn(int map) {
+    public void spawn(int map, int count) {
+
+    }
+
+    @Override
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
 
     }
 }

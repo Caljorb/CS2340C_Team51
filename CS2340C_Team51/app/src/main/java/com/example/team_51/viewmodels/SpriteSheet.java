@@ -29,7 +29,7 @@ public class SpriteSheet {
     }
 
     public Sprite getEnemySprite(int enemy) {
-        if (enemy < 2) {
+        if (enemy < 3) {
             return getSpriteByIndex(1, enemy + 2);
         } else {
             return getSpriteByIndex(2, enemy - 3);

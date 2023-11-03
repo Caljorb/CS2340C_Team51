@@ -15,7 +15,11 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
+import com.example.team_51.model.enemies.BatFactory;
 import com.example.team_51.model.enemies.Enemy;
+import com.example.team_51.model.enemies.EnemyFactory;
+import com.example.team_51.model.enemies.SlimeFactory;
+import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
@@ -35,6 +39,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private Button button;
     private MoveBall moveBall;
+    private EnemyFactory[] enemyFactories;
+    private Enemy[] enemies;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -69,6 +75,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player = Player.getPlayer(context, 2240, 1024, moveBall, name, spriteSheet,
                 hpChar);
 
+        enemyFactories = new EnemyFactory[4];
+
+        enemyFactories[0] = new BatFactory();
+        enemyFactories[1] = new SlimeFactory();
+        enemyFactories[2] = new SnakeFactory();
+        enemyFactories[3] = new SnakeFactory();
+
+        enemies = new Enemy[4];
+
+        for (int i = 0; i < 4; i++) {
+            enemies[i] = enemyFactories[1].create(1, spriteSheet);
+        }
+
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay =
@@ -92,6 +112,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         //button.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
+        for (int i = 0; i < 4; i++) {
+            enemies[i].draw(canvas, gameDisplay);
+        }
     }
 
     @Override

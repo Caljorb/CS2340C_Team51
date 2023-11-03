@@ -21,11 +21,11 @@ public class Snake implements Enemy {
     @Override
     public void spawn(int map, int count) {
         switch (map) {
-        case 1:
+        case 2:
             posX = 2800;
             posY = 1600;
             break;
-        case 2:
+        case 3:
             if (count < 1) {
                 posX = 1400;
                 posY = 1200;

@@ -22,8 +22,9 @@ public class Bat implements Enemy {
 
     @Override
     public void spawn(int map, int count) {
+        System.out.println(map);
         switch (map) {
-        case 0:
+        case 1:
             if (count < 1) {
                 posX = 2800;
                 posY = 800;
@@ -32,7 +33,7 @@ public class Bat implements Enemy {
                 posY = 650;
             }
             break;
-        case 1:
+        case 2:
             posX = 1500;
             posY = 1500;
             break;

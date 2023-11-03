@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import com.example.team_51.model.enemies.BatFactory;
 import com.example.team_51.model.enemies.Enemy;
 import com.example.team_51.model.enemies.EnemyFactory;
+import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
@@ -80,7 +81,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemyFactories[0] = new BatFactory();
         enemyFactories[1] = new SlimeFactory();
         enemyFactories[2] = new SnakeFactory();
-        enemyFactories[3] = new SnakeFactory();
+        enemyFactories[3] = new RatFactory();
 
         enemies = new Enemy[4];
 
@@ -148,8 +149,26 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         moveBall.update();
         //player.update();
         player.update(tilemap);
-        tilemap.update();
+        boolean swap = tilemap.update();
         gameDisplay.update();
+        if (swap) {
+            // stuff for spawing new enemies
+            if (tilemap.getMap() == 1) {
+                for (int i = 0; i < 4; i++) {
+                    enemies[i] = enemyFactories[i].create(tilemap.getMap(),
+                            new SpriteSheet(getContext())); // please work
+                }
+            } else {
+                enemies[0] = enemyFactories[2].create(tilemap.getMap(),
+                        new SpriteSheet(getContext()));
+                enemies[1] = enemyFactories[2].create(tilemap.getMap(),
+                        new SpriteSheet(getContext()));
+                enemies[2] = enemyFactories[3].create(tilemap.getMap(),
+                        new SpriteSheet(getContext()));
+                enemies[3] = enemyFactories[3].create(tilemap.getMap(),
+                        new SpriteSheet(getContext()));
+            }
+        }
     }
 
     public String diffSelect(int diff) {

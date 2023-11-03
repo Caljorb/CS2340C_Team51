@@ -23,34 +23,7 @@ public class Bat implements Enemy {
     @Override
     public void spawn(int map, int count) {
         switch (map) {
-        /*case 0:
-            if (count < 1) {
-                posX = 2400;
-                posY = 1200;
-            } else {
-                posX = 1800;
-                posY = 1000;
-            }
-            break;
-        case 1:
-            if (count < 1) {
-                posX = 2400;
-                posY = 1200;
-            } else {
-                posX = 1800;
-                posY = 1000;
-            }
-            break;
-        case 2:
-            if (count < 1) {
-                posX = 2400;
-                posY = 1200;
-            } else {
-                posX = 1800;
-                posY = 1000;
-            }
-            break;*/
-            default:
+        case 0:
             if (count < 1) {
                 posX = 2800;
                 posY = 800;
@@ -59,9 +32,13 @@ public class Bat implements Enemy {
                 posY = 650;
             }
             break;
+        case 1:
+            posX = 1500;
+            posY = 1500;
+            break;
+        default:
+            break;
         }
-        //posX = 2000;
-        //posY = 1000;
     }
 
     @Override

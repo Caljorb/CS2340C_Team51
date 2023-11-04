@@ -21,14 +21,14 @@ public class Snake implements Enemy {
     @Override
     public void spawn(int map, int count) {
         switch (map) {
-        case 2:
-            posX = 2800;
-            posY = 1600;
+        case 1:
+            posX = 2000;
+            posY = 650;
             break;
-        case 3:
+        case 2:
             if (count < 1) {
-                posX = 1400;
-                posY = 1200;
+                posX = 1600;
+                posY = 700;
             } else {
                 posX = 3000;
                 posY = 1000;
@@ -37,6 +37,7 @@ public class Snake implements Enemy {
         default:
             break;
         }
+        System.out.println("PosX: " + posX + ", PosY: " + posY);
     }
 
     @Override

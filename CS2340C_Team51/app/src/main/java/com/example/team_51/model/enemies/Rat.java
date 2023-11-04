@@ -22,22 +22,23 @@ public class Rat implements Enemy {
     @Override
     public void spawn(int map, int count) {
         switch (map) {
-        case 2:
+        case 1:
             posX = 2400;
             posY = 1200;
             break;
-        case 3:
+        case 2:
             if (count < 1) {
-                posX = 2400;
-                posY = 1200;
+                posX = 2300;
+                posY = 900;
             } else {
-                posX = 1800;
-                posY = 1000;
+                posX = 2750;
+                posY = 670;
             }
             break;
         default:
             break;
         }
+        System.out.println("PosX: " + posX + ", PosY: " + posY);
     }
 
     @Override

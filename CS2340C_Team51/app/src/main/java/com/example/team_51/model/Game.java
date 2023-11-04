@@ -85,10 +85,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         enemies = new Enemy[4];
 
-        enemies[0] = enemyFactories[1].create(1, spriteSheet);
-        enemies[1] = enemyFactories[1].create(1, spriteSheet);
-        enemies[2] = enemyFactories[0].create(1, spriteSheet);
-        enemies[3] = enemyFactories[0].create(1, spriteSheet);
+        enemies[0] = enemyFactories[1].create(0, spriteSheet);
+        enemies[1] = enemyFactories[1].create(0, spriteSheet);
+        enemies[2] = enemyFactories[0].create(0, spriteSheet);
+        enemies[3] = enemyFactories[0].create(0, spriteSheet);
 
         /*for (int i = 0; i < 4; i++) {
             enemies[i] = enemyFactories[1].create(1, spriteSheet);

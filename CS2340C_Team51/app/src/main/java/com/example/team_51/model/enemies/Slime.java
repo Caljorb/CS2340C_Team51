@@ -21,7 +21,7 @@ public class Slime implements Enemy {
     @Override
     public void spawn(int map, int count) {
         switch (map) {
-        case 1:
+        case 0:
             if (count < 1) {
                 posX = 2400;
                 posY = 1200;
@@ -30,13 +30,14 @@ public class Slime implements Enemy {
                 posY = 1000;
             }
             break;
-        case 2:
-            posX = 2000;
-            posY = 1600;
+        case 1:
+            posX = 2600;
+            posY = 900;
             break;
         default:
             break;
         }
+        System.out.println("PosX: " + posX + ", PosY: " + posY);
     }
 
     @Override

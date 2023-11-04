@@ -92,7 +92,7 @@ public class Tilemap {
         mapLayout = new MapLayout(map);
     }
 
-    public void update() {
+    public boolean update() {
         boolean swap = false;
 
         if (player.getPlayerPosX() > 3236
@@ -112,6 +112,7 @@ public class Tilemap {
             createTilemap(); // make new map
             createWalls(); // make new walls
         }
+        return swap;
     }
 
     public boolean updateTest() {

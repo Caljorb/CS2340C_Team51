@@ -4,13 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.MoveStratEnemy;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Bat implements Enemy {
+public class Bat implements Enemy, MoveStratEnemy {
     public static final double SPEED_PIXELS_PER_SECOND = 150.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     private double posX;
@@ -83,12 +84,22 @@ public class Bat implements Enemy {
         double tempX = posX + veloX;
         double tempY = posY + veloY;
 
-        posX = tempX;
-        posY = tempY;
+        if (!checkOutOfBounds(tempX, tempY)) {
+            posX = tempX;
+            posY = tempY;
+        }
     }
 
     @Override
-    public void move(int updates) {
+    public boolean checkOutOfBounds(double posX, double posY) {
+        boolean xIn = posX > 1110 && posX < 3300;
+        boolean yIn = posY > 500 && posY < 1400;
 
+        return !(xIn && yIn);
+    }
+
+    @Override
+    public boolean isWall(Tilemap tilemap, double posX, double posY) {
+        return false;
     }
 }

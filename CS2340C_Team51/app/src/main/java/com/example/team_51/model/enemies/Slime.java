@@ -4,13 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.MoveStratEnemy;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 
-public class Slime implements Enemy {
+public class Slime implements Enemy, MoveStratEnemy {
     public static final double SPEED_PIXELS_PER_SECOND = 50.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
     private double posX;
@@ -81,42 +82,22 @@ public class Slime implements Enemy {
         double tempX = posX + veloX;
         double tempY = posY + veloY;
 
-        posX = tempX;
-        posY = tempY;
+        if (!checkOutOfBounds(tempX, tempY)) {
+            posX = tempX;
+            posY = tempY;
+        }
     }
 
     @Override
-    public void move(int updates) {
-        /* Game plan:
-            1. Every 10 updates, change direction
-            2. Slime moves same amount each direction
-        */
-//        int currDir = updates % 4; // get
-//
-//        if (updates % 10 == 0) {
-//            // turn right from previous direction
-//            switch (currDir) {
-//            case 1:
-//                veloX = 1 * MAX_SPEED; // right
-//                break;
-//            case 2:
-//                veloY = 1 * MAX_SPEED; // down
-//                break;
-//            case 3:
-//                veloX = -1 * MAX_SPEED; // left
-//                break;
-//            default:
-//                veloY = -1 * MAX_SPEED; // up
-//                break;
-//            }
-//        }
-//        // move straight
-//        double tempX = posX + veloX;
-//        double tempY = posY + veloY;
-//
-//        posX = tempX;
-//        posY = tempY;
+    public boolean checkOutOfBounds(double posX, double posY) {
+        boolean xIn = posX > 1110 && posX < 3300;
+        boolean yIn = posY > 500 && posY < 1400;
+
+        return !(xIn && yIn);
     }
 
-
+    @Override
+    public boolean isWall(Tilemap tilemap, double posX, double posY) {
+        return false;
+    }
 }

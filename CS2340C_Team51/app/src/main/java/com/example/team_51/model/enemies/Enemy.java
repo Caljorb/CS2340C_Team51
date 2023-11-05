@@ -9,5 +9,4 @@ public interface Enemy {
     void spawn(int map, int count);
     void draw(Canvas canvas, GameDisplay gameDisplay);
     void update(Tilemap tilemap, int updates);
-    void move(int updates);
 }

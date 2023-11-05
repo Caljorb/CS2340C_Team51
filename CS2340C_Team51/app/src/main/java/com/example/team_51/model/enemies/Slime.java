@@ -59,11 +59,9 @@ public class Slime implements Enemy {
 
     @Override
     public void update(Tilemap tilemap, int updates) {
-        int currDir = updates / 10; // get
-        //System.out.println(updates);
+        int currDir = updates / 10;
         if (updates % 110 == 0) {
             // turn right from previous direction
-            //System.out.println(updates);
             switch (currDir % 4) {
             case 1:
                 veloX = -1 * MAX_SPEED; // left

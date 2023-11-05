@@ -60,24 +60,30 @@ public class Slime implements Enemy, MoveStratEnemy {
 
     @Override
     public void update(Tilemap tilemap, int updates) {
-        int currDir = updates / 10;
-        if (updates % 110 == 0) {
-            // turn right from previous direction
-            switch (currDir % 4) {
-            case 1:
-                veloX = -1 * MAX_SPEED; // left
-                break;
-            case 2:
-                veloY = 1 * MAX_SPEED; // down
-                break;
-            case 3:
-                veloX = 1 * MAX_SPEED; // right
-                break;
-            default:
-                veloY = -1 * MAX_SPEED; // up
-                break;
+        if (!isWall(tilemap, posX, posY)) {
+            int currDir = updates / 10;
+            if (updates % 110 == 0) {
+                // turn right from previous direction
+                switch (currDir % 4) {
+                case 1:
+                    veloX = -1 * MAX_SPEED; // left
+                    break;
+                case 2:
+                    veloY = 1 * MAX_SPEED; // down
+                    break;
+                case 3:
+                    veloX = 1 * MAX_SPEED; // right
+                    break;
+                default:
+                    veloY = -1 * MAX_SPEED; // up
+                    break;
+                }
             }
+        } else { // bounce off wall on collision
+            veloX = veloX * -1;
+            veloY = veloY * -1;
         }
+
         // move straight
         double tempX = posX + veloX;
         double tempY = posY + veloY;
@@ -98,6 +104,24 @@ public class Slime implements Enemy, MoveStratEnemy {
 
     @Override
     public boolean isWall(Tilemap tilemap, double posX, double posY) {
-        return false;
+        int[][] walls = tilemap.getWalls();
+
+        double tileX = 1117.4; // where tile 1 starts X
+        double tileY = 500.6; // where tile 1 starts Y
+
+        int c = (int) ((posX - tileX + 32) / 64.0); // find tile index based on enemy pos
+        int r = (int) ((posY - tileY + 32) / 64.0);
+
+        try {
+            if (walls[r][c] == 3 || walls[r][c] == 4) {
+                System.out.println("C: " + c + ", R: " + r);
+                System.out.println("True");
+                return true;
+            }
+        } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
+            return true; // enemy position can be weird sometimes
+        }
+
+        return false; // enemy was not in any walls
     }
 }

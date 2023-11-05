@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.example.team_51.model.Sprite;
+import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -50,5 +51,15 @@ public class Rat implements Enemy {
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY), paint);
         sprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX),
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
+    }
+
+    @Override
+    public void update(Tilemap tilemap, int updates) {
+
+    }
+
+    @Override
+    public void move(int updates) {
+
     }
 }

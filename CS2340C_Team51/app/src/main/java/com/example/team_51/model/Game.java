@@ -42,6 +42,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private MoveBall moveBall;
     private EnemyFactory[] enemyFactories;
     private Enemy[] enemies;
+    private int updates;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -90,10 +91,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemies[2] = enemyFactories[0].create(0, spriteSheet);
         enemies[3] = enemyFactories[0].create(0, spriteSheet);
 
-        /*for (int i = 0; i < 4; i++) {
-            enemies[i] = enemyFactories[1].create(1, spriteSheet);
-        }*/
-
+        updates = 0;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -151,12 +149,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         player.update(tilemap);
         boolean swap = tilemap.update();
         gameDisplay.update();
+
+        for (int i = 0; i < enemies.length; i++) {
+            enemies[i].update(tilemap, updates); // update enemy position
+        }
+
+
         if (swap) {
             // stuff for spawing new enemies
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
                     enemies[i] = enemyFactories[i].create(tilemap.getMap(),
-                            new SpriteSheet(getContext())); // please work
+                            new SpriteSheet(getContext()));
                 }
             } else {
                 enemies[0] = enemyFactories[2].create(tilemap.getMap(),
@@ -169,6 +173,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                         new SpriteSheet(getContext()));
             }
         }
+        updates++; // increment number of updates
     }
 
     public String diffSelect(int diff) {

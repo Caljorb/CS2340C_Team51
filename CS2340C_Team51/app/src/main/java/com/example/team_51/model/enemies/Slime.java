@@ -67,15 +67,19 @@ public class Slime implements Enemy, MoveStratEnemy {
                 switch (currDir % 4) {
                 case 1:
                     veloX = -1 * MAX_SPEED; // left
+                    veloY = 0;
                     break;
                 case 2:
                     veloY = 1 * MAX_SPEED; // down
+                    veloX = 0;
                     break;
                 case 3:
                     veloX = 1 * MAX_SPEED; // right
+                    veloY = 0;
                     break;
                 default:
                     veloY = -1 * MAX_SPEED; // up
+                    veloX = 0;
                     break;
                 }
             }

@@ -65,19 +65,23 @@ public class Bat implements Enemy, MoveStratEnemy {
     public void update(Tilemap tilemap, int updates) {
         if (!isWall(tilemap, posX, posY)) {
             int currDir = updates / 10;
-            if (updates % 27 == 0) { // move erratically
+            if (updates % 10 == 0) { // move downwards in circles
                 switch (currDir % 5) {
                 case 1:
-                    veloX = 1 * MAX_SPEED; // right
+                    veloX = 1.3 * MAX_SPEED; // right
+                    veloY = -1 * MAX_SPEED;
                     break;
                 case 2:
-                    veloY = -1 * MAX_SPEED; // up
+                    veloY = -1.9 * MAX_SPEED; // up
+                    veloX = -1 * MAX_SPEED;
                     break;
                 case 3:
                     veloX = -1 * MAX_SPEED; // left
+                    veloY = 1.5 * MAX_SPEED;
                     break;
                 default:
-                    veloY = 1 * MAX_SPEED; // down
+                    veloY = 1.1 * MAX_SPEED; // down
+                    veloX = .75 * MAX_SPEED;
                     break;
                 }
             }

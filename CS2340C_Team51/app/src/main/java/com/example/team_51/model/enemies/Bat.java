@@ -130,4 +130,12 @@ public class Bat implements Enemy, MoveStratEnemy {
 
         return false; // enemy was not in any walls
     }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
 }

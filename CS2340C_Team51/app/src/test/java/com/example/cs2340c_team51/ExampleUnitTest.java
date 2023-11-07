@@ -9,6 +9,12 @@ import com.example.team_51.model.Game;
 import com.example.team_51.model.LeaderboardRow;
 import com.example.team_51.model.MoveBall;
 import com.example.team_51.model.Player;
+import com.example.team_51.model.enemies.Bat;
+import com.example.team_51.model.enemies.BatFactory;
+import com.example.team_51.model.enemies.Enemy;
+import com.example.team_51.model.enemies.EnemyFactory;
+import com.example.team_51.model.enemies.Slime;
+import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -358,4 +364,30 @@ public class ExampleUnitTest {
         player.setPosX(player.getPlayerPosX() - 32);
         assertEquals(1, tilemap.getMap());
     }
+
+    // check enemy cant move oob (Caleb)
+
+    @Test
+    public void checkEnemyOoB() {
+        EnemyFactory batFactory = new BatFactory();
+        Enemy bat = batFactory.create(0, new SpriteSheet(null));
+        Bat e = (Bat) bat;
+        assertTrue(e.checkOutOfBounds(3000000, 0));
+        assertTrue(e.checkOutOfBounds(220, -1111));
+        assertFalse(e.checkOutOfBounds(1200, 800));
+    }
+
+    // check enemy collides with walls (Caleb)
+
+    @Test
+    public void checkEnemyWall() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        Tilemap tilemap = new Tilemap(0, null);
+        assertTrue(e.isWall(tilemap, 1110, 500));
+        assertFalse(e.isWall(tilemap, 2240, 1024));
+    }
+
 }

@@ -217,4 +217,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
 
         return false; // player was not in any walls
     }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
 }

@@ -43,10 +43,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private EnemyFactory[] enemyFactories;
     private Enemy[] enemies;
     private int updates;
-    private double[] prevEnemiesPosX;
-    private double[] prevEnemiesPosY;
-    private double prevPlayerPosX;
-    private double prevPlayerPosY;
 
 
     public Game(int diff, String name, int character, long points) {
@@ -58,8 +54,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         int[] hpChar = new int[]{diff, character};
         player = Player.getPlayer(null, 2240, 1024, 32, name,
                 new SpriteSheet(null), hpChar);
-        prevPlayerPosX = player.getPlayerPosX();
-        prevPlayerPosY = player.getPlayerPosY();
     }
 
 
@@ -98,15 +92,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemies[2] = enemyFactories[0].create(0, spriteSheet);
         enemies[3] = enemyFactories[0].create(0, spriteSheet);
 
-        prevEnemiesPosX = new double[enemies.length];
-        prevEnemiesPosY = new double[enemies.length];
-        for (int i = 0; i < enemies.length; i++) {
-            Enemy enemy = enemies[i];
-            prevEnemiesPosX[i] = enemy.getPosX();
-            prevEnemiesPosY[i] = enemy.getPosY();
-        }
-        prevPlayerPosX = player.getPlayerPosX();
-        prevPlayerPosY = player.getPlayerPosY();
 
         updates = 0;
 

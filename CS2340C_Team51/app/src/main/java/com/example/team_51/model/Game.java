@@ -44,6 +44,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Enemy[] enemies;
     private int updates;
 
+
     public Game(int diff, String name, int character, long points) {
         super(null);
         this.diff = diff;
@@ -90,6 +91,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemies[1] = enemyFactories[1].create(0, spriteSheet);
         enemies[2] = enemyFactories[0].create(0, spriteSheet);
         enemies[3] = enemyFactories[0].create(0, spriteSheet);
+
 
         updates = 0;
 
@@ -173,9 +175,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                         new SpriteSheet(getContext()));
             }
         }
-        if (checkCollision()) {
-            System.out.println("Player dead. Move to lose screen");
+        if (updates % 5 == 0) {
+            if (checkCollision()) {
+                System.out.println("Player dead. Move to lose screen");
+            }
         }
+
         updates++; // increment number of updates
     }
 
@@ -291,8 +296,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             double enemyPosY = enemy.getPosY();
             double playerPosX = player.getPlayerPosX();
             double playerPosY = player.getPlayerPosY();
-            if ((Math.abs(enemyPosX - playerPosX) < 32) && (Math.abs(enemyPosY - playerPosY) < 32)) {
-                player.setHp(player.getHp() - 4);
+
+            if ((Math.abs(enemyPosX - playerPosX) <= 32) && (Math.abs(enemyPosY - playerPosY) <= 32)) {
+                player.setHp(player.getHp() - 10);
                 if (player.getHp() <= 0) {
                     return true;
                 }

@@ -173,6 +173,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                         new SpriteSheet(getContext()));
             }
         }
+        if (checkCollision()) {
+            System.out.println("Player dead. Move to lose screen");
+        }
         updates++; // increment number of updates
     }
 
@@ -276,5 +279,25 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     public void setDiff(int diff) {
         this.diff = diff;
+    }
+    public void setObserver(Enemy enemy, int ind) {
+        enemies[ind] = enemy;
+    }
+    public boolean checkCollision() {
+        for (int i = 0; i < enemies.length; i++) {
+            Enemy enemy = enemies[i];
+            setObserver(enemy, i);
+            double enemyPosX = enemy.getPosX();
+            double enemyPosY = enemy.getPosY();
+            double playerPosX = player.getPlayerPosX();
+            double playerPosY = player.getPlayerPosY();
+            if ((Math.abs(enemyPosX - playerPosX) < 32) && (Math.abs(enemyPosY - playerPosY) < 32)) {
+                player.setHp(player.getHp() - 4);
+                if (player.getHp() <= 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

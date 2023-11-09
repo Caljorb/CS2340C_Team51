@@ -138,4 +138,10 @@ public class Bat implements Enemy, MoveStratEnemy {
     public void setPosY(double posY) {
         this.posY = posY;
     }
+    public double getPosX() {
+        return posX;
+    }
+    public double getPosY() {
+        return posY;
+    }
 }

@@ -124,4 +124,10 @@ public class Snake implements Enemy, MoveStratEnemy {
 
         return false; // enemy was not in any walls
     }
+    public double getPosX() {
+        return posX;
+    }
+    public double getPosY() {
+        return posY;
+    }
 }

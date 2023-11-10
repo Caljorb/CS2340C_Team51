@@ -26,6 +26,7 @@ import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
 import com.example.team_51.views.GameActivity;
+import com.example.team_51.views.LoseActivity;
 import com.example.team_51.views.WinActivity;
 
 import java.util.ArrayList;
@@ -38,7 +39,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int diff;
     private int character;
     private long points;
-    private Button button;
     private MoveBall moveBall;
     private EnemyFactory[] enemyFactories;
     private Enemy[] enemies;
@@ -63,8 +63,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
-        //this.button = new Button(context, new Rect(2048, 832, 2176, 896));
-        //button.setClickable(true);
 
         moveBall = new MoveBall(225, 750, 80);
 
@@ -145,9 +143,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        //button.update();
         moveBall.update();
-        //player.update();
         player.update(tilemap);
         boolean swap = tilemap.update();
         gameDisplay.update();
@@ -158,7 +154,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
 
         if (swap) {
-            // stuff for spawing new enemies
+            // stuff for spawning new enemies
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
                     enemies[i] = enemyFactories[i].create(tilemap.getMap(),
@@ -178,6 +174,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (updates % 5 == 0) {
             if (checkCollision()) {
                 System.out.println("Player dead. Move to lose screen");
+
+                Intent intent =
+                        new Intent(GameActivity.getGameContext(), LoseActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                // allow starting activity outside activity class
+                intent.putExtra("score", points);
+                intent.putExtra("name", player.getName());
+                ArrayList<LeaderboardRow> leaderboardRows = intent.
+                        getParcelableArrayListExtra("leaderboard");
+                intent.putExtra("leaderboard", leaderboardRows);
+                boolean retried = intent.getBooleanExtra("retried", false);
+                intent.putExtra("retried", retried);
+                GameActivity.getGameContext().startActivity(intent);
+
             }
         }
 
@@ -205,26 +215,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 System.out.println("Touched MoveBall");
             }
 
-            /*if (button.isPressed((double) event.getX(), (double) event.getY())) {
-                button.setIsPressed(true);
-                tilemap.incrementMap();
-                if (tilemap.getMap() > 2) {
-                    // button opens end screen
-                    // and passes all data
-                    Intent intent =
-                                new Intent(GameActivity.getGameContext(), EndActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    // allow starting activity outside activity class
-                    intent.putExtra("score", points);
-                    intent.putExtra("name", player.getName());
-                    ArrayList<LeaderboardRow> leaderboardRows = intent.
-                                getParcelableArrayListExtra("leaderboard");
-                    intent.putExtra("leaderboard", leaderboardRows);
-                    boolean retried = intent.getBooleanExtra("retried", false);
-                    intent.putExtra("retried", retried);
-                    GameActivity.getGameContext().startActivity(intent);
-                }
-            }*/
             return true;
         case MotionEvent.ACTION_MOVE:
             if (moveBall.getIsPressed()) {
@@ -297,7 +287,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             double playerPosX = player.getPlayerPosX();
             double playerPosY = player.getPlayerPosY();
 
-            if ((Math.abs(enemyPosX - playerPosX) <= 32) && (Math.abs(enemyPosY - playerPosY) <= 32)) {
+            if ((Math.abs(enemyPosX - playerPosX) <= 32)
+                    && (Math.abs(enemyPosY - playerPosY) <= 32)) {
                 player.setHp(player.getHp() - 10);
                 if (player.getHp() <= 0) {
                     return true;

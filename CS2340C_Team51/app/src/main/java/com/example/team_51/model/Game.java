@@ -43,6 +43,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private EnemyFactory[] enemyFactories;
     private Enemy[] enemies;
     private int updates;
+    private Enemy observer;
 
 
     public Game(int diff, String name, int character, long points) {
@@ -272,15 +273,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void setDiff(int diff) {
         this.diff = diff;
     }
-    public void setObserver(Enemy enemy, int ind) {
-        enemies[ind] = enemy;
+    public void setObserver(int ind) {
+        observer = enemies[ind];
     }
     public boolean checkCollision() {
         for (int i = 0; i < enemies.length; i++) {
-            Enemy enemy = enemies[i];
-            setObserver(enemy, i);
-            double enemyPosX = enemy.getPosX();
-            double enemyPosY = enemy.getPosY();
+            setObserver(i);
+            double enemyPosX = observer.getPosX();
+            double enemyPosY = observer.getPosY();
             double playerPosX = player.getPlayerPosX();
             double playerPosY = player.getPlayerPosY();
 

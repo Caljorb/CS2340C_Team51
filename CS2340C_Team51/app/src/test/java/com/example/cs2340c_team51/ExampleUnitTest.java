@@ -409,4 +409,54 @@ public class ExampleUnitTest {
             }
         return false;
     }
+    
+    // check player can be hit by enemy (Kavya)
+
+
+    @Test
+    public void checkEnemyPlayerCollision() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, player);
+
+
+        assertTrue(player.getPlayerPosX() == e.getPosX()
+                && player.getPlayerPosY() == e.getPosY());
+        player.setPosX(1000);
+        assertFalse(player.getPlayerPosX() == e.getPosX()
+                && player.getPlayerPosY() == e.getPosY());
+    }
+
+    // check enemy deals damage to player (Kavya)
+
+
+    @Test
+    public void checkEnemyHurts() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, player);
+
+
+        assertEquals(100, player.getHp());
+
+        checkCollision(e, player);
+
+
+        assertEquals(90, player.getHp());
+    }
+
 }

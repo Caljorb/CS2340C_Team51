@@ -55,7 +55,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         if (player == null) {
             player = new Player(context, posX, posY, moveBall, name, spriteSheet, hpChar);
         } else {
-            player.setPlayer(moveBall, name, spriteSheet, hpChar);
+            player.setPlayer(posX, posY, moveBall, name, spriteSheet, hpChar);
         }
         return player;
     } // singleton to limit to a single instance
@@ -102,12 +102,15 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         return hp;
     }
 
-    private void setPlayer(MoveBall moveBall, String name, SpriteSheet spriteSheet, int[] hpChar) {
+    private void setPlayer(double posX, double posY, MoveBall moveBall,
+                           String name, SpriteSheet spriteSheet, int[] hpChar) {
         this.moveBall = moveBall;
         this.hpChar = new int[]{hpChar[0], hpChar[1]};
         this.hp = hpChar[0];
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+        this.posX = posX;
+        this.posY = posY;
     }
 
     private void setPlayer(String name, SpriteSheet spriteSheet, int[] hpChar) {

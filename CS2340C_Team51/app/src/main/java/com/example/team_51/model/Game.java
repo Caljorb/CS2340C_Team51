@@ -148,10 +148,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         boolean swap = tilemap.update();
         gameDisplay.update();
 
-        for (int i = 0; i < enemies.length; i++) {
-            enemies[i].update(tilemap, updates); // update enemy position
-        }
-
+        setGame(tilemap, updates);
 
         if (swap) {
             // stuff for spawning new enemies
@@ -296,5 +293,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
         return false;
+    }
+
+    public void setGame(Tilemap tilemap, int updates) {
+        for (Enemy enemy : enemies) {
+            enemy.update(tilemap, updates);
+        }
     }
 }

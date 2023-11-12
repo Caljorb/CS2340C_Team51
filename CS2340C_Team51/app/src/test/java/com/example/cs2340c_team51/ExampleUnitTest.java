@@ -13,8 +13,12 @@ import com.example.team_51.model.enemies.Bat;
 import com.example.team_51.model.enemies.BatFactory;
 import com.example.team_51.model.enemies.Enemy;
 import com.example.team_51.model.enemies.EnemyFactory;
+import com.example.team_51.model.enemies.Rat;
+import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.Slime;
 import com.example.team_51.model.enemies.SlimeFactory;
+import com.example.team_51.model.enemies.Snake;
+import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -389,5 +393,20 @@ public class ExampleUnitTest {
         assertTrue(e.isWall(tilemap, 1110, 500));
         assertFalse(e.isWall(tilemap, 2240, 1024));
     }
+    
+    private boolean checkCollision(Enemy enemy, Player player) {
+            double enemyPosX = enemy.getPosX();
+            double enemyPosY = enemy.getPosY();
+            double playerPosX = player.getPlayerPosX();
+            double playerPosY = player.getPlayerPosY();
 
+            if ((Math.abs(enemyPosX - playerPosX) <= 32)
+                    && (Math.abs(enemyPosY - playerPosY) <= 32)) {
+                player.setHp(player.getHp() - 10);
+                if (player.getHp() <= 0) {
+                    return true;
+                }
+            }
+        return false;
+    }
 }

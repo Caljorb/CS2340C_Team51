@@ -4,7 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.Game;
 import com.example.team_51.model.MoveStratEnemy;
+import com.example.team_51.model.Player;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
@@ -133,5 +135,16 @@ public class Slime implements Enemy, MoveStratEnemy {
     }
     public double getPosY() {
         return posY;
+    }
+    /*public void setHp(int hp) {
+        this.hp = hp;
+    }
+    public int getHp() {
+        return hp;
+    }*/
+    public void observerUpdate(Game game) {
+        Player player = game.getPlayer();
+        player.setHp(player.getHp() - 7);
+        //this.setHp(this.getHp() - 2);
     }
 }

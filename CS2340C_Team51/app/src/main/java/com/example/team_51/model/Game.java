@@ -286,7 +286,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             if ((Math.abs(enemyPosX - playerPosX) <= 32)
                     && (Math.abs(enemyPosY - playerPosY) <= 32)) {
-                player.setHp(player.getHp() - 10);
+                observer.observerUpdate(this);
                 if (player.getHp() <= 0) {
                     return true;
                 }

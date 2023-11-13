@@ -310,6 +310,7 @@ public class ExampleUnitTest {
         assertEquals(1024, player.getPlayerPosY(), 0.0);
 
     }
+    
 
     // Test if tile is 3 or 4 it is a wall - Daniel
     @Test
@@ -457,6 +458,41 @@ public class ExampleUnitTest {
 
 
         assertEquals(90, player.getHp());
+    }
+    // test bat moves faster than slime (Rashmith)
+    @Test
+    public void testMoveSpeed() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = SlimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        EnemyFactory batFactory = new BatFactory();
+        Enemy bat = batFactory.create(0, new SPriteSheet(null));
+        Bat b = (Bat) bat;
+
+        assertFalse(e.MAX_SPEED > b.MAX_SPEED);
+    }
+
+    // check upon death that game ends (Rashmith)
+
+    @Test
+    public void testGameOver() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                                        new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, players);
+        
+        assertFalse(checkCollision(e, player));
+
+        player.setHp(0);
+        
+        assertTrue(checkCollision(e, player));
+
     }
 
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -44,6 +45,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Enemy[] enemies;
     private int updates;
     private Enemy observer;
+    private Button attackButton;
 
 
     public Game(int diff, String name, int character, long points) {
@@ -64,6 +66,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
+        this.attackButton = new Button(context,
+                new Rect(2048, 832, 2176, 896));
+        attackButton.setClickable(true);
 
         moveBall = new MoveBall(225, 750, 80);
 
@@ -114,7 +119,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
         canvas.drawText("Score: " + points, 80, 250, paint);
 
-        //button.draw(canvas, gameDisplay);
+        attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
         for (int i = 0; i < 4; i++) {

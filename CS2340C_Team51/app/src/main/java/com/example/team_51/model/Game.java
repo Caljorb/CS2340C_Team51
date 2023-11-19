@@ -42,7 +42,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private MoveBall moveBall;
     private EnemyFactory[] enemyFactories;
-    private Enemy[] enemies;
+    private ArrayList<Enemy> enemies;
     private int updates;
     private Enemy observer;
     private Button attackButton;
@@ -89,12 +89,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemyFactories[2] = new SnakeFactory();
         enemyFactories[3] = new RatFactory();
 
-        enemies = new Enemy[4];
+        enemies = new ArrayList<>();
 
-        enemies[0] = enemyFactories[1].create(0, spriteSheet);
-        enemies[1] = enemyFactories[1].create(0, spriteSheet);
-        enemies[2] = enemyFactories[0].create(0, spriteSheet);
-        enemies[3] = enemyFactories[0].create(0, spriteSheet);
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
+
 
 
         updates = 0;
@@ -122,8 +123,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
-        for (int i = 0; i < 4; i++) {
-            enemies[i].draw(canvas, gameDisplay);
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).draw(canvas, gameDisplay);
         }
     }
 
@@ -159,19 +160,22 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (swap) {
             // stuff for spawning new enemies
             if (tilemap.getMap() == 1) {
-                for (int i = 0; i < 4; i++) {
-                    enemies[i] = enemyFactories[i].create(tilemap.getMap(),
-                            new SpriteSheet(getContext()));
+                for (int i = 0; i < enemies.size(); i++) {
+                    enemies.set(i, enemyFactories[i].create(tilemap.getMap(),
+                            new SpriteSheet(getContext())));
                 }
             } else {
-                enemies[0] = enemyFactories[2].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[1] = enemyFactories[2].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[2] = enemyFactories[3].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[3] = enemyFactories[3].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
+                int count = 0;
+                while (count < enemies.size()) {
+                    if (count < 2) {
+                        enemies.set(count, enemyFactories[2].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    } else {
+                        enemies.set(count, enemyFactories[3].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    }
+                    count++;
+                }
             }
         }
         if (updates % 5 == 0) {
@@ -285,10 +289,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
     }
     public void setObserver(int ind) {
-        observer = enemies[ind];
+        observer = enemies.get(ind);
     }
     public boolean checkCollision() {
-        for (int i = 0; i < enemies.length; i++) {
+        int i = 0;
+        while (i < enemies.size()) {
             setObserver(i);
             double enemyPosX = observer.getPosX();
             double enemyPosY = observer.getPosY();
@@ -301,7 +306,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 if (player.getHp() <= 0) {
                     return true;
                 }
+                if (observer.getHp() <= 0) {
+                    enemies.remove(i);
+                    continue;
+                }
             }
+            i++;
         }
         return false;
     }

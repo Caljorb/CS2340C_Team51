@@ -126,15 +126,15 @@ public class Rat implements Enemy, MoveStratEnemy {
     public double getPosY() {
         return posY;
     }
-    /*public void setHp(int hp) {
+    public void setHp(int hp) {
         this.hp = hp;
     }
     public int getHp() {
         return hp;
-    }*/
+    }
     public void observerUpdate(Game game) {
         Player player = game.getPlayer();
         player.setHp(player.getHp() - 15);
-        //this.setHp(this.getHp() - 2);
+        this.setHp(this.getHp() - 2);
     }
 }

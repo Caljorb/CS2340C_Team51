@@ -13,5 +13,7 @@ public interface Enemy {
     double getPosX();
     double getPosY();
     void observerUpdate(Game game);
+    void setHp(int hp);
+    int getHp();
 
 }

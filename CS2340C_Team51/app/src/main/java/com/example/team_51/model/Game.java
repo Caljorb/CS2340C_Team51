@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -41,9 +42,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private MoveBall moveBall;
     private EnemyFactory[] enemyFactories;
-    private Enemy[] enemies;
+    private ArrayList<Enemy> enemies;
     private int updates;
     private Enemy observer;
+    private Button attackButton;
 
 
     public Game(int diff, String name, int character, long points) {
@@ -64,6 +66,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
+        this.attackButton = new Button(context,
+                new Rect(2048, 832, 2176, 896));
+        attackButton.setClickable(true);
 
         moveBall = new MoveBall(225, 750, 80);
 
@@ -84,12 +89,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemyFactories[2] = new SnakeFactory();
         enemyFactories[3] = new RatFactory();
 
-        enemies = new Enemy[4];
+        enemies = new ArrayList<>();
 
-        enemies[0] = enemyFactories[1].create(0, spriteSheet);
-        enemies[1] = enemyFactories[1].create(0, spriteSheet);
-        enemies[2] = enemyFactories[0].create(0, spriteSheet);
-        enemies[3] = enemyFactories[0].create(0, spriteSheet);
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
+
 
 
         updates = 0;
@@ -114,11 +120,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
         canvas.drawText("Score: " + points, 80, 250, paint);
 
-        //button.draw(canvas, gameDisplay);
+        attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
-        for (int i = 0; i < 4; i++) {
-            enemies[i].draw(canvas, gameDisplay);
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).draw(canvas, gameDisplay);
         }
     }
 
@@ -154,19 +160,22 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (swap) {
             // stuff for spawning new enemies
             if (tilemap.getMap() == 1) {
-                for (int i = 0; i < 4; i++) {
-                    enemies[i] = enemyFactories[i].create(tilemap.getMap(),
-                            new SpriteSheet(getContext()));
+                for (int i = 0; i < enemies.size(); i++) {
+                    enemies.set(i, enemyFactories[i].create(tilemap.getMap(),
+                            new SpriteSheet(getContext())));
                 }
             } else {
-                enemies[0] = enemyFactories[2].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[1] = enemyFactories[2].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[2] = enemyFactories[3].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[3] = enemyFactories[3].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
+                int count = 0;
+                while (count < enemies.size()) {
+                    if (count < 2) {
+                        enemies.set(count, enemyFactories[2].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    } else {
+                        enemies.set(count, enemyFactories[3].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    }
+                    count++;
+                }
             }
         }
         if (updates % 5 == 0) {
@@ -213,6 +222,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 System.out.println("Touched MoveBall");
             }
 
+            if (attackButton.isPressed((double) event.getX(), (double) event.getY())) {
+                attackButton.setIsPressed(true);
+                System.out.println("Touched Button");
+                // put method for attack and hit detection here (very similar to collision)
+            }
+
             return true;
         case MotionEvent.ACTION_MOVE:
             if (moveBall.getIsPressed()) {
@@ -221,7 +236,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
             return true;
         case MotionEvent.ACTION_UP:
-            //button.setIsPressed(false);
+            attackButton.setIsPressed(false);
             moveBall.setIsPressed(false);
             moveBall.resetController();
             System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
@@ -274,10 +289,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
     }
     public void setObserver(int ind) {
-        observer = enemies[ind];
+        observer = enemies.get(ind);
     }
     public boolean checkCollision() {
-        for (int i = 0; i < enemies.length; i++) {
+        int i = 0;
+        while (i < enemies.size()) {
             setObserver(i);
             double enemyPosX = observer.getPosX();
             double enemyPosY = observer.getPosY();
@@ -290,7 +306,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 if (player.getHp() <= 0) {
                     return true;
                 }
+                if (observer.getHp() <= 0) {
+                    enemies.remove(i);
+                    continue;
+                }
             }
+            i++;
         }
         return false;
     }

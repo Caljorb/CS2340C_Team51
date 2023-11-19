@@ -24,6 +24,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     private double veloX;
     private double veloY;
     private MoveBall moveBall;
+    private Sprite swordSprite;
 
 
     private Player(Context context, double posX, double posY, MoveBall moveBall, String name,
@@ -36,6 +37,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         this.hp = hpChar[0];
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+        this.swordSprite = spriteSheet.getSwordSprite();
     }
 
     private Player(Context context, double posX, double posY, double radius, String name,
@@ -78,6 +80,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         canvas.drawText("Name: " + name, 80, 100, paint);
         canvas.drawText("Health: " + hp, 80, 150, paint);
         sprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX),
+                (int) gameDisplay.gameToDisplayCoordinatesY(posY));
+        swordSprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX + 15),
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
     }
 

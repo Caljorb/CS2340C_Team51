@@ -36,6 +36,10 @@ public class SpriteSheet {
         }
     }
 
+    public Sprite getSwordSprite() {
+        return getSpriteByIndex(2, 2);
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }

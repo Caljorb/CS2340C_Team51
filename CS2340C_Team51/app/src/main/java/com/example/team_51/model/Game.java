@@ -218,6 +218,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 System.out.println("Touched MoveBall");
             }
 
+            if (attackButton.isPressed((double) event.getX(), (double) event.getY())) {
+                attackButton.setIsPressed(true);
+                System.out.println("Touched Button");
+                // put method for attack and hit detection here (very similar to collision)
+            }
+
             return true;
         case MotionEvent.ACTION_MOVE:
             if (moveBall.getIsPressed()) {
@@ -226,7 +232,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
             return true;
         case MotionEvent.ACTION_UP:
-            //button.setIsPressed(false);
+            attackButton.setIsPressed(false);
             moveBall.setIsPressed(false);
             moveBall.resetController();
             System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "

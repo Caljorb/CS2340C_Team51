@@ -5,10 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.enemies.Enemy;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
+
+import java.util.ArrayList;
 
 public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
@@ -93,8 +96,6 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public void update(Tilemap tilemap) {
         update(moveBall, tilemap);
     }
-
-
 
     public double getPlayerPosX() {
         return posX;
@@ -226,5 +227,21 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     }
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int attack(ArrayList<Enemy> enemies) {
+        int i = 0;
+        while (i < enemies.size()) {
+            double enemyPosX = enemies.get(i).getPosX();
+            double enemyPosY = enemies.get(i).getPosY();
+
+            if ((Math.abs(enemyPosX - posX) <= 80)
+                    && (Math.abs(enemyPosY - posY) <= 32)) {
+                enemies.remove(i);
+                return i;
+            }
+            i++;
+        }
+        return -1;
     }
 }

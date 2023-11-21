@@ -31,6 +31,9 @@ import com.example.team_51.views.LoseActivity;
 import com.example.team_51.views.WinActivity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
@@ -46,7 +49,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int updates;
     private Enemy observer;
     private Button attackButton;
-
+    private int attacked;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -96,8 +99,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemies.add(enemyFactories[0].create(0, spriteSheet));
         enemies.add(enemyFactories[0].create(0, spriteSheet));
 
-
-
         updates = 0;
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -126,6 +127,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(canvas, gameDisplay);
         }
+
+        paint.setColor(Color.RED);
+
+        if (attacked != -1) {
+            player.killDraw(canvas, gameDisplay);
+        }
+        attacked = -1;
     }
 
     @Override
@@ -159,19 +167,20 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         if (swap) {
             // stuff for spawning new enemies
+            enemies.clear();
             if (tilemap.getMap() == 1) {
-                for (int i = 0; i < enemies.size(); i++) {
-                    enemies.set(i, enemyFactories[i].create(tilemap.getMap(),
-                            new SpriteSheet(getContext())));
+                for (int i = 0; i < 4; i++) {
+                    enemies.add(i, enemyFactories[i].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
                 }
             } else {
                 int count = 0;
-                while (count < enemies.size()) {
+                while (count < 4) {
                     if (count < 2) {
-                        enemies.set(count, enemyFactories[2].create(tilemap.getMap(),
+                        enemies.add(count, enemyFactories[2].create(tilemap.getMap(),
                                 new SpriteSheet(getContext())));
                     } else {
-                        enemies.set(count, enemyFactories[3].create(tilemap.getMap(),
+                        enemies.add(count, enemyFactories[3].create(tilemap.getMap(),
                                 new SpriteSheet(getContext())));
                     }
                     count++;
@@ -219,13 +228,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         case MotionEvent.ACTION_DOWN:
             if (moveBall.isPressed((double) event.getX(), (double) event.getY())) {
                 moveBall.setIsPressed(true);
-                System.out.println("Touched MoveBall");
+                //System.out.println("Touched MoveBall");
             }
 
             if (attackButton.isPressed((double) event.getX(), (double) event.getY())) {
                 attackButton.setIsPressed(true);
-                System.out.println("Touched Button");
-                // put method for attack and hit detection here (very similar to collision)
+                //System.out.println("Touched Button");
+                attacked = player.attack(enemies);
             }
 
             return true;
@@ -239,8 +248,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             attackButton.setIsPressed(false);
             moveBall.setIsPressed(false);
             moveBall.resetController();
-            System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
-                    + player.getPlayerPosY());
+            //System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
+            //        + player.getPlayerPosY());
             if (tilemap.getMap() > 2) {
                 player.setPosX(2240);
                 player.setPosY(1024);

@@ -49,6 +49,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int updates;
     private Enemy observer;
     private Button attackButton;
+    private int attacked;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -126,6 +127,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(canvas, gameDisplay);
         }
+
+        paint.setColor(Color.RED);
+
+        if (attacked != -1) {
+            player.killDraw(canvas, gameDisplay);
+        }
+        attacked = -1;
     }
 
     @Override
@@ -220,13 +228,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         case MotionEvent.ACTION_DOWN:
             if (moveBall.isPressed((double) event.getX(), (double) event.getY())) {
                 moveBall.setIsPressed(true);
-                System.out.println("Touched MoveBall");
+                //System.out.println("Touched MoveBall");
             }
 
             if (attackButton.isPressed((double) event.getX(), (double) event.getY())) {
                 attackButton.setIsPressed(true);
-                System.out.println("Touched Button");
-                player.attack(enemies);
+                //System.out.println("Touched Button");
+                attacked = player.attack(enemies);
             }
 
             return true;
@@ -240,8 +248,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             attackButton.setIsPressed(false);
             moveBall.setIsPressed(false);
             moveBall.resetController();
-            System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
-                    + player.getPlayerPosY());
+            //System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
+            //        + player.getPlayerPosY());
             if (tilemap.getMap() > 2) {
                 player.setPosX(2240);
                 player.setPosY(1024);

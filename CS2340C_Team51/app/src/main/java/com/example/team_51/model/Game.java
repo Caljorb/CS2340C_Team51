@@ -23,6 +23,9 @@ import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.PowerUp;
+import com.example.team_51.model.powers.PowerUpInstance;
+import com.example.team_51.model.powers.SpeedPower;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -50,6 +53,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Enemy observer;
     private Button attackButton;
     private int attacked;
+    private PowerUp powerUp;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -101,6 +105,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         updates = 0;
 
+        powerUp = new SpeedPower(new PowerUpInstance(), spriteSheet);
+
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay =
@@ -124,6 +130,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
+
+        powerUp.draw(canvas, gameDisplay);
+
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(canvas, gameDisplay);
         }

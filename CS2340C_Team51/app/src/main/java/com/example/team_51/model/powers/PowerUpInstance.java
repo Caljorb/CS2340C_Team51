@@ -1,20 +1,33 @@
 package com.example.team_51.model.powers;
 
-import com.example.team_51.model.Sprite;
-import com.example.team_51.viewmodels.SpriteSheet;
+
+import android.graphics.Canvas;
+
+import com.example.team_51.viewmodels.GameDisplay;
 
 public class PowerUpInstance implements PowerUp {
-    private Sprite sprite;
     private double posX;
     private double posY;
-    private int boost;
-
-    public PowerUpInstance(int power, SpriteSheet spriteSheet) {
-        this.sprite = spriteSheet.getPowerSprite(power);
+    public PowerUpInstance() {
+        this.posX = 2000;
+        this.posY = 800;
     }
 
     @Override
     public int addPower() {
         return 1;
+    }
+
+    @Override
+    public void draw(Canvas canvas, GameDisplay gameDisplay) {
+
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public double getPosY() {
+        return posY;
     }
 }

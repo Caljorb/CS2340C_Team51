@@ -38,7 +38,7 @@ public class SpriteSheet {
     }
 
     public Sprite getPowerSprite(int power) {
-        return getSpriteByIndex(0, power);
+        return getSpriteByIndex(3, power);
     }
 
     public Sprite getSwordSprite() {

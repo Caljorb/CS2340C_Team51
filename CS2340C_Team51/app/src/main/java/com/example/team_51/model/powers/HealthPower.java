@@ -6,11 +6,11 @@ public class HealthPower extends PowerDecorator {
     }
 
     @Override
-    public void addPower() {
-        addHealthPower();
+    public int addPower() {
+        return addHealthPower();
     }
 
-    private void addHealthPower() {
-
+    private int addHealthPower() {
+        return 25;
     }
 }

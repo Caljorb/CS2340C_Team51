@@ -6,11 +6,11 @@ public class ExtraPointPower extends PowerDecorator {
     }
 
     @Override
-    public void addPower() {
-        addPointPower();
+    public int addPower() {
+        return addPointPower();
     }
 
-    private void addPointPower() {
-
+    private int addPointPower() {
+        return 10000;
     }
 }

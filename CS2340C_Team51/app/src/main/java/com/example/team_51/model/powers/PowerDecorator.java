@@ -8,7 +8,7 @@ public abstract class PowerDecorator implements PowerUp {
     }
 
     @Override
-    public void addPower() {
-        powerUp.addPower();
+    public int addPower() {
+        return powerUp.addPower();
     }
 }

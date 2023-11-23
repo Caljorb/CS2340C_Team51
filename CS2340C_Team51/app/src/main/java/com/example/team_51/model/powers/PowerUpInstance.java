@@ -1,12 +1,20 @@
 package com.example.team_51.model.powers;
 
-public class PowerUpInstance implements PowerUp {
-    public PowerUpInstance() {
+import com.example.team_51.model.Sprite;
+import com.example.team_51.viewmodels.SpriteSheet;
 
+public class PowerUpInstance implements PowerUp {
+    private Sprite sprite;
+    private double posX;
+    private double posY;
+    private int boost;
+
+    public PowerUpInstance(int power, SpriteSheet spriteSheet) {
+        this.sprite = spriteSheet.getPowerSprite(power);
     }
 
     @Override
-    public void addPower() {
-
+    public int addPower() {
+        return 1;
     }
 }

@@ -6,11 +6,11 @@ public class SpeedPower extends PowerDecorator {
     }
 
     @Override
-    public void addPower() {
-        addSpeedPower();
+    public int addPower() {
+        return addSpeedPower();
     }
 
-    private void addSpeedPower() {
-
+    private int addSpeedPower() {
+        return 2;
     }
 }

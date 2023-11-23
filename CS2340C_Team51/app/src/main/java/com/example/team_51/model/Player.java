@@ -28,6 +28,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     private double veloY;
     private MoveBall moveBall;
     private Sprite swordSprite;
+    private int boost;
 
 
     private Player(Context context, double posX, double posY, MoveBall moveBall, String name,
@@ -41,6 +42,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
         this.swordSprite = spriteSheet.getSwordSprite();
+        this.boost = 1;
     }
 
     private Player(Context context, double posX, double posY, double radius, String name,
@@ -52,6 +54,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         this.hp = hpChar[0];
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+        this.boost = 1;
     }
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
@@ -154,8 +157,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
 
     @Override
     public void move(MoveBall moveBall, Tilemap tilemap) {
-        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
-        veloY = moveBall.getControllerY() * MAX_SPEED;
+        veloX = moveBall.getControllerX() * MAX_SPEED * boost;
+        veloY = moveBall.getControllerY() * MAX_SPEED * boost;
 
         //System.out.println(veloX);
         //System.out.println(veloY);
@@ -175,8 +178,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     }
 
     public void move(MoveBall moveBall) {
-        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
-        veloY = moveBall.getControllerY() * MAX_SPEED;
+        veloX = moveBall.getControllerX() * MAX_SPEED * boost;
+        veloY = moveBall.getControllerY() * MAX_SPEED * boost;
 
         //System.out.println(veloX);
         //System.out.println(veloY);
@@ -250,5 +253,13 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
             i++;
         }
         return -1;
+    }
+
+    public int getBoost() {
+        return boost;
+    }
+
+    public void setBoost(int boost) {
+        this.boost = boost;
     }
 }

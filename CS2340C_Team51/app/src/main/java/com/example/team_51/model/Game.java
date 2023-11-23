@@ -227,10 +227,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if (checkGrab()) { // set location oob after pickup
-
             if (tilemap.getMap() == 0) {
                 grabbed = true;
-                powerUp.addPower(); // make player fast
+                player.setBoost(powerUp.addPower()); // make player fast
             } else if (tilemap.getMap() == 1) {
                 // grabbed not true so you can gain more points
                 points += powerUp.addPower(); // add points
@@ -244,7 +243,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             powerUp.update(tilemap);
         }
 
-        points -= 25;
+        if (updates % 400 == 0) {
+            player.setBoost(1);
+        }
+
+        points -= 25; // update points
 
         updates++; // increment number of updates
     }
@@ -352,6 +355,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     && (Math.abs(enemyPosY - playerPosY) <= 32)) {
                 observer.observerUpdate(this);
                 if (player.getHp() <= 0) {
+                    player.setHp(0);
                     return true;
                 }
                 if (observer.getHp() <= 0) {

@@ -105,14 +105,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         updates = 0;
 
-        powerUp = new SpeedPower(new PowerUpInstance(), spriteSheet);
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         gameDisplay =
                 new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
         tilemap = new Tilemap(spriteSheet, 0, player); // uses start map first
+        powerUp = new SpeedPower(new PowerUpInstance(tilemap), spriteSheet);
         setFocusable(true);
     }
 

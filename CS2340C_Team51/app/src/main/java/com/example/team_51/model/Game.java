@@ -215,6 +215,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
+        if (updates % 160 == 0) {
+            powerUp.update(tilemap);
+        }
+
         updates++; // increment number of updates
     }
 

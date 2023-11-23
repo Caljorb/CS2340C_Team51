@@ -22,8 +22,8 @@ public class PowerUpInstance implements PowerUp {
         while (isWall(tilemap, posX, posY) || checkOutOfBounds(posX, posY)) {
             posX = 1120 + (Math.random() * 2000);
             posY = 500 + (Math.random() * 900);
-//            System.out.println("isWall: " + isWall(tilemap, posX, posY));
-//            System.out.println("checkOOB: " + !checkOutOfBounds(posX, posY));
+            //System.out.println("isWall: " + isWall(tilemap, posX, posY));
+            //System.out.println("checkOOB: " + !checkOutOfBounds(posX, posY));
         }
         return new double[] {posX, posY};
     }
@@ -65,11 +65,22 @@ public class PowerUpInstance implements PowerUp {
 
     }
 
+    @Override
+    public void update(Tilemap tilemap) {
+
+    }
+
     public double getPosX() {
         return posX;
     }
 
     public double getPosY() {
         return posY;
+    }
+
+    public void setPos(Tilemap tilemap) {
+        double[] temp = randomSpawn(tilemap);
+        this.posX = temp[0];
+        this.posY = temp[1];
     }
 }

@@ -225,8 +225,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         int r = (int) ((posY - tileY + 32) / 64.0);
 
         if (walls[r][c] == 3 || walls[r][c] == 4) {
-            System.out.println("C: " + c + ", R: " + r);
-            System.out.println("True");
+            //System.out.println("C: " + c + ", R: " + r);
+            //System.out.println("True");
             return true;
         }
 

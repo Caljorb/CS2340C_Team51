@@ -190,6 +190,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
                         new SpriteSheet(getContext()));
             } else {
+                System.out.println("Grabbed: " + grabbed);
                 int count = 0;
                 while (count < 4) {
                     if (count < 2) {
@@ -243,7 +244,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             powerUp.update(tilemap);
         }
 
-        points -= 5;
+        points -= 25;
 
         updates++; // increment number of updates
     }

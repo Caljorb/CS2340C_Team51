@@ -25,6 +25,7 @@ import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.model.powers.ExtraPointPower;
 import com.example.team_51.model.powers.HealthPower;
+import com.example.team_51.model.powers.PowerDecorator;
 import com.example.team_51.model.powers.PowerUp;
 import com.example.team_51.model.powers.PowerUpInstance;
 import com.example.team_51.model.powers.SpeedPower;
@@ -221,6 +222,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
+        if (checkGrab()) { // set location oob after pickup
+            if (tilemap.getMap() == 0) {
+                powerUp.addPower();
+                System.out.println("Add Power");
+            } else if (tilemap.getMap() == 1) {
+                powerUp.addPower();
+                System.out.println("Add Power");
+            } else if (tilemap.getMap() == 2) {
+                powerUp.addPower();
+                System.out.println("Add Power");
+            }
+        }
+
         if (updates % 160 == 0) {
             powerUp.update(tilemap);
         }
@@ -339,6 +353,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
             }
             i++;
+        }
+        return false;
+    }
+
+    public boolean checkGrab() {
+        if ((Math.abs(((PowerDecorator) powerUp).getPosX() - player.getPlayerPosX()) <= 32)
+                && (Math.abs(((PowerDecorator) powerUp).getPosY()
+                - player.getPlayerPosY())) <= 32) {
+            return true;
         }
         return false;
     }

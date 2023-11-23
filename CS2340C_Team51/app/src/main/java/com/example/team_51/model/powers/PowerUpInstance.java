@@ -78,6 +78,14 @@ public class PowerUpInstance implements PowerUp {
         return posY;
     }
 
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
+    }
+
     public void setPos(Tilemap tilemap) {
         double[] temp = randomSpawn(tilemap);
         this.posX = temp[0];

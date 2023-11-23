@@ -13,6 +13,8 @@ public class ExtraPointPower extends PowerDecorator {
 
     @Override
     public int addPower() {
+        ((PowerUpInstance) super.powerUp).setPosX(100000);
+        ((PowerUpInstance) super.powerUp).setPosY(100000);
         return addPointPower();
     }
 

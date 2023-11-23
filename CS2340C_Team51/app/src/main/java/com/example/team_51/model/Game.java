@@ -23,6 +23,8 @@ import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.ExtraPointPower;
+import com.example.team_51.model.powers.HealthPower;
 import com.example.team_51.model.powers.PowerUp;
 import com.example.team_51.model.powers.PowerUpInstance;
 import com.example.team_51.model.powers.SpeedPower;
@@ -174,13 +176,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         setGame(tilemap, updates);
 
         if (swap) {
-            // stuff for spawning new enemies
+            // stuff for spawning new enemies/powers
             enemies.clear();
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
                     enemies.add(i, enemyFactories[i].create(tilemap.getMap(),
                                 new SpriteSheet(getContext())));
                 }
+                powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
+                        new SpriteSheet(getContext()));
             } else {
                 int count = 0;
                 while (count < 4) {
@@ -193,6 +197,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     }
                     count++;
                 }
+                powerUp = new HealthPower(new PowerUpInstance(tilemap),
+                        new SpriteSheet(getContext()));
             }
         }
         if (updates % 5 == 0) {

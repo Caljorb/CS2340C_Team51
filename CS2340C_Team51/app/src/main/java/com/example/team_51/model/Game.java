@@ -57,6 +57,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Button attackButton;
     private int attacked;
     private PowerUp powerUp;
+    private boolean grabbed;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -115,6 +116,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         tilemap = new Tilemap(spriteSheet, 0, player); // uses start map first
         powerUp = new SpeedPower(new PowerUpInstance(tilemap), spriteSheet);
+        grabbed = false;
         setFocusable(true);
     }
 
@@ -179,6 +181,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         if (swap) {
             // stuff for spawning new enemies/powers
             enemies.clear();
+            grabbed = false;
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
                     enemies.add(i, enemyFactories[i].create(tilemap.getMap(),
@@ -223,19 +226,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         if (checkGrab()) { // set location oob after pickup
+            grabbed = true;
             if (tilemap.getMap() == 0) {
                 powerUp.addPower();
-                System.out.println("Add Power");
             } else if (tilemap.getMap() == 1) {
                 powerUp.addPower();
-                System.out.println("Add Power");
             } else if (tilemap.getMap() == 2) {
                 powerUp.addPower();
-                System.out.println("Add Power");
             }
         }
 
-        if (updates % 160 == 0) {
+        if (updates % 160 == 0 && !grabbed) {
             powerUp.update(tilemap);
         }
 
@@ -358,12 +359,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public boolean checkGrab() {
-        if ((Math.abs(((PowerDecorator) powerUp).getPosX() - player.getPlayerPosX()) <= 32)
+        return (Math.abs(((PowerDecorator) powerUp).getPosX() - player.getPlayerPosX()) <= 32)
                 && (Math.abs(((PowerDecorator) powerUp).getPosY()
-                - player.getPlayerPosY())) <= 32) {
-            return true;
-        }
-        return false;
+                - player.getPlayerPosY())) <= 32;
     }
 
     public void setGame(Tilemap tilemap, int updates) {

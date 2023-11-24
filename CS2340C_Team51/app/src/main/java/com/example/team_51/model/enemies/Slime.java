@@ -120,8 +120,8 @@ public class Slime implements Enemy, MoveStratEnemy {
 
         try {
             if (walls[r][c] == 3 || walls[r][c] == 4) {
-                System.out.println("C: " + c + ", R: " + r);
-                System.out.println("True");
+                //System.out.println("C: " + c + ", R: " + r);
+                //System.out.println("True");
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {

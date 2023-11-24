@@ -3,6 +3,7 @@ package com.example.team_51.viewmodels;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.cs2340c_team51.R;
@@ -34,6 +35,10 @@ public class SpriteSheet {
         } else {
             return getSpriteByIndex(2, enemy - 3);
         }
+    }
+
+    public Sprite getPowerSprite(int power) {
+        return getSpriteByIndex(3, power);
     }
 
     public Sprite getSwordSprite() {

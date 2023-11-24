@@ -23,6 +23,12 @@ import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.ExtraPointPower;
+import com.example.team_51.model.powers.HealthPower;
+import com.example.team_51.model.powers.PowerDecorator;
+import com.example.team_51.model.powers.PowerUp;
+import com.example.team_51.model.powers.PowerUpInstance;
+import com.example.team_51.model.powers.SpeedPower;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -50,6 +56,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private Enemy observer;
     private Button attackButton;
     private int attacked;
+    private PowerUp powerUp;
+    private boolean grabbed;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -107,6 +115,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
         tilemap = new Tilemap(spriteSheet, 0, player); // uses start map first
+        powerUp = new SpeedPower(new PowerUpInstance(tilemap), spriteSheet);
+        grabbed = false;
         setFocusable(true);
     }
 
@@ -124,6 +134,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
+
+        powerUp.draw(canvas, gameDisplay);
+
         for (int i = 0; i < enemies.size(); i++) {
             enemies.get(i).draw(canvas, gameDisplay);
         }
@@ -166,14 +179,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         setGame(tilemap, updates);
 
         if (swap) {
-            // stuff for spawning new enemies
+            // stuff for spawning new enemies/powers
             enemies.clear();
+            grabbed = false;
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
                     enemies.add(i, enemyFactories[i].create(tilemap.getMap(),
                                 new SpriteSheet(getContext())));
                 }
+                powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
+                        new SpriteSheet(getContext()));
             } else {
+                System.out.println("Grabbed: " + grabbed);
                 int count = 0;
                 while (count < 4) {
                     if (count < 2) {
@@ -185,6 +202,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     }
                     count++;
                 }
+                powerUp = new HealthPower(new PowerUpInstance(tilemap),
+                        new SpriteSheet(getContext()));
             }
         }
         if (updates % 5 == 0) {
@@ -206,6 +225,29 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             }
         }
+
+        if (checkGrab()) { // set location oob after pickup
+            if (tilemap.getMap() == 0) {
+                grabbed = true;
+                player.setBoost(powerUp.addPower()); // make player fast
+            } else if (tilemap.getMap() == 1) {
+                // grabbed not true so you can gain more points
+                points += powerUp.addPower(); // add points
+            } else if (tilemap.getMap() == 2) {
+                grabbed = true;
+                player.setHp(player.getHp() + powerUp.addPower()); // add health
+            }
+        }
+
+        if (updates % 160 == 0 && !grabbed) {
+            powerUp.update(tilemap);
+        }
+
+        if (updates % 400 == 0) {
+            player.setBoost(1);
+        }
+
+        points -= 25; // update points
 
         updates++; // increment number of updates
     }
@@ -313,6 +355,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     && (Math.abs(enemyPosY - playerPosY) <= 32)) {
                 observer.observerUpdate(this);
                 if (player.getHp() <= 0) {
+                    player.setHp(0);
                     return true;
                 }
                 if (observer.getHp() <= 0) {
@@ -323,6 +366,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             i++;
         }
         return false;
+    }
+
+    public boolean checkGrab() {
+        return (Math.abs(((PowerDecorator) powerUp).getPosX() - player.getPlayerPosX()) <= 32)
+                && (Math.abs(((PowerDecorator) powerUp).getPosY()
+                - player.getPlayerPosY())) <= 32;
     }
 
     public void setGame(Tilemap tilemap, int updates) {

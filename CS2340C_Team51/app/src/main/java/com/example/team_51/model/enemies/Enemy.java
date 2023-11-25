@@ -12,7 +12,7 @@ public interface Enemy {
     void update(Tilemap tilemap, int updates);
     double getPosX();
     double getPosY();
-    void observerUpdate(Game game);
+    void observerUpdate(Game game, int damage);
     void setHp(int hp);
     int getHp();
 

@@ -2,7 +2,6 @@ package com.example.team_51.views;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 

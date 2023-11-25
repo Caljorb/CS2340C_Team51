@@ -138,9 +138,9 @@ public class Snake implements Enemy, MoveStratEnemy {
     public int getHp() {
         return hp;
     }
-    public void observerUpdate(Game game) {
+    public void observerUpdate(Game game, int damage) {
         Player player = game.getPlayer();
-        player.setHp(player.getHp() - 20);
+        player.setHp(player.getHp() - (damage + 15));
         this.setHp(this.getHp() - 2);
     }
 }

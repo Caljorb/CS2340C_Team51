@@ -142,9 +142,9 @@ public class Slime implements Enemy, MoveStratEnemy {
     public int getHp() {
         return hp;
     }
-    public void observerUpdate(Game game) {
+    public void observerUpdate(Game game, int damage) {
         Player player = game.getPlayer();
-        player.setHp(player.getHp() - 7);
+        player.setHp(player.getHp() - damage);
         this.setHp(this.getHp() - 2);
     }
 }

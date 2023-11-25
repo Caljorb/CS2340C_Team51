@@ -37,9 +37,6 @@ import com.example.team_51.views.LoseActivity;
 import com.example.team_51.views.WinActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
@@ -353,7 +350,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
             if ((Math.abs(enemyPosX - playerPosX) <= 32)
                     && (Math.abs(enemyPosY - playerPosY) <= 32)) {
-                observer.observerUpdate(this);
+                if (diff == 100) {
+                    observer.observerUpdate(this, 5);
+                } else if (diff == 90) {
+                    observer.observerUpdate(this, 10);
+                } else {
+                    observer.observerUpdate(this, 15);
+                }
+
                 if (player.getHp() <= 0) {
                     player.setHp(0);
                     return true;

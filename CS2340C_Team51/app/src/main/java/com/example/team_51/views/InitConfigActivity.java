@@ -44,10 +44,10 @@ public class InitConfigActivity extends AppCompatActivity {
                 hp = 100;
                 diffSel = true;
             } else if (diffsCheckedRadioButtonId == R.id.medium) {
-                hp = 50;
+                hp = 90;
                 diffSel = true;
             } else if (diffsCheckedRadioButtonId == R.id.hard) {
-                hp = 30;
+                hp = 80;
                 diffSel = true;
             }
 

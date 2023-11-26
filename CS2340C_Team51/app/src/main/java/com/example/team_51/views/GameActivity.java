@@ -2,7 +2,6 @@ package com.example.team_51.views;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +13,7 @@ public class GameActivity extends AppCompatActivity {
     private int hp;
     private String name;
     private final long startScore = 100000;
-    private CountDownTimer countDownTimer;
+    //private CountDownTimer countDownTimer;
     private Game game;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,19 +28,6 @@ public class GameActivity extends AppCompatActivity {
         // make game
         game = new Game(this, hp, name, character, startScore);
         setContentView(game);
-
-        // make point keeper
-        countDownTimer = new CountDownTimer(startScore, 1000) {
-            @Override
-            public void onTick(long l) {
-                game.updatePoints(l);
-            }
-
-            @Override
-            public void onFinish() {
-                game.updatePoints(0);
-            }
-        }.start();
     }
 
     public static Context getGameContext() {

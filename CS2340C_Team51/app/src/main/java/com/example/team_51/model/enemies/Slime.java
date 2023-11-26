@@ -4,7 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.Game;
 import com.example.team_51.model.MoveStratEnemy;
+import com.example.team_51.model.Player;
 import com.example.team_51.model.Sprite;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
@@ -118,8 +120,8 @@ public class Slime implements Enemy, MoveStratEnemy {
 
         try {
             if (walls[r][c] == 3 || walls[r][c] == 4) {
-                System.out.println("C: " + c + ", R: " + r);
-                System.out.println("True");
+                //System.out.println("C: " + c + ", R: " + r);
+                //System.out.println("True");
                 return true;
             }
         } catch (ArrayIndexOutOfBoundsException arrayIndexOutOfBoundsException) {
@@ -133,5 +135,16 @@ public class Slime implements Enemy, MoveStratEnemy {
     }
     public double getPosY() {
         return posY;
+    }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+    public int getHp() {
+        return hp;
+    }
+    public void observerUpdate(Game game, int damage) {
+        Player player = game.getPlayer();
+        player.setHp(player.getHp() - damage);
+        this.setHp(this.getHp() - 2);
     }
 }

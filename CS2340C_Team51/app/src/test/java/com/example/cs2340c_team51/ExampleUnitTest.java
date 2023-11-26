@@ -20,6 +20,11 @@ import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.Snake;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.ExtraPointPower;
+import com.example.team_51.model.powers.HealthPower;
+import com.example.team_51.model.powers.PowerUp;
+import com.example.team_51.model.powers.PowerUpInstance;
+import com.example.team_51.model.powers.SpeedPower;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -310,6 +315,7 @@ public class ExampleUnitTest {
         assertEquals(1024, player.getPlayerPosY(), 0.0);
 
     }
+    
 
     // Test if tile is 3 or 4 it is a wall - Daniel
     @Test
@@ -458,5 +464,118 @@ public class ExampleUnitTest {
 
         assertEquals(90, player.getHp());
     }
+    // test bat moves faster than slime (Rashmith)
+    @Test
+    public void testMoveSpeed() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
 
+        EnemyFactory batFactory = new BatFactory();
+        Enemy bat = batFactory.create(0, new SpriteSheet(null));
+        Bat b = (Bat) bat;
+
+        assertFalse(e.MAX_SPEED > b.MAX_SPEED);
+    }
+
+    // check upon death that game ends (Rashmith)
+
+    @Test
+    public void testGameOver() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                                        new SpriteSheet(null), hpChar);
+        Tilemap tilemap = new Tilemap(0, player);
+        
+        assertFalse(checkCollision(e, player));
+
+        player.setHp(0);
+        
+        assertTrue(checkCollision(e, player));
+
+    }
+
+    // check that the spawnpoints of all enemies are different (Daniel)
+    @Test
+    public void checkDiffSpawns() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(1, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+
+        EnemyFactory batFactory = new BatFactory();
+        Enemy bat = batFactory.create(1, new SpriteSheet(null));
+        Bat b = (Bat) bat;
+
+
+        EnemyFactory snakeFactory = new SnakeFactory();
+        Enemy snake = snakeFactory.create(1, new SpriteSheet(null));
+        Snake s = (Snake) snake;
+
+
+        EnemyFactory ratFactory = new RatFactory();
+        Enemy rat = ratFactory.create(1, new SpriteSheet(null));
+        Rat r = (Rat) rat;
+
+
+        assertNotEquals(e.getPosX(), b.getPosX(), 0.0);
+        assertNotEquals(s.getPosX(), e.getPosX(), 0.0);
+        assertNotEquals(r.getPosX(), s.getPosX(), 0.0);
+        assertNotEquals(b.getPosX(), r.getPosX(), 0.0);
+    }
+
+    // check on invalid position, isWall returns true and handles error (Daniel)
+    @Test
+    public void checkWallError() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+
+        Tilemap tilemap = new Tilemap(0, null);
+        assertTrue(e.isWall(tilemap, 11100, 500000));
+        assertTrue(e.isWall(tilemap, -2240, -1024));
+    }
+
+
+    // check gain health when picking up power (Caleb)
+
+    @Test
+    public void testHealthPower() {
+        Tilemap tilemap = new Tilemap(0, null);
+
+        PowerUp powerUp = new HealthPower(new PowerUpInstance(tilemap),
+                new SpriteSheet(null));
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                new SpriteSheet(null), hpChar);
+
+        assertEquals(player.getHp(), 100);
+
+        player.setHp(powerUp.addPower() + player.getHp());
+
+        assertTrue(player.getHp() > 100);
+    }
+
+    // check powers dont spawn oob or in a wall (Caleb)
+
+    @Test
+    public void testPowerWallAndInBounds() {
+        Tilemap tilemap = new Tilemap(0, null);
+
+        PowerUp powerUp = new PowerUpInstance(tilemap);
+
+        assertTrue(((PowerUpInstance) powerUp).isWall(tilemap, 1110, 500));
+        assertFalse(((PowerUpInstance) powerUp).isWall(tilemap, 2240, 1024));
+
+        assertTrue(((PowerUpInstance) powerUp).checkOutOfBounds( 11100, 500000));
+        assertTrue(((PowerUpInstance) powerUp).checkOutOfBounds( -2240, -1024));
+    }
 }

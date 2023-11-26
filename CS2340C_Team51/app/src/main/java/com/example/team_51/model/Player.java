@@ -5,10 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import com.example.team_51.model.enemies.Enemy;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
+
+import java.util.ArrayList;
 
 public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public static final double SPEED_PIXELS_PER_SECOND = 300.0;
@@ -24,6 +27,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     private double veloX;
     private double veloY;
     private MoveBall moveBall;
+    private Sprite swordSprite;
+    private double boost;
 
 
     private Player(Context context, double posX, double posY, MoveBall moveBall, String name,
@@ -36,6 +41,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         this.hp = hpChar[0];
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+        this.swordSprite = spriteSheet.getSwordSprite();
+        this.boost = 1;
     }
 
     private Player(Context context, double posX, double posY, double radius, String name,
@@ -47,6 +54,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         this.hp = hpChar[0];
         this.name = name;
         this.sprite = spriteSheet.getPlayerSprite(hpChar[1]);
+        this.boost = 1;
     }
 
     public static synchronized Player getPlayer(Context context, double posX, double posY,
@@ -79,6 +87,15 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         canvas.drawText("Health: " + hp, 80, 150, paint);
         sprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX),
                 (int) gameDisplay.gameToDisplayCoordinatesY(posY));
+        swordSprite.draw(canvas, (int) gameDisplay.gameToDisplayCoordinatesX(posX + 15),
+                (int) gameDisplay.gameToDisplayCoordinatesY(posY));
+    }
+
+    public void killDraw(Canvas canvas, GameDisplay gameDisplay) {
+        Paint paint = new Paint();
+        paint.setColor(Color.RED);
+        canvas.drawCircle((int) gameDisplay.gameToDisplayCoordinatesX(posX + 32),
+                (int) gameDisplay.gameToDisplayCoordinatesY(posY + 32), 32, paint);
     }
 
     @Override
@@ -89,8 +106,6 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     public void update(Tilemap tilemap) {
         update(moveBall, tilemap);
     }
-
-
 
     public double getPlayerPosX() {
         return posX;
@@ -142,8 +157,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
 
     @Override
     public void move(MoveBall moveBall, Tilemap tilemap) {
-        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
-        veloY = moveBall.getControllerY() * MAX_SPEED;
+        veloX = moveBall.getControllerX() * MAX_SPEED * boost;
+        veloY = moveBall.getControllerY() * MAX_SPEED * boost;
 
         //System.out.println(veloX);
         //System.out.println(veloY);
@@ -163,8 +178,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     }
 
     public void move(MoveBall moveBall) {
-        veloX = moveBall.getControllerX() * MAX_SPEED; // moveBall.getController is always 0
-        veloY = moveBall.getControllerY() * MAX_SPEED;
+        veloX = moveBall.getControllerX() * MAX_SPEED * boost;
+        veloY = moveBall.getControllerY() * MAX_SPEED * boost;
 
         //System.out.println(veloX);
         //System.out.println(veloY);
@@ -213,8 +228,8 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         int r = (int) ((posY - tileY + 32) / 64.0);
 
         if (walls[r][c] == 3 || walls[r][c] == 4) {
-            System.out.println("C: " + c + ", R: " + r);
-            System.out.println("True");
+            //System.out.println("C: " + c + ", R: " + r);
+            //System.out.println("True");
             return true;
         }
 
@@ -222,5 +237,29 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     }
     public void setHp(int hp) {
         this.hp = hp;
+    }
+
+    public int attack(ArrayList<Enemy> enemies) {
+        int i = 0;
+        while (i < enemies.size()) {
+            double enemyPosX = enemies.get(i).getPosX();
+            double enemyPosY = enemies.get(i).getPosY();
+
+            if ((Math.abs(enemyPosX - posX) <= 80)
+                    && (Math.abs(enemyPosY - posY) <= 32)) {
+                enemies.remove(i);
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+
+    public double getBoost() {
+        return boost;
+    }
+
+    public void setBoost(double boost) {
+        this.boost = boost;
     }
 }

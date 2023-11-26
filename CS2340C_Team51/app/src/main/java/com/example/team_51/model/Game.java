@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,6 +23,18 @@ import com.example.team_51.model.enemies.RatFactory;
 import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.ExtraPointPower;
+import com.example.team_51.model.powers.HealthPower;
+import com.example.team_51.model.powers.PowerDecorator;
+import com.example.team_51.model.powers.PowerUp;
+import com.example.team_51.model.powers.PowerUpInstance;
+import com.example.team_51.model.powers.SpeedPower;
+import com.example.team_51.model.statusEffects.ConfusionStatus;
+import com.example.team_51.model.statusEffects.PoisonStatus;
+import com.example.team_51.model.statusEffects.SlowStatus;
+import com.example.team_51.model.statusEffects.StatusDecorator;
+import com.example.team_51.model.statusEffects.StatusEffect;
+import com.example.team_51.model.statusEffects.StatusInstance;
 import com.example.team_51.viewmodels.GameDisplay;
 import com.example.team_51.viewmodels.GameLoop;
 import com.example.team_51.viewmodels.SpriteSheet;
@@ -41,9 +54,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private long points;
     private MoveBall moveBall;
     private EnemyFactory[] enemyFactories;
-    private Enemy[] enemies;
+    private ArrayList<Enemy> enemies;
     private int updates;
-
+    private Enemy observer;
+    private Button attackButton;
+    private int attacked;
+    private PowerUp powerUp;
+    private StatusEffect se;
+    private boolean grabbed;
+    private boolean statusGrabbed;
 
     public Game(int diff, String name, int character, long points) {
         super(null);
@@ -63,6 +82,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         this.diff = diff;
         this.character = character;
         this.points = points;
+        this.attackButton = new Button(context,
+                new Rect(2048, 832, 2176, 896));
+        attackButton.setClickable(true);
 
         moveBall = new MoveBall(225, 750, 80);
 
@@ -83,13 +105,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         enemyFactories[2] = new SnakeFactory();
         enemyFactories[3] = new RatFactory();
 
-        enemies = new Enemy[4];
+        enemies = new ArrayList<>();
 
-        enemies[0] = enemyFactories[1].create(0, spriteSheet);
-        enemies[1] = enemyFactories[1].create(0, spriteSheet);
-        enemies[2] = enemyFactories[0].create(0, spriteSheet);
-        enemies[3] = enemyFactories[0].create(0, spriteSheet);
-
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[1].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
+        enemies.add(enemyFactories[0].create(0, spriteSheet));
 
         updates = 0;
 
@@ -99,6 +120,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 new GameDisplay(displayMetrics.widthPixels, displayMetrics.heightPixels, player);
 
         tilemap = new Tilemap(spriteSheet, 0, player); // uses start map first
+        powerUp = new SpeedPower(new PowerUpInstance(tilemap), spriteSheet);
+        se = new SlowStatus(new StatusInstance(tilemap), spriteSheet);
+        grabbed = false;
+        statusGrabbed = false;
         setFocusable(true);
     }
 
@@ -113,12 +138,23 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawText("Difficulty: " + diffSelect(diff), 80, 200, paint);
         canvas.drawText("Score: " + points, 80, 250, paint);
 
-        //button.draw(canvas, gameDisplay);
+        attackButton.draw(canvas, gameDisplay);
         moveBall.draw(canvas);
         player.draw(canvas, gameDisplay);
-        for (int i = 0; i < 4; i++) {
-            enemies[i].draw(canvas, gameDisplay);
+
+        powerUp.draw(canvas, gameDisplay);
+        se.draw(canvas, gameDisplay);
+
+        for (int i = 0; i < enemies.size(); i++) {
+            enemies.get(i).draw(canvas, gameDisplay);
         }
+
+        paint.setColor(Color.RED);
+
+        if (attacked != -1) {
+            player.killDraw(canvas, gameDisplay);
+        }
+        attacked = -1;
     }
 
     @Override
@@ -151,20 +187,35 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         setGame(tilemap, updates);
 
         if (swap) {
-            // stuff for spawning new enemies
+            // stuff for spawning new enemies/powers
+            enemies.clear();
+            grabbed = false;
+            statusGrabbed = false;
             if (tilemap.getMap() == 1) {
                 for (int i = 0; i < 4; i++) {
-                    enemies[i] = enemyFactories[i].create(tilemap.getMap(),
-                            new SpriteSheet(getContext()));
+                    enemies.add(i, enemyFactories[i].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
                 }
+                powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
+                        new SpriteSheet(getContext()));
+                se = new PoisonStatus(new StatusInstance(tilemap),
+                        new SpriteSheet(getContext()));
             } else {
-                enemies[0] = enemyFactories[2].create(tilemap.getMap(),
+                System.out.println("Grabbed: " + grabbed);
+                int count = 0;
+                while (count < 4) {
+                    if (count < 2) {
+                        enemies.add(count, enemyFactories[2].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    } else {
+                        enemies.add(count, enemyFactories[3].create(tilemap.getMap(),
+                                new SpriteSheet(getContext())));
+                    }
+                    count++;
+                }
+                powerUp = new HealthPower(new PowerUpInstance(tilemap),
                         new SpriteSheet(getContext()));
-                enemies[1] = enemyFactories[2].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[2] = enemyFactories[3].create(tilemap.getMap(),
-                        new SpriteSheet(getContext()));
-                enemies[3] = enemyFactories[3].create(tilemap.getMap(),
+                se = new ConfusionStatus(new StatusInstance(tilemap),
                         new SpriteSheet(getContext()));
             }
         }
@@ -188,6 +239,43 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
+        if (checkStatusGrab()) {
+            if (tilemap.getMap() == 0) {
+                statusGrabbed = true;
+                player.setBoost(se.addSE());
+            } else if (tilemap.getMap() == 1) {
+                player.setHp(player.getHp() + powerUp.addPower());
+            } else if (tilemap.getMap() == 2) {
+                grabbed = true;
+                player.setBoost(se.addSE());
+            }
+        }
+
+        if (checkGrab()) { // set location oob after pickup
+            if (tilemap.getMap() == 0) {
+                grabbed = true;
+                player.setBoost(powerUp.addPower()); // make player fast
+
+            } else if (tilemap.getMap() == 1) {
+                // grabbed not true so you can gain more points
+                points += powerUp.addPower(); // add points
+            } else if (tilemap.getMap() == 2) {
+                grabbed = true;
+                player.setHp(player.getHp() + powerUp.addPower()); // add health
+            }
+        }
+
+        if (updates % 160 == 0 && !grabbed && !statusGrabbed) {
+            powerUp.update(tilemap);
+            se.update(tilemap);
+        }
+
+        if (updates % 200 == 0) {
+            player.setBoost(1);
+        }
+
+        points -= 25; // update points
+
         updates++; // increment number of updates
     }
 
@@ -209,7 +297,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
         case MotionEvent.ACTION_DOWN:
             if (moveBall.isPressed((double) event.getX(), (double) event.getY())) {
                 moveBall.setIsPressed(true);
-                System.out.println("Touched MoveBall");
+                //System.out.println("Touched MoveBall");
+            }
+
+            if (attackButton.isPressed((double) event.getX(), (double) event.getY())) {
+                attackButton.setIsPressed(true);
+                //System.out.println("Touched Button");
+                attacked = player.attack(enemies);
             }
 
             return true;
@@ -220,11 +314,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             }
             return true;
         case MotionEvent.ACTION_UP:
-            //button.setIsPressed(false);
+            attackButton.setIsPressed(false);
             moveBall.setIsPressed(false);
             moveBall.resetController();
-            System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
-                    + player.getPlayerPosY());
+            //System.out.println("Player X: " + player.getPlayerPosX() + "\n" + "Player Y: "
+            //        + player.getPlayerPosY());
             if (tilemap.getMap() > 2) {
                 player.setPosX(2240);
                 player.setPosY(1024);
@@ -272,27 +366,51 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void setDiff(int diff) {
         this.diff = diff;
     }
-    public void setObserver(Enemy enemy, int ind) {
-        enemies[ind] = enemy;
+    public void setObserver(int ind) {
+        observer = enemies.get(ind);
     }
     public boolean checkCollision() {
-        for (int i = 0; i < enemies.length; i++) {
-            Enemy enemy = enemies[i];
-            setObserver(enemy, i);
-            double enemyPosX = enemy.getPosX();
-            double enemyPosY = enemy.getPosY();
+        int i = 0;
+        while (i < enemies.size()) {
+            setObserver(i);
+            double enemyPosX = observer.getPosX();
+            double enemyPosY = observer.getPosY();
             double playerPosX = player.getPlayerPosX();
             double playerPosY = player.getPlayerPosY();
 
             if ((Math.abs(enemyPosX - playerPosX) <= 32)
                     && (Math.abs(enemyPosY - playerPosY) <= 32)) {
-                player.setHp(player.getHp() - 10);
+                if (diff == 100) {
+                    observer.observerUpdate(this, 5);
+                } else if (diff == 90) {
+                    observer.observerUpdate(this, 10);
+                } else {
+                    observer.observerUpdate(this, 15);
+                }
+
                 if (player.getHp() <= 0) {
+                    player.setHp(0);
                     return true;
                 }
+                if (observer.getHp() <= 0) {
+                    enemies.remove(i);
+                    continue;
+                }
             }
+            i++;
         }
         return false;
+    }
+
+    public boolean checkGrab() {
+        return (Math.abs(((PowerDecorator) powerUp).getPosX() - player.getPlayerPosX()) <= 32)
+                && (Math.abs(((PowerDecorator) powerUp).getPosY()
+                - player.getPlayerPosY())) <= 32;
+    }
+    public boolean checkStatusGrab() {
+        return (Math.abs(((StatusDecorator) se).getPosX() - player.getPlayerPosX()) <= 32)
+                && (Math.abs(((StatusDecorator) se).getPosY()
+                - player.getPlayerPosY())) <= 32;
     }
 
     public void setGame(Tilemap tilemap, int updates) {

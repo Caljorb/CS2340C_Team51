@@ -36,6 +36,17 @@ public class SpriteSheet {
         }
     }
 
+    public Sprite getPowerSprite(int power) {
+        return getSpriteByIndex(3, power);
+    }
+
+    public Sprite getSwordSprite() {
+        return getSpriteByIndex(2, 2);
+    }
+    public Sprite getSESprite(int se) {
+        return getSpriteByIndex(4, se);
+    }
+
     public Bitmap getBitmap() {
         return bitmap;
     }

@@ -578,4 +578,37 @@ public class ExampleUnitTest {
         assertTrue(((PowerUpInstance) powerUp).checkOutOfBounds( 11100, 500000));
         assertTrue(((PowerUpInstance) powerUp).checkOutOfBounds( -2240, -1024));
     }
+
+    // check player speed increases when power picked up (Kavya)
+    @Test
+    public void testSpeedPower() {
+       Tilemap tilemap = new Tilemap(0, null);
+       PowerUp powerUp = new SpeedPower(new PowerUpInstance(tilemap),
+               new SpriteSheet(null));
+       int[] hpChar = new int[]{100, 1};
+       MoveBall moveBall = new MoveBall();
+       Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+               new SpriteSheet(null), hpChar);
+       assertEquals(player.getBoost(), 1);
+       player.setBoost(powerUp.addPower());
+       assertEquals(player.getBoost(), 2);
+       player.setBoost(1);
+       assertEquals(player.getBoost(), 1);
+    }
+    
+    // check points increase when picking up points power (Kavya)
+    @Test
+    public void testPointsPower() {
+       Tilemap tilemap = new Tilemap(0, null);
+       PowerUp powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
+               new SpriteSheet(null));
+       int[] hpChar = new int[]{100, 1};
+       MoveBall moveBall = new MoveBall();
+       Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+               new SpriteSheet(null), hpChar);
+       Game game = new Game(1, "", 1, 100000);
+       assertEquals(game.getPoints(), 100000);
+       powerUp.addPower();
+       assertEquals(game.getPoints() + powerUp.addPower(), 110000);
+    }
 }

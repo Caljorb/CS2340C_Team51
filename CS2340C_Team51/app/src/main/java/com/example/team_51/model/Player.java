@@ -28,7 +28,7 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
     private double veloY;
     private MoveBall moveBall;
     private Sprite swordSprite;
-    private int boost;
+    private double boost;
 
 
     private Player(Context context, double posX, double posY, MoveBall moveBall, String name,
@@ -255,11 +255,11 @@ public class Player extends Circle implements MovementStrategy, MoveSubscriber {
         return -1;
     }
 
-    public int getBoost() {
+    public double getBoost() {
         return boost;
     }
 
-    public void setBoost(int boost) {
+    public void setBoost(double boost) {
         this.boost = boost;
     }
 }

@@ -28,7 +28,7 @@ public class PowerUpInstance implements PowerUp {
         return new double[] {posX, posY};
     }
 
-    private boolean isWall(Tilemap tilemap, double posX, double posY) {
+    public boolean isWall(Tilemap tilemap, double posX, double posY) {
         int[][] walls = tilemap.getWalls();
 
         double tileX = 1117.4; // where tile 1 starts X
@@ -48,7 +48,7 @@ public class PowerUpInstance implements PowerUp {
         return false; // not in any walls
     }
 
-    private boolean checkOutOfBounds(double posX, double posY) {
+    public boolean checkOutOfBounds(double posX, double posY) {
         boolean xIn = posX > 1110 && posX < 3300;
         boolean yIn = posY > 500 && posY < 1400;
 

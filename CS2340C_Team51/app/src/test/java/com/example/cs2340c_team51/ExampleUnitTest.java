@@ -20,9 +20,11 @@ import com.example.team_51.model.enemies.SlimeFactory;
 import com.example.team_51.model.enemies.Snake;
 import com.example.team_51.model.enemies.SnakeFactory;
 import com.example.team_51.model.map.Tilemap;
+import com.example.team_51.model.powers.ExtraPointPower;
 import com.example.team_51.model.powers.HealthPower;
 import com.example.team_51.model.powers.PowerUp;
 import com.example.team_51.model.powers.PowerUpInstance;
+import com.example.team_51.model.powers.SpeedPower;
 import com.example.team_51.viewmodels.LeaderboardViewModel;
 import com.example.team_51.viewmodels.SpriteSheet;
 
@@ -577,6 +579,39 @@ public class ExampleUnitTest {
         assertTrue(((PowerUpInstance) powerUp).checkOutOfBounds( -2240, -1024));
     }
 
+    // check player speed increases when power picked up (Kavya)
+    @Test
+    public void testSpeedPower() {
+       Tilemap tilemap = new Tilemap(0, null);
+       PowerUp powerUp = new SpeedPower(new PowerUpInstance(tilemap),
+               new SpriteSheet(null));
+       int[] hpChar = new int[]{100, 1};
+       MoveBall moveBall = new MoveBall();
+       Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+               new SpriteSheet(null), hpChar);
+       assertEquals(player.getBoost(), 1, 0);
+       player.setBoost(powerUp.addPower());
+       assertEquals(player.getBoost(), 2,0);
+       player.setBoost(1);
+       assertEquals(player.getBoost(), 1,0);
+    }
+    
+    // check points increase when picking up points power (Kavya)
+    @Test
+    public void testPointsPower() {
+       Tilemap tilemap = new Tilemap(0, null);
+       PowerUp powerUp = new ExtraPointPower(new PowerUpInstance(tilemap),
+               new SpriteSheet(null));
+       int[] hpChar = new int[]{100, 1};
+       MoveBall moveBall = new MoveBall();
+       Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+               new SpriteSheet(null), hpChar);
+       Game game = new Game(1, "", 1, 100000);
+       assertEquals(game.getPoints(), 100000);
+       powerUp.addPower();
+       assertEquals(game.getPoints() + powerUp.addPower(), 110000);
+    }
+
     //check if attack function works properly - Daniel
     @Test
     public void checkAttackHit() {
@@ -623,5 +658,4 @@ public class ExampleUnitTest {
 
         assertEquals(enemies.size(), 0);
     }
-
 }

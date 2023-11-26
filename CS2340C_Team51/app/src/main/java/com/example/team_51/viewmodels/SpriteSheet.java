@@ -3,7 +3,6 @@ package com.example.team_51.viewmodels;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Paint;
 import android.graphics.Rect;
 
 import com.example.cs2340c_team51.R;
@@ -43,6 +42,9 @@ public class SpriteSheet {
 
     public Sprite getSwordSprite() {
         return getSpriteByIndex(2, 2);
+    }
+    public Sprite getSESprite(int se) {
+        return getSpriteByIndex(4, se);
     }
 
     public Bitmap getBitmap() {

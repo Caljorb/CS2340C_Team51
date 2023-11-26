@@ -589,11 +589,11 @@ public class ExampleUnitTest {
        MoveBall moveBall = new MoveBall();
        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
                new SpriteSheet(null), hpChar);
-       assertEquals(player.getBoost(), 1);
+       assertEquals(player.getBoost(), 1, 0);
        player.setBoost(powerUp.addPower());
-       assertEquals(player.getBoost(), 2);
+       assertEquals(player.getBoost(), 2,0);
        player.setBoost(1);
-       assertEquals(player.getBoost(), 1);
+       assertEquals(player.getBoost(), 1,0);
     }
     
     // check points increase when picking up points power (Kavya)
@@ -610,5 +610,52 @@ public class ExampleUnitTest {
        assertEquals(game.getPoints(), 100000);
        powerUp.addPower();
        assertEquals(game.getPoints() + powerUp.addPower(), 110000);
+    }
+
+    //check if attack function works properly - Daniel
+    @Test
+    public void checkAttackHit() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                new SpriteSheet(null), hpChar);
+
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(e);
+
+        assertEquals(player.attack(enemies), 0); // enemy hit
+
+        player.setPosX(1);
+
+        assertEquals(player.attack(enemies), -1); // enemy missed
+
+
+    }
+
+
+    // check if enemy dies when hp is 0 from attack - Daniel
+    @Test
+    public void checkDieAttack() {
+        EnemyFactory slimeFactory = new SlimeFactory();
+        Enemy slime = slimeFactory.create(0, new SpriteSheet(null));
+        Slime e = (Slime) slime;
+
+        int[] hpChar = new int[]{100, 1};
+        MoveBall moveBall = new MoveBall();
+        Player player = Player.getPlayer(null, 2400, 1200, moveBall, "",
+                new SpriteSheet(null), hpChar);
+
+        ArrayList<Enemy> enemies = new ArrayList<>();
+        enemies.add(e);
+
+        assertEquals(enemies.size(), 1);
+
+        player.attack(enemies);
+
+        assertEquals(enemies.size(), 0);
     }
 }

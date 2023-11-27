@@ -153,6 +153,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
         if (attacked != -1) {
             player.killDraw(canvas, gameDisplay);
+            attackPoints();
         }
         attacked = -1;
     }
@@ -396,6 +397,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                     enemies.remove(i);
                     continue;
                 }
+                enemyHitPoints();
             }
             i++;
         }

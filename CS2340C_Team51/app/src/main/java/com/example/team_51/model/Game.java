@@ -418,4 +418,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
             enemy.update(tilemap, updates);
         }
     }
+    public void attackPoints() {
+        points += 10000;
+    }
+    public void enemyHitPoints() {
+        points -= 5000;
+    }
 }

@@ -658,4 +658,26 @@ public class ExampleUnitTest {
 
         assertEquals(enemies.size(), 0);
     }
+
+    // check points are increased on kill (Rashmith)
+    @Test
+    public void checkPointsOnKill() {
+        Game game = new Game(1, "", 1, 100000);
+        assertEquals(game.getPoints(), 100000);
+
+        game.attackPoints();
+
+        assertEquals(game.getPoints(), 110000);
+    }
+
+    // check poionts are decreased when hit by enemy (Rashmith)
+    @Test
+    public void checkLosePointsOnHit() {
+        Game game = new Game(1, "", 1, 100000);
+
+        assertEquals(game.getPoints(), 100000);
+
+        game.enemyHitPoints();
+        assertEquals(game.getPoints(), 95000);
+    }
 }

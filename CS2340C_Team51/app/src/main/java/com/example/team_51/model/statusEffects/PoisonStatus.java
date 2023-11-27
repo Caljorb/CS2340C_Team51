@@ -5,7 +5,7 @@ import com.example.team_51.viewmodels.SpriteSheet;
 public class PoisonStatus extends StatusDecorator {
     public PoisonStatus(StatusEffect se, SpriteSheet spritesheet) {
         super(se);
-        super.sprite = spritesheet.getSESprite(0);
+        super.sprite = spritesheet.getSESprite(1);
     }
     public double addSE() {
         ((StatusInstance) super.se).setPosX(100000);

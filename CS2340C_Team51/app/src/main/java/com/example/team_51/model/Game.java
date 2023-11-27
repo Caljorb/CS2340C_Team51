@@ -245,9 +245,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
                 statusGrabbed = true;
                 player.setBoost(se.addSE());
             } else if (tilemap.getMap() == 1) {
-                player.setHp(player.getHp() + powerUp.addPower());
+                statusGrabbed = true;
+                player.setHp((int) (player.getHp() + se.addSE()));
             } else if (tilemap.getMap() == 2) {
-                grabbed = true;
+                statusGrabbed = true;
                 player.setBoost(se.addSE());
             }
         }

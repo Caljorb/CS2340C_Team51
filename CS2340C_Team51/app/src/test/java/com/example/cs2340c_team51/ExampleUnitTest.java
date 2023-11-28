@@ -507,17 +507,17 @@ public class ExampleUnitTest {
         Enemy slime = slimeFactory.create(1, new SpriteSheet(null));
         Slime e = (Slime) slime;
 
-
+        // create an EnemyFactory (static) and Batfactory(dyanmic) variable
         EnemyFactory batFactory = new BatFactory();
         Enemy bat = batFactory.create(1, new SpriteSheet(null));
         Bat b = (Bat) bat;
 
-
+        // create an EnemyFactory (static) and SnakeFactory(dyanmic) variable
         EnemyFactory snakeFactory = new SnakeFactory();
         Enemy snake = snakeFactory.create(1, new SpriteSheet(null));
         Snake s = (Snake) snake;
 
-
+         // create an EnemyFactory (static) and RatFactory(dyanmic) variable
         EnemyFactory ratFactory = new RatFactory();
         Enemy rat = ratFactory.create(1, new SpriteSheet(null));
         Rat r = (Rat) rat;

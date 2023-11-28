@@ -6,7 +6,7 @@ import com.example.team_51.model.Sprite;
 import com.example.team_51.model.map.Tilemap;
 import com.example.team_51.viewmodels.GameDisplay;
 
-//This is the StatusDecorator class
+//This is the StatusDecorator Class
 public class StatusDecorator implements StatusEffect {
     protected StatusEffect se;
     protected Sprite sprite;

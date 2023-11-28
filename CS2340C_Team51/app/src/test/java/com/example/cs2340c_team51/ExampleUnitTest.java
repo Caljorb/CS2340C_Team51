@@ -233,19 +233,19 @@ public class ExampleUnitTest {
         MoveBall moveBall = new MoveBall();
 
         moveBall.setController(110, 100);
-        assertTrue(moveBall.getControllerX() > 0);
+        assertTrue(moveBall.getControllerX() > 0); //checks if x-coordinate greater than 0
         assertEquals(0, moveBall.getControllerY(), 0.0);
 
         moveBall.setController(90, 100);
-        assertTrue(moveBall.getControllerX() < 0);
+        assertTrue(moveBall.getControllerX() < 0); // checks if x-coordinate less than 0
         assertEquals(0, moveBall.getControllerY(), 0.0);
 
         moveBall.setController(100, 110);
-        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertEquals(0, moveBall.getControllerX(), 0.0); // checks if x-coordinate is at 0 (y = 110)
         assertTrue(moveBall.getControllerY() > 0);
 
         moveBall.setController(100, 90);
-        assertEquals(0, moveBall.getControllerX(), 0.0);
+        assertEquals(0, moveBall.getControllerX(), 0.0); // checks if x-coordinate is at 0 (y = 90)
         assertTrue(moveBall.getControllerY() < 0);
     }
 
@@ -507,17 +507,17 @@ public class ExampleUnitTest {
         Enemy slime = slimeFactory.create(1, new SpriteSheet(null));
         Slime e = (Slime) slime;
 
-        // create an EnemyFactory (static) and Batfactory(dyanmic) variable
+        // create an EnemyFactory (static) and Batfactory(dynamic) variable
         EnemyFactory batFactory = new BatFactory();
         Enemy bat = batFactory.create(1, new SpriteSheet(null));
         Bat b = (Bat) bat;
 
-        // create an EnemyFactory (static) and SnakeFactory(dyanmic) variable
+        // create an EnemyFactory (static) and SnakeFactory(dynamic) variable
         EnemyFactory snakeFactory = new SnakeFactory();
         Enemy snake = snakeFactory.create(1, new SpriteSheet(null));
         Snake s = (Snake) snake;
 
-         // create an EnemyFactory (static) and RatFactory(dyanmic) variable
+         // create an EnemyFactory (static) and RatFactory(dynamic) variable
         EnemyFactory ratFactory = new RatFactory();
         Enemy rat = ratFactory.create(1, new SpriteSheet(null));
         Rat r = (Rat) rat;

@@ -44,6 +44,7 @@ import com.example.team_51.views.WinActivity;
 
 import java.util.ArrayList;
 
+//Class for the game
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private final Player player;
